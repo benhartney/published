@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Political Dashboard</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="levels.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-8 offset-md-2">
+          <h2 class="heading-margin">
+            Levels
+          </h2>
+          <p>
+            Note: The following will not work on mobile.
+          </p>
+          <p>
+            We need to improve how we think about and communicate around politics.
+            In this demo I will sketch out a way to represent someone's political views in a dashboard, to make political views clearer and easier to communicate.
+            It includes three components of a political view:
+            <ul>
+              <li>The outcomes the person cares about</li>
+              <ul>
+                <li>e.g. Bernie Sanders cares about income inequality</li>
+              </ul>
+              <li>For each of those outcomes, the other policy metrics that impact it</li>
+              <ul>
+                <li>e.g. Bernie Sanders thinks that the minimum wage level impacts income inequality</li>
+              </ul>
+              <li>The various projections on the impact of a proposed policy change, and which projections the view holder believes</li>
+              <ul>
+                <li>e.g. Various groups create projections on the outcomes of a proposal to increase the federal minimum wage, Bernie Sanders agrees with some of them but disagrees with others</li>
+              </ul>
+            </ul>
+          </p>
+          <p>
+            For people who already write about and debate policy, the use cases of the dashboard are:
+            <ul>
+              <li>A clearer, more efficient, always up-to-date view on how society is doing (according to their view)</li>
+              <li>An easy way to share their view and compare it to others</li>
+              <li>An easy way to see the various projections for a policy proposal</li>
+            </ul>
+          </p>
+          <p>
+            If those use cases are validated, it may be possible to create use cases for less policy-minded people.
+          </p>
+          <p>
+            Finally, in some situations, we could replace our existing overloaded political labels with a clearer list of the political outcomes we care about, and the metrics we believe impact those outcomes.
+          </p>
+          <p>
+            Note: This is a simplified demo, so the views below are incomplete, and there are implementation details of the idea not explored.
+          </p>
+          <h5 class="heading-margin">
+            Outcome #1
+          </h5>
+          <p>
+            In this demo, let's assume I am an economist living in Brisbane, Queensland, Australia.
+            I care about keeping unemployment as close to 5% (a widely-accepted target) as possible.
+            So my dashboard looks like this:
+          </p>
+        </div>
+      </div>
+      <div class="row border border-dark dashboard">
+        <div class="col-4 offset-md-4">
+          <div class="card border-danger variable-card bg-light">
+            <div class="card-body">
+              <h5 class="card-title">Unemployment</h5>
+              <p class="card-text"><span class="font-weight-bold">5.6%</span><br>0.6% / 67,887 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+              <p class="card-text text-secondary">Updated: July 2017<br>Source: <a class='source-link' href="http://lmip.gov.au/">lmip.gov.au</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8 offset-md-2">
+          <p>
+            I also care about employment-related issues that the unemployment rate doesn't capture (e.g. discouraged unemployed people who have stopped looking for a job, underemployment, long-term unemployed), but for this demo, I will simplify and focus on the unemployment rate.
+          </p>
+          <p>
+            I care about unemployment not just in my country, but also in my city, state, and the world.
+            Click on the buttons to switch between these levels.
+          </p>
+        </div>
+      </div>
+      <div class="row border border-dark dashboard">
+        <div class="col-12">
+          <div class="row">
+            <div class="btn-group level-buttons" data-toggle="buttons">
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" data-level="brisbane" autocomplete="off">Brisbane
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" data-level="queensland" autocomplete="off">Queensland
+              </label>
+              <label class="btn btn-secondary active">
+                <input type="radio" name="options" data-level="australia" autocomplete="off" checked>Australia
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" data-level="world" autocomplete="off">World
+              </label>
+            </div>
+          </div>
+          <div class="row variable-card-row" style='display:none;' data-level="brisbane">
+            <div class="col-4 offset-md-4">
+              <div class="card border-success variable-card bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Unemployment</h4>
+                  <p class="card-text"><span class="font-weight-bold">4.3%</span><br>0.7% / 986 people<br><span class='text-success'>less</span> than the target level (5%)</p>
+                  <p class="card-text text-secondary">Updated: July 2017<br>Source: <a class='source-link' href="http://lmip.gov.au/">lmip.gov.au</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row variable-card-row" style='display:none;' data-level="queensland">
+            <div class="col-4 offset-md-4">
+              <div class="card border-danger variable-card bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Unemployment</h4>
+                  <p class="card-text"><span class="font-weight-bold">6.2%</span><br>1.2% / 25,557 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+                  <p class="card-text text-secondary">Updated: July 2017<br>Source: <a class='source-link' href="http://lmip.gov.au/">lmip.gov.au</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row variable-card-row" data-level="australia">
+            <div class="col-4 offset-md-4">
+              <div class="card border-danger variable-card bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Unemployment</h4>
+                  <p class="card-text"><span class="font-weight-bold">5.6%</span><br>0.6% / 67,887 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+                  <p class="card-text text-secondary">Updated: July 2017<br>Source: <a class='source-link' href="http://lmip.gov.au/">lmip.gov.au</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row variable-card-row" style='display:none;' data-level="world">
+            <div class="col-4 offset-md-4">
+              <div class="card border-danger variable-card bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Unemployment</h4>
+                  <p class="card-text"><span class="font-weight-bold">5.7%</span><br>0.7% / 25,288,500 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+                  <p class="card-text text-secondary">Updated: 2016<br>Source: <a class='source-link' href="https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS">World Bank</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8 offset-md-2">
+          <h5 class="heading-margin">
+            Outcome #2
+          </h5>
+          <p>
+            I think that a good indicator of how well a country is doing is how happy the people are.
+            The UN publishes a World Happiness Report that compares countries.
+            Australia is consistently ranked in the top 10.
+            I don't care about the details of the absolute number used to do the rankings, but I do care about then possibility of Australia moving down in the rankings.
+          </p>
+        </div>
+      </div>
+      <div class="row border border-dark dashboard">
+        <div class="col-12">
+          <div class="row">
+            <div class="btn-group level-buttons" data-toggle="buttons">
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" data-level="brisbane" autocomplete="off">Brisbane
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" data-level="queensland" autocomplete="off">Queensland
+              </label>
+              <label class="btn btn-secondary active">
+                <input type="radio" name="options" data-level="australia" autocomplete="off" checked>Australia
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" data-level="world" autocomplete="off">World
+              </label>
+            </div>
+          </div>
+          <div class="row variable-card-row" style='display:none;' data-level="brisbane">
+            <div class="col-4 offset-md-2">
+              <div class="card border-success variable-card bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Unemployment</h4>
+                  <p class="card-text"><span class="font-weight-bold">4.3%</span><br>0.7% / 986 people<br><span class='text-success'>less</span> than the target level (5%)</p>
+                  <p class="card-text text-secondary">Updated: July 2017<br>Source: <a class='source-link' href="http://lmip.gov.au/">lmip.gov.au</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card border-dark variable-card bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Happiness</h4>
+                  <p class="card-text">TBD</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row variable-card-row" style='display:none;' data-level="queensland">
+            <div class="col-4 offset-md-2">
+              <div class="card border-danger variable-card bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Unemployment</h4>
+                  <p class="card-text"><span class="font-weight-bold">6.2%</span><br>1.2% / 25,557 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+                  <p class="card-text text-secondary">Updated: July 2017<br>Source: <a class='source-link' href="http://lmip.gov.au/">lmip.gov.au</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card border-dark variable-card bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Happiness</h4>
+                  <p class="card-text">TBD</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row variable-card-row" data-level="australia">
+            <div class="col-4 offset-md-2">
+              <div class="card border-danger variable-card bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Unemployment</h4>
+                  <p class="card-text"><span class="font-weight-bold">5.6%</span><br>0.6% / 67,887 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+                  <p class="card-text text-secondary">Updated: July 2017<br>Source: <a class='source-link' href="http://lmip.gov.au/">lmip.gov.au</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card border-success variable-card bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Happiness</h4>
+                  <p class="card-text">In the top 10 happiest countries?<br><span class='text-success'>Yes</span></p>
+                  <p class="card-text"></p>
+                  <p class="card-text text-secondary">Updated: 2017<br>Source: <a class='source-link' href="http://worldhappiness.report/">UN Sustainable Development Solutions Network</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row variable-card-row" style='display:none;' data-level="world">
+            <div class="col-4 offset-md-2">
+              <div class="card border-danger variable-card bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Unemployment</h4>
+                  <p class="card-text"><span class="font-weight-bold">5.7%</span><br>0.7% / 25,288,500 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+                  <p class="card-text text-secondary">Updated: 2016<br>Source: <a class='source-link' href="https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS">World Bank</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card border-dark variable-card bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Happiness</h4>
+                  <p class="card-text">TBD</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8 offset-md-2">
+          <h5 class="heading-margin">
+            Outcome Selection
+          </h5>
+          <p>
+            There are significant complexities in choosing a metric for an outcome.
+            A benefit of my happiness metric is that it provides a good sense of what is realistic - it may not be possible (or wise) to try to maximize the absolute happiness number the UN calculates, but keeping up with the international standard seems reasonable.
+          </p>
+          <p>
+            A downside with the metric is that a significant decrease in happiness experienced equally in all countries would not change the metric, but might still be relevant to me.
+            To catch this, I could add a floor-based metric using the absolute happiness number.
+          </p>
+          <p>
+            Some outcomes that I care about will not have an appropriate metric.
+            Even in this situation, the system is still useful because at least the lack of an appropriate metric is made clear.
+          </p>
+          <h5 class="heading-margin">
+            Impacting Metrics
+          </h5>
+          <p>
+            For each of the outcomes that I care about, the system can display other metrics that impact it.
+            I believe that the economy's growth rate has an impact on unemployment - a higher growth rate leads to a lower unemployment rate.
+            The growth rate metric I will use is the difference between the growth rate and the average growth rate for other advanced economies (similar to my happiness metric, this provides a sense of what is possible).
+            I'll also go one level deeper and show three of the metrics that I believe impact the growth rate.
+          </p>
+          <p>
+            I only actually care about the outcomes in the top row, everything below that is a means to those ends.
+            This structure makes my political view clearer.
+          </p>
+          <p>
+            I'll also add metric forecasts - try changing the year drop-down.
+          </p>
+          <p>
+            Note that this is an incomplete dashboard, a full political view would be larger and more complex.
+          </p>
+        </div>
+      </div>
+      <div class="row border border-dark dashboard">
+        <div class="col-12">
+          <div class="row variable-card-row" data-level="australia">
+            <div class="col-4 offset-md-4">
+              <div class="card border-danger variable-card connector-unemployment bg-light">
+                <div class="card-body">
+                  <div class="dropdown float-right">
+                    <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      2017
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <button class="dropdown-item" href="#" data-year=2017>2017</button>
+                      <button class="dropdown-item" href="#" data-year=2018>2018 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2019>2019 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2020>2020 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2021>2021 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2022>2022 (forecast)</button>
+                    </div>
+                  </div>
+                  <h4 class="card-title">Unemployment</h4>
+                  <p class="card-text year-dependant-text" data-year=2017><span class="font-weight-bold">5.6%</span><br>0.6% / 67,887 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+                  <p class="card-text year-dependant-text" data-year=2018 style='display:none;'><span class="font-weight-bold">5.4%</span><br>0.4% / 37,103 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+                  <p class="card-text year-dependant-text" data-year=2019 style='display:none;'><span class="font-weight-bold">5.2%</span><br>0.2% / 18,081 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+                  <p class="card-text year-dependant-text" data-year=2020 style='display:none;'><span class="font-weight-bold">5%</span><br>0% / 0 people<br><span class='text-dark'>more</span> than the target level (5%)</p>
+                  <p class="card-text year-dependant-text" data-year=2021 style='display:none;'><span class="font-weight-bold">4.9%</span><br>0.1% / 12,437 people<br><span class='text-success'>less</span> than the target level (5%)</p>
+                  <p class="card-text year-dependant-text" data-year=2022 style='display:none;'><span class="font-weight-bold">4.8%</span><br>0.2% / 23,516 people<br><span class='text-success'>less</span> than the target level (5%)</p>
+                  <p class="card-text text-secondary">Updated: July 2017<br>Source: <a class='source-link' href="http://lmip.gov.au/">lmip.gov.au</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row variable-card-row" data-level="australia">
+            <div class="col-4 offset-md-4">
+              <div class="card border-success variable-card connector-growth bg-light">
+                <div class="card-body">
+                  <div class="dropdown float-right">
+                    <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      2017
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <button class="dropdown-item" href="#" data-year=2017>2017</button>
+                      <button class="dropdown-item" href="#" data-year=2018>2018 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2019>2019 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2020>2020 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2021>2021 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2022>2022 (forecast)</button>
+                    </div>
+                  </div>
+                  <h4 class="card-title">Growth</h4>
+                  <p class="card-text year-dependant-text" data-year=2017><span class="font-weight-bold">2.2%</span><br>0% more than the average level of growth for advanced economies (2.2%)</p>
+                  <p class="card-text year-dependant-text" data-year=2018 style='display:none;'><span class="font-weight-bold">2.9%</span><br>0.9% <span class='text-success'>more</span> than the average level of growth for advanced economies (2.0%)</p>
+                  <p class="card-text year-dependant-text" data-year=2019 style='display:none;'><span class="font-weight-bold">2.9%</span><br>1.1% <span class='text-success'>more</span> than the average level of growth for advanced economies (1.8%)</p>
+                  <p class="card-text year-dependant-text" data-year=2020 style='display:none;'><span class="font-weight-bold">2.8%</span><br>1.1% <span class='text-success'>more</span> than the average level of growth for advanced economies (1.7%)</p>
+                  <p class="card-text year-dependant-text" data-year=2021 style='display:none;'><span class="font-weight-bold">2.8%</span><br>1.1% <span class='text-success'>more</span> than the average level of growth for advanced economies (1.7%)</p>
+                  <p class="card-text year-dependant-text" data-year=2022 style='display:none;'><span class="font-weight-bold">2.7%</span><br>1.0% <span class='text-success'>more</span> than the average level of growth for advanced economies (1.7%)</p>
+                  <p class="card-text text-secondary">Updated: 2016<br>Source: <a class='source-link' href="https://www.imf.org/external/pubs/ft/weo/2017/02/weodata/weorept.aspx?pr.x=47&pr.y=7&sy=2015&ey=2022&scsm=1&ssd=1&sort=country&ds=.&br=1&c=193&s=NGDP_RPCH&grp=0&a=">IMF</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row variable-card-row" data-level="australia">
+            <div class="col-4">
+              <div class="card border-dark variable-card connector-infrastructure bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Infrastructure</h4>
+                  <p class="card-text">Overall rating: C+</p>
+                  <p class="card-text text-secondary">Updated: 2016<br>Source: <a class='source-link' href="https://www.engineersaustralia.org.au/sites/default/files/content-files/2016-12/national_infrastructure_investment_report_0.pdf">Engineers Australia</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card border-danger variable-card connector-primary bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Early childhood education</h4>
+                  <p class="card-text">Age 4 population not enrolled: 14.8%</p>
+                  <p class="card-text text-secondary">Updated: 2014<br>Source: <a class='source-link' href="https://www.oecd.org/australia/govataglance.htm">OECD</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card border-dark variable-card connector-protection bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Regulatory protection of incumbent companies</h4>
+                  <p class="card-text">Rating: B-<br></p>
+                  <p class="card-text text-secondary">Updated: 2013<br>Source: <a class='source-link' href="https://tcdata360.worldbank.org/indicators/gim.prot.incum?country=AUS&indicator=3328&viz=line_chart&years=2013,2013">World Bank</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8 offset-md-2">
+          <h5 class="heading-margin">
+            Policy Projections
+          </h5>
+          <p>
+            Imagine a US citizen, John Smith, who wants low unemployment, low taxes, and income inequality to be back to where it was in 1979.
+          </p>
+          <p>
+            When a policy change like the tax system change currently being debated in Congress, John's dashboard could show the projected impact:
+          </p>
+        </div>
+      </div>
+      <div class="row border border-dark dashboard" id="policy-off">
+        <div class="col-12">
+          <div class="row">
+            <div class="btn-group policy-buttons" data-toggle="buttons">
+              <label class="btn btn-secondary btn-info active">
+                <input type="radio" name="options" id="policy-off-button-off" autocomplete="off" checked> Hide Policy Change Projection
+              </label>
+              <label class="btn btn-info btn-secondary">
+                <input type="radio" name="options" id="policy-off-button-on" autocomplete="off"> Show Policy Change Projection
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <div class="card border-success variable-card bg-light connector-us-unemployment">
+                <div class="card-body">
+                  <h5 class="card-title">Unemployment</h5>
+                  <p class="card-text"><span class="font-weight-bold">4.1%</span><br>0.9% / 1,499,050 people<br><span class='text-success'>less</span> than the target level (5%)</p>
+                  <p class="card-text text-secondary">Updated: October 2017<br>Source: <a class='source-link' href="http://www.dlt.ri.gov/lmi/laus/us/usadj.htm">dlt.ri.gov</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card border-danger variable-card bg-light">
+                <div class="card-body">
+                  <h5 class="card-title">Tax Level</h5>
+                  <p class="card-text"><span class="font-weight-bold">26%</span><br>tax revenue as % of GDP</p>
+                  <p class="card-text text-secondary">Updated: 2016<br>Source: <a class='source-link' href="https://stats.oecd.org/Index.aspx?DataSetCode=REV">stats.oecd.org</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card border-danger variable-card bg-light">
+                <div class="card-body">
+                  <h5 class="card-title">Income Inequality</h5>
+                  <p class="card-text"><span class="font-weight-bold">41</span><br>Gini index<br>6.4 <span class='text-danger'>over</span> the target level (1979: 34.6)</p>
+                  <p class="card-text text-secondary">Updated: 2013<br>Source: <a class='source-link' href="https://data.worldbank.org/indicator/SI.POV.GINI?locations=US">World Bank</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <div class="card border-success variable-card bg-light connector-us-growth">
+                <div class="card-body">
+                  <h5 class="card-title">Growth</h5>
+                  <p class="card-text"><span class="font-weight-bold">3%</span></p>
+                  <p class="card-text text-secondary">Updated: September 2017<br>Source: <a class='source-link' href="https://www.bea.gov/newsreleases/glance.htm">bea.gov</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <div class="card border-success variable-card bg-light connector-us-debt">
+                <div class="card-body">
+                  <h5 class="card-title">Gov Debt</h5>
+                  <p class="card-text"><span class="font-weight-bold">4.1%</span><br>0.9% / 1,499,050 people<br><span class='text-success'>less</span> than the target level (5%)</p>
+                  <p class="card-text text-secondary">Updated: October 2017<br>Source: <a class='source-link' href="http://www.dlt.ri.gov/lmi/laus/us/usadj.htm">dlt.ri.gov</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row border border-dark dashboard" id='policy-on' style='display:none;'>
+        <div class="col-12">
+          <div class="row">
+            <div class="btn-group policy-buttons" data-toggle="buttons">
+              <label class="btn btn-secondary btn-info">
+                <input type="radio" name="options" id="policy-on-button-off" autocomplete="off"> Hide Policy Change Projection
+              </label>
+              <label class="btn btn-info btn-secondary active">
+                <input type="radio" name="options" id="policy-on-button-on" autocomplete="off" checked> Show Policy Change Projection
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <div class="card border-dark variable-card text-white bg-secondary connector-us-unemployment">
+                <div class="card-body">
+                  <h5 class="card-title">Unemployment</h5>
+                  <p class="card-text">No change<br>&nbsp;<br>&nbsp;</p>
+                  <p class="card-text text-secondary">&nbsp;<br>&nbsp;</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card border-success variable-card text-white bg-success">
+                <div class="card-body">
+                  <h5 class="card-title">Tax Level</h5>
+                  <p class="card-text">Tax revenue as % of GDP<br>will decrease</p>
+                  <p class="card-text text-secondary text-secondary-white">Source: <a class='source-link-white' href="http://www.taxpolicycenter.org/feature/analysis-tax-cuts-and-jobs-act">Tax Policy Center</a><br>&nbsp;</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card border-danger variable-card text-white bg-danger">
+                <div class="card-body">
+                  <h5 class="card-title">Income Inequality</h5>
+                  <p class="card-text">Gini index<br>will increase</p>
+                  <p class="card-text text-secondary text-secondary-white">Source: <a class='source-link-white' href="http://www.taxpolicycenter.org/feature/analysis-tax-cuts-and-jobs-act">Tax Policy Center</a><br>&nbsp;<br>&nbsp;</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <div class="card border-secondary variable-card text-white bg-secondary connector-us-growth">
+                <div class="card-body">
+                  <h5 class="card-title">Growth</h5>
+                  <p class="card-text">No significant change</p>
+                  <p class="card-text text-secondary text-secondary-white">Source: <a class='source-link-white' href="http://www.igmchicago.org/surveys/tax-reform-2">IGM Forum</a><br>&nbsp;</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <div class="card border-danger variable-card text-white bg-danger connector-us-debt">
+                <div class="card-body">
+                  <h5 class="card-title">Gov Debt</h5>
+                  <p class="card-text">Will increase</p>
+                  <p class="card-text text-secondary text-secondary-white">Source: <a class='source-link-white' href="http://www.igmchicago.org/surveys/tax-reform-2">IGM Forum</a><br>&nbsp;<br>&nbsp;<br>&nbsp;</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8 offset-md-2">
+          <p>
+            A few notes:
+            <ul>
+              <li>This sample projection only shows first and second order effects.</li>
+              <li>The dashboard is incomplete.</li>
+              <li>Only one projection is displayed, but it's possible to show projections from multiple groups, along with information such as the accuracy of the groups over time and which projection the dashboard owner believes.</li>
+              <li>The projection only displays the direction of the change (i.e. if it will get better or worse), but it's possible to also show actual numerical projections.</li>
+              <li>A projection may include metrics that the dashboard being viewed does not include (e.g. maybe the projection above also states that trade will be impacted, but John Smith doesn't care about trade). The dashboard could display these in a separate section.</li>
+            </ul>
+          </p>
+          <h5 class="heading-margin">
+            Consistency
+          </h5>
+          <p>
+            In our current system of political discussion, the best case is a well-written article that outlines the author's political view.
+            But even in this case, we're still dealing with flat text that makes it hard to quickly understand the view and compare it to others.
+            And the vast majority of political discourse is far from this ideal case.
+            For example, when debating policy people are often talking about different things, or at different levels.
+            The consistency provided by having views presented in a dashboard would make political discussion much clearer and easier to understand.
+          </p>
+          <h5 class="heading-margin">
+            Who Does What
+          </h5>
+          <p>
+            The three types of content in a dashboard are:
+            <ul>
+              <li>The outcomes the person cares about</li>
+              <li>For each of those outcomes, the other policy metrics that impact it</li>
+              <li>The various projections on the impact of a proposed policy change, and which projections the view holder believes</li>
+            </ul>
+          </p>
+          <p>
+            Policy-minded people already know those things, so in v1 their existing views would be converted into a dashboard.
+          </p>
+          <p>
+            The system would automatically display the most recent data for the various metrics.
+          </p>
+          <p>
+            Less policy-minded people may know the outcomes they care about, but not necessarily all of the impacting metrics and projections.
+            Over time the system itself could provide the impacting metrics and projections, to provide use cases to those people.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8 offset-md-2">
+          <h5 class="heading-margin">
+            Examples of Other Possible Outcomes/Impacting Metrics
+          </h5>
+          <ul>
+            <li>Inequality</li>
+            <li>Health & health-care</li>
+            <li>Environment</li>
+            <li>Crime</li>
+            <li>Poverty</li>
+            <li>Taxation</li>
+          </ul>
+          <p>
+            If you're policy-minded and would like to work with me to create a dashboard that represents your policy beliefs, email me at benhartney@gmail.com.<br><br><br><br>
+          </p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="levels.js"></script>
+  </body>
+</html>

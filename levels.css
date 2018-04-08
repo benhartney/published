@@ -1,0 +1,27 @@
+body {
+	margin-top: 6rem;
+}
+.level-buttons, .policy-buttons {
+	margin: 2rem auto 0 auto;
+}
+.variable-card {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+.dashboard {
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+}
+.source-link {
+	color:#868e96!important;
+}
+.source-link-white, .text-secondary-white {
+	color:#fff!important;
+}
+div.line{
+  height: 2px; /* Line width of 3 */
+  background: #ddd; /* Black fill */
+}
+.heading-margin {
+	margin-bottom: 1rem;
+}

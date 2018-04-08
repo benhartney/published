@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Political Dashboard</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="levels.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row border border-dark dashboard">
+        <div class="col-12">
+          <div class="row variable-card-row" data-level="australia">
+            <div class="col-4 offset-md-4">
+              <div class="card border-danger variable-card connector-unemployment bg-light">
+                <div class="card-body">
+                  <div class="dropdown float-right">
+                    <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      2017
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <button class="dropdown-item" href="#" data-year=2017>2017</button>
+                      <button class="dropdown-item" href="#" data-year=2018>2018 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2019>2019 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2020>2020 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2021>2021 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2022>2022 (forecast)</button>
+                    </div>
+                  </div>
+                  <h4 class="card-title">Unemployment</h4>
+                  <p class="card-text year-dependant-text" data-year=2017><span class="font-weight-bold">5.6%</span><br>0.6% / 67,887 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+                  <p class="card-text year-dependant-text" data-year=2018 style='display:none;'><span class="font-weight-bold">5.4%</span><br>0.4% / 37,103 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+                  <p class="card-text year-dependant-text" data-year=2019 style='display:none;'><span class="font-weight-bold">5.2%</span><br>0.2% / 18,081 people<br><span class='text-danger'>more</span> than the target level (5%)</p>
+                  <p class="card-text year-dependant-text" data-year=2020 style='display:none;'><span class="font-weight-bold">5%</span><br>0% / 0 people<br><span class='text-dark'>more</span> than the target level (5%)</p>
+                  <p class="card-text year-dependant-text" data-year=2021 style='display:none;'><span class="font-weight-bold">4.9%</span><br>0.1% / 12,437 people<br><span class='text-success'>less</span> than the target level (5%)</p>
+                  <p class="card-text year-dependant-text" data-year=2022 style='display:none;'><span class="font-weight-bold">4.8%</span><br>0.2% / 23,516 people<br><span class='text-success'>less</span> than the target level (5%)</p>
+                  <p class="card-text text-secondary">Updated: July 2017<br>Source: <a class='source-link' href="http://lmip.gov.au/">lmip.gov.au</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row variable-card-row" data-level="australia">
+            <div class="col-4 offset-md-4">
+              <div class="card border-success variable-card connector-growth bg-light" data-slots-available="3">
+                <div class="card-body">
+                  <div class="dropdown float-right">
+                    <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      2017
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <button class="dropdown-item" href="#" data-year=2017>2017</button>
+                      <button class="dropdown-item" href="#" data-year=2018>2018 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2019>2019 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2020>2020 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2021>2021 (forecast)</button>
+                      <button class="dropdown-item" href="#" data-year=2022>2022 (forecast)</button>
+                    </div>
+                  </div>
+                  <h4 class="card-title">Growth</h4>
+                  <p class="card-text year-dependant-text" data-year=2017><span class="font-weight-bold">2.2%</span><br>0% more than the average level of growth for advanced economies (2.2%)</p>
+                  <p class="card-text year-dependant-text" data-year=2018 style='display:none;'><span class="font-weight-bold">2.9%</span><br>0.9% <span class='text-success'>more</span> than the average level of growth for advanced economies (2.0%)</p>
+                  <p class="card-text year-dependant-text" data-year=2019 style='display:none;'><span class="font-weight-bold">2.9%</span><br>1.1% <span class='text-success'>more</span> than the average level of growth for advanced economies (1.8%)</p>
+                  <p class="card-text year-dependant-text" data-year=2020 style='display:none;'><span class="font-weight-bold">2.8%</span><br>1.1% <span class='text-success'>more</span> than the average level of growth for advanced economies (1.7%)</p>
+                  <p class="card-text year-dependant-text" data-year=2021 style='display:none;'><span class="font-weight-bold">2.8%</span><br>1.1% <span class='text-success'>more</span> than the average level of growth for advanced economies (1.7%)</p>
+                  <p class="card-text year-dependant-text" data-year=2022 style='display:none;'><span class="font-weight-bold">2.7%</span><br>1.0% <span class='text-success'>more</span> than the average level of growth for advanced economies (1.7%)</p>
+                  <p class="card-text text-secondary">Updated: 2016<br>Source: <a class='source-link' href="https://www.imf.org/external/pubs/ft/weo/2017/02/weodata/weorept.aspx?pr.x=47&pr.y=7&sy=2015&ey=2022&scsm=1&ssd=1&sort=country&ds=.&br=1&c=193&s=NGDP_RPCH&grp=0&a=">IMF</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row variable-card-row" data-level="australia">
+            <div class="col-4">
+              <div class="card border-dark variable-card connector-infrastructure bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Infrastructure</h4>
+                  <p class="card-text">Overall rating: C+</p>
+                  <p class="card-text text-secondary">Updated: 2016<br>Source: <a class='source-link' href="https://www.engineersaustralia.org.au/sites/default/files/content-files/2016-12/national_infrastructure_investment_report_0.pdf">Engineers Australia</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card border-danger variable-card connector-primary bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Early childhood education</h4>
+                  <p class="card-text">Age 4 population not enrolled: 14.8%</p>
+                  <p class="card-text text-secondary">Updated: 2014<br>Source: <a class='source-link' href="https://www.oecd.org/australia/govataglance.htm">OECD</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card border-dark variable-card connector-protection bg-light">
+                <div class="card-body">
+                  <h4 class="card-title">Regulatory protection of incumbent companies</h4>
+                  <p class="card-text">Rating: B-<br></p>
+                  <p class="card-text text-secondary">Updated: 2013<br>Source: <a class='source-link' href="https://tcdata360.worldbank.org/indicators/gim.prot.incum?country=AUS&indicator=3328&viz=line_chart&years=2013,2013">World Bank</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="levels.js"></script>
+  </body>
+</html>

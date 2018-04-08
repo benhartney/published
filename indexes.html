@@ -1,0 +1,352 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Political View Builder</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="indexes.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <a class="navbar-brand" href="">PoliticalViewBuilder</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" id='showIntro'>About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" id='main-container' class='invisible'>
+
+      <div class="jumbotron jumbotron-fluid" id='intro'>
+        <div class="container">
+
+          <p class="lead">A composite statistic (index) is formed when individual indicators are compiled into a single number.</p>
+          <p class="lead">The most well known example is the UN's Human Development Index (HDI), which measures aggregates the achievements in a country across three basic dimensions of human development: a long and healthy life, access to knowledge and a decent standard of living.</p>
+          <p class="lead">We can use these indexes to determine the state of a country (against the maximum possible score), compare countries, and identify trends over time for a country.</p>
+          <p class="lead">These indexes are essentially a political view. Any time we refer to the HDI's rankings, we are accepting the variables it is counting, the relative weightings between them, and various other implementation details.</p>
+          <p class="lead">They have issues (over-simplification, data quality etc), but to the extent that we already use them, we should have a clearer sense of these details.</p>
+          <p class="lead">But furthermore, we should be able to change them. We should be able to add other variables. We should be able to save these new indexes we create, and use them as proxies for our political views.</p>
+          <p class="lead">This is an experiment in doing those things.</p>
+          <p class="lead">Currently, this system allows you to edit the HDI. In the future, you will be able to create your own index, and share it. Want to add in things like measures of freedom, or carbon emissions, or inequality? You'll be able to do so.</p>
+          <p class="lead">
+            <a class="btn btn-primary" href="#" role="button" id='introContinue'>Continue</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm">
+          <div class="dropdown float-right">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              UN HDI
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <button class="dropdown-item" type="button">UN Inequality-adjusted HDI (coming soon)</button>
+              <button class="dropdown-item" type="button">UN Gender Inequality Index (coming soon)</button>
+              <button class="dropdown-item" type="button">UN Gender Development Index (coming soon)</button>
+              <button class="dropdown-item" type="button">UN Multidimensional Poverty Index (coming soon)</button>
+              <button class="dropdown-item" type="button">Social Progress Index (coming soon)</button>
+            </div>
+          </div>
+          <h1>Model</h1>
+          <div class='mb-2'>
+            <input id="geoCheckbox" type="checkbox"> Reduce the score of countries that are less balanced in their levels of life expectancy, education, and yearly income <a href="#" data-toggle="modal" data-target="#geoModal"><svg class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></a>
+            <div class="alert alert-info alert-dismissible show" role="alert">
+              Note: The HDI usually has this turned on, but it's turned off in this experiment because otherwise changing the variable weightings doesn't change the model much.
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+
+
+          <div class='mb-2'>
+            <input id="incomeLogCheckbox" type="checkbox" checked> Reduce the importance of income differences among richer countries (i.e. make each additional dollar of income worth less than the previous one) <a href="#" data-toggle="modal" data-target="#logModal"><svg class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></a>
+          </div>
+
+
+          
+          <h4>Weighting</h4>
+          <form class="form-inline">
+            <table style="width:100%">
+              <tr>
+                <th>Variable</th>
+                <th>Importance</th>
+              </tr>
+              <tr>
+                <td>Life expectancy</td>
+                <td><button id='life-expectancy-weighting-reduce' type="button" class="btn btn-secondary btn-sm">-</button> <button id='life-expectancy-weighting-increase' type="button" class="btn btn-secondary btn-sm">+</button></td> 
+              </tr>
+              <tr>
+                <td>Schooling that a current adult had</td>
+                <td><button id='mean-schooling-weighting-reduce' type="button" class="btn btn-secondary btn-sm">-</button> <button id='mean-schooling-weighting-increase' type="button" class="btn btn-secondary btn-sm">+</button></td> 
+              </tr>
+              <tr>
+                <td>Schooling that a current child expects to have</td>
+                <td><button id='expected-schooling-weighting-reduce' type="button" class="btn btn-secondary btn-sm">-</button> <button id='expected-schooling-weighting-increase' type="button" class="btn btn-secondary btn-sm">+</button></td> 
+              </tr>
+              <tr>
+                <td>Yearly income</td>
+                <td><button id='income-weighting-reduce' type="button" class="btn btn-secondary btn-sm">-</button> <button id='income-weighting-increase' type="button" class="btn btn-secondary btn-sm">+</button></td> 
+              </tr>
+            </table>
+            <div class="border border-dark" id="weighting-outcomes">
+              <div>
+                <span id="life-expectancy-weighting" class="font-weight-bold">2</span> year/s of life expectancy, is worth: 
+              </div>
+              <div>
+                <span id="mean-schooling-weighting" class="font-weight-bold">1</span> year/s of schooling that a current adult had, is worth:
+              </div>
+              <div>
+                <span id="expected-schooling-weighting" class="font-weight-bold">1.2</span> year/s of schooling a current child can expect to have, is worth:
+              </div>
+              <div>
+                $<span id="income-weighting" class="font-weight-bold">2500</span> of yearly income (converted to 2011 US dollars and prices)
+              </div>
+            </div>
+          </form>
+          <div class='mb-3'>
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Add variable
+              </button>
+              <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 31px, 0px); top: 0px; left: 0px; will-change: transform;">
+                <button class="dropdown-item" type="button">Nutrition: Undernourishment (coming soon)</button>
+                <button class="dropdown-item" type="button">Shelter: Homelessness rate (coming soon)</button>
+                <button class="dropdown-item" type="button">Shelter: Availability of affordable housing (coming soon)</button>
+                <button class="dropdown-item" type="button">Personal Safety: Level of violent crime (coming soon)</button>
+                <button class="dropdown-item" type="button">Health and Wellness: Suicide rate (coming soon)</button>
+                <button class="dropdown-item" type="button">Economy: Unemployment rate (coming soon)</button>
+                <button class="dropdown-item" type="button">Economy: Corporate welfare (coming soon)</button>
+                <button class="dropdown-item" type="button">Freedom: Non-violent incarceration rate (coming soon)</button>
+                <button class="dropdown-item" type="button">Freedom: Heritage Index of Economic Freedom (coming soon)</button>
+                <button class="dropdown-item" type="button">Equality: TBD (coming soon)</button>
+                <button class="dropdown-item" type="button">Environment: Greenhouse gas emissions (coming soon)</button>
+                <button class="dropdown-item" type="button">Environment: Renewable energy use (as % of total energy consumption) (coming soon)</button>
+                <button class="dropdown-item" type="button">Environment: Natural resource depletion (as % of GNI) (coming soon)</button>
+                <button class="dropdown-item" type="button">Animal welfare: Extinction rate (coming soon)</button>
+                <button class="dropdown-item" type="button">Animal welfare: Number of animals currently being raised in factory farms (coming soon)</button>
+                <button class="dropdown-item" type="button">Access to Information and Communications: Press Freedom Index (coming soon)</button>
+                <button class="dropdown-item" type="button">Access to Information and Communications: Support for free speech (coming soon)</button>
+                <button class="dropdown-item" type="button">Global Catastrophic Risks: Biosecurity and Pandemic Preparedness (coming soon)</button>
+                <button class="dropdown-item" type="button">Global Catastrophic Risks: Potential Risks From Advanced Artificial Intelligence (coming soon)</button>
+              </div>
+            </div>&nbsp;<a href="#" data-toggle="modal" data-target="#addVariableModal"><svg class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></a>
+          </div>
+
+          <h4>Goal Levels</h4>
+          <p>Once a country reaches one of these levels, their score will not increase for any additional improvements in that area. These will be editable in a future update.</p>
+          <label>Life expectancy of a new-born infant <a href="#" data-toggle="modal" data-target="#lifeExpectancyModal"><svg class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></a></label>
+          <input type="text" class="form-control model-input" value='85' id="life-expectancy-max" disabled>
+          <label>Years of schooling that an adult has received <a href="#" data-toggle="modal" data-target="#meanSchoolingModal"><svg class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></a></label>
+          <input type="text" class="form-control model-input" value='15' id="mean-schooling-max" disabled>
+          <label>Years of schooling a child will receive <a href="#" data-toggle="modal" data-target="#expectedSchoolingModal"><svg class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></a></label>
+          <input type="text" class="form-control model-input" value='18' id="expected-schooling-max" disabled>
+          <label>Yearly income a person has (converted to 2011 US dollars and prices) <a href="#" data-toggle="modal" data-target="#incomeModal"><svg class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></a></label>
+          <input type="text" class="form-control model-input" value='75000' id="income-max" disabled>
+        </div>
+        <div class="col-sm">
+
+          <h1>Rankings</h1>
+          <div id="table-column">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Country</th>
+                  <th>Score/10</th>
+                  <th>Edit</th>
+                </tr>
+              </thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-sm">
+          <h1 id="country-name">Country Stats</h1>
+          <p id="countryEditInstructions">
+            Select a country to see its details.
+          </p>
+          <form class="form-inline" id='country-inputs'>
+            <div>
+              In 2015:
+            </div>
+            <div class='mb-2'>
+              An average new-born infant will live for
+              <input type="text" class="form-control country-input" id="life-expectancy">
+              years <a href="#" data-toggle="modal" data-target="#lifeExpectancyModal"><svg class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></a>
+            </div>
+            <div class='mb-2'>
+              An average adult has received
+              <input type="text" class="form-control country-input" id="mean-schooling">
+              years of schooling <a href="#" data-toggle="modal" data-target="#meanSchoolingModal"><svg class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></a>
+            </div>
+            <div class='mb-2'>
+              An average child will receive
+              <input type="text" class="form-control country-input" id="expected-schooling">
+              years of schooling <a href="#" data-toggle="modal" data-target="#expectedSchoolingModal"><svg class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></a>
+            </div>
+            <div class='mb-2'>
+              An average person has $
+              <input type="text" class="form-control country-input" id="income">
+              dollars of yearly income (converted to 2011 US dollars and prices) <a href="#" data-toggle="modal" data-target="#incomeModal"><svg class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></a>
+            </div>
+            <canvas id="countryOutcomeChart" width="400" height="400"></canvas>
+            More historical data will be added in a future update.
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <p id='copyright'><small>Sources: <a href='https://www.socialprogressindex.com/'>Social Progress Index</a>, <a href='http://hdr.undp.org/en/content/human-development-index-hdi'>UN</a>, <a href='https://www.openphilanthropy.org'>Open Philanthropy</a>.</small></p>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="geoModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              Imagine 2 countries.<br><br>
+              Country A<br>
+              <ul>
+                <li>Life expectancy: Above average</li>
+                <li>Education: Average</li>
+                <li>Yearly Income: Below average</li>
+              </ul>
+              Country B<br>
+              <ul>
+                <li>Life expectancy: Average</li>
+                <li>Education: Average</li>
+                <li>Yearly Income: Average</li>
+              </ul>
+              If you think these countries should have the same score, uncheck the checkbox.<br><br>
+              If you think country B should have a higher score than country A, because country B is more balanced, check the checkbox.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="meanSchoolingModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              Average number of years of education received by people ages 25 and older in their lifetime based on education attainment levels of the population converted into years of schooling based on theoretical durations of each level of education attended.<br><br>
+              Source: UNESCO Institute for Statistics (2016), Barro and Lee (2016), ICF Macro Demographic and Health Surveys and UNICEF's Multple Indicator Cluster Surveys
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="expectedSchoolingModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              Number of years of schooling that a child of school entrance age can expect to receive if prevailing patterns of age-specific enrolment rates were to stay the same throughout the child's life.<br><br>
+              Source: UNESCO Institute for Statistics (2016), ICF Macro Demographic and Health Surveys and UNICEF Multple Indicator Cluster Surveys
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="lifeExpectancyModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              The number of years a new-born infant could expect to live if prevailing patterns of age-specific mortality rates at the time of birth were to stay the same throughout the child's life.<br><br>
+              Source: UNDESA (2015a)
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="incomeModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              Aggregate income of an economy generated by its production and its ownership of factors of production, less the incomes paid for the use of factors of production owned by the rest of the world, converted to international dollars using PPP rates, divided by midyear population.<br><br>
+              Source: World Bank (2016a), IMF (2016) and United Nations Statistica Division (2016a)
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              Imagine someone that earns $30,000 each year.<br><br>
+              If you think each of those dollars should contribute to their country's score equally, uncheck the box.<br><br>
+              If you think that an extra dollar of income is worth much more to a poor person than a rich one - that is, the ability to transform additional income into equivalently valuable functionings declines as incomes rise - and thus you think that each of those dollars of income should be worth less than the one before it, check the checkbox.<br><br>
+              The second $10,000 would be worth 15% of the first $10,000. The third $10,000 would be worth 9% of the first $10,000. And so on.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="addVariableModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              These are some examples of the types of variables that could be added to the scoring calculation, in a future update. Their presence here is not necessarily an endorsement of their importance - in theory, all possible components of a political view should be available to add to the calculation.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.2.1.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@1.7.1/dist/jstat.min.js"></script> <!-- include jStat, from the CDN or otherwise -->
+    <script src="indexes.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
+  </body>
+</html>
