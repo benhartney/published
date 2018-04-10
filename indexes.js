@@ -275,12 +275,6 @@ function calculateCountries() {
 
 $(document).ready(function() {
 
-  $('#introContinue').click(function() {
-    $('#intro').hide();
-    setCookie('introHidden','true',7);
-    return false;
-  });
-
   $('#life-expectancy-weighting-reduce').click(function() {
     var existingVal = convertStringToInt($('#life-expectancy-weighting').text())
     $('#life-expectancy-weighting').text(existingVal + 1)
@@ -345,14 +339,22 @@ $(document).ready(function() {
     return false;
   });
 
+  $('#introContinue').click(function() {
+    $('#intro').hide();
+    setCookie('introHidden','true',7);
+    return false;
+  });
+
   $('#showIntro').click(function() {
     $('#intro').show();
     return false;
   });
 
-  var x = getCookie('introHidden');
-  if (x != null || false) {
-    $('#intro').show();
+  var introHiddenCookieValue = getCookie('introHidden');
+  console.log("introHiddenCookieValue")
+  console.log(introHiddenCookieValue)
+  if (introHiddenCookieValue != null) {
+    $('#intro').hide();
   }
 
 
@@ -402,10 +404,6 @@ $(document).ready(function() {
 
   window.geo = $('#geoCheckbox').is(":checked")
   window.incomeLog = $('#incomeLogCheckbox').is(":checked")
-  console.log("window.geo")
-  console.log(window.geo)
-  console.log("window.incomeLog")
-  console.log(window.incomeLog)
 
   //$('.model-input').typingFinished(500, function(e) {
   //  calculateCountries();

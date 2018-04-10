@@ -18,9 +18,7 @@
 #income, #income-weighting, #income-max {
   width: 80px !important; 
 }
-#intro {
-  display:none;
-}
+#intro {}
 #countryOutcomeChart {
   margin-top: 20px;
   margin-bottom: 20px;
