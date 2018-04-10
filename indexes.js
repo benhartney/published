@@ -451,9 +451,6 @@ $(document).ready(function() {
 
   calculateCountries();
 
-  console.log('width')
-  console.log($(window).width())
-
   if ($(window).width() > 1440) {
     $('#main-container').addClass("container")
   } else {
