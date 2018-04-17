@@ -458,6 +458,11 @@ $(document).ready(function() {
   }
   $('#main-container').removeClass("invisible")
   //$('#main-container').removeClass("invisible")
+
+  
+  $('.weighting-change-button').click(function() {
+    $('#weightingInfo').show()
+  });
   
 
 

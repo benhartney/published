@@ -51,7 +51,7 @@
           <p class="lead">A composite statistic, aka an index, is formed when individual indicators are compiled into a single number.</p>
           <p class="lead">The most well known example is the UN's Human Development Index (HDI), which aggregates achievements across three basic dimensions of human development: a long and healthy life, access to knowledge and a decent standard of living.</p>
           <p class="lead">We can use indexes to determine how well a country is doing, compare countries against each other, and see how are country is progressing.</p>
-          <p class="lead">Another way to think about indexes is that they are political views - when we refer to the HDI's rankings, we are accepting the variables it is counting, the relative weightings between the variables, and various other implementation details.</p>
+          <p class="lead">Another way to think about indexes is that they are political views - when we refer to the HDI's rankings, we are accepting the indicators it is counting, the relative weightings between the indicators, and various other implementation details.</p>
 
           <p class="lead">We should have a clearer sense of these details, and be able to easily see the impact of changing them.</p>
           <p class="lead">Furthermore, we should be able create new indexes easily. If I feel like the HDI is missing impact on the environment, or how well the criminal justice system is working, or taxation level, I should be able to add those, save the new index, and share it.</p>
@@ -89,7 +89,7 @@
           <div class='mb-2'>
             <input id="incomeLogCheckbox" type="checkbox"> Reduce the importance of income differences among richer countries (i.e. make each additional dollar of income worth less than the previous one) <a href="#" data-toggle="modal" data-target="#logModal"><svg class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></a>
             <div class="alert alert-info alert-dismissible show" role="alert">
-              Note: The HDI usually has these turned on, but they're been turned off because otherwise changing the variable weightings doesn't significantly change the rankings.
+              Note: The HDI usually has these turned on, but they're been turned off because otherwise changing the indicator weightings doesn't significantly change the rankings.
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -102,24 +102,24 @@
           <form class="form-inline">
             <table style="width:100%">
               <tr>
-                <th>Variable</th>
+                <th>Indicator</th>
                 <th>Importance</th>
               </tr>
               <tr>
                 <td>Life expectancy</td>
-                <td><button id='life-expectancy-weighting-reduce' type="button" class="btn btn-secondary btn-sm">-</button> <button id='life-expectancy-weighting-increase' type="button" class="btn btn-secondary btn-sm">+</button></td> 
+                <td><button id='life-expectancy-weighting-reduce' type="button" class="btn btn-secondary btn-sm weighting-change-button">-</button> <button id='life-expectancy-weighting-increase' type="button" class="btn btn-secondary btn-sm weighting-change-button">+</button></td> 
               </tr>
               <tr>
                 <td>Schooling that a current adult had</td>
-                <td><button id='mean-schooling-weighting-reduce' type="button" class="btn btn-secondary btn-sm">-</button> <button id='mean-schooling-weighting-increase' type="button" class="btn btn-secondary btn-sm">+</button></td> 
+                <td><button id='mean-schooling-weighting-reduce' type="button" class="btn btn-secondary btn-sm weighting-change-button">-</button> <button id='mean-schooling-weighting-increase' type="button" class="btn btn-secondary btn-sm weighting-change-button">+</button></td> 
               </tr>
               <tr>
                 <td>Schooling that a current child expects to have</td>
-                <td><button id='expected-schooling-weighting-reduce' type="button" class="btn btn-secondary btn-sm">-</button> <button id='expected-schooling-weighting-increase' type="button" class="btn btn-secondary btn-sm">+</button></td> 
+                <td><button id='expected-schooling-weighting-reduce' type="button" class="btn btn-secondary btn-sm weighting-change-button">-</button> <button id='expected-schooling-weighting-increase' type="button" class="btn btn-secondary btn-sm weighting-change-button">+</button></td> 
               </tr>
               <tr>
                 <td>Yearly income</td>
-                <td><button id='income-weighting-reduce' type="button" class="btn btn-secondary btn-sm">-</button> <button id='income-weighting-increase' type="button" class="btn btn-secondary btn-sm">+</button></td> 
+                <td><button id='income-weighting-reduce' type="button" class="btn btn-secondary btn-sm weighting-change-button">-</button> <button id='income-weighting-increase' type="button" class="btn btn-secondary btn-sm weighting-change-button">+</button></td> 
               </tr>
             </table>
             <div class="border border-dark" id="weighting-outcomes">
@@ -135,12 +135,18 @@
               <div>
                 $<span id="income-weighting" class="font-weight-bold">2500</span> of yearly income (converted to 2011 US dollars and prices)
               </div>
+              <div class="alert alert-info alert-dismissible show" role="alert" id='weightingInfo'>
+                Note: These numbers display the weighting changes. Increasing an indicator's importance will reduce the relevant number here, because by making the indicator more valuable you need less of it to "trade" against the other indicators.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
             </div>
           </form>
           <div class='mb-3'>
             <div class="btn-group">
               <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Add variable
+                Add indicator
               </button>
               <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 31px, 0px); top: 0px; left: 0px; will-change: transform;">
                 <button class="dropdown-item" type="button">Nutrition: Undernourishment (coming soon)</button>
@@ -338,7 +344,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body">
-              These are some examples of the types of variables that could be added to the scoring calculation, in a future update. Their presence here is not necessarily an endorsement of their importance - in theory, all possible components of a political view should be available to add to the calculation.
+              These are some examples of the types of indicators that could be added to the scoring calculation, in a future update. Their presence here is not necessarily an endorsement of their importance - in theory, all possible components of a political view should be available to add to the calculation.
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
