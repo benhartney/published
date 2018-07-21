@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Political View Mapper: Noah Smith</title>
+
+        <style type="text/css">
+            body {
+                font: 10pt sans;
+            }
+
+            #mynetwork {
+                width: 100%;
+                height: 600px;
+                border: 1px solid lightgray;
+            }
+        </style>
+        <script type="text/javascript" src="vis.js"></script>
+        <link href="vis-network.min.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript">
+            var nodes = null;
+            var edges = null;
+            var network = null;
+            var directionInput = document.getElementById("direction");
+
+            function setLevel(id,level) {
+              nodes.find(function(element) {return element['id'] == id})["level"] = level;
+            }
+
+            function createNode(id, label) {
+              nodes.push({
+                id: id,
+                label: label,
+                shape: 'box',
+                color: {
+                  background: 'white',
+                  border: 'black'
+                },
+                widthConstraint: {
+                  minimum: 200
+                },
+                heightConstraint: {
+                  minimum: 120
+                }
+              });
+            }
+
+            function createLink(from, to, label) {
+              edges.push({
+                from: from,
+                to: to,
+                arrows: 'from',
+                label: label,
+                font: {
+                  background: 'white',
+                  size: 25
+                }
+              });
+            }
+
+            function destroy() {
+                if (network !== null) {
+                    network.destroy();
+                    network = null;
+                }
+            }
+
+            function draw() {
+                destroy();
+                nodes = [];
+                edges = [];
+                var connectionCount = [];
+
+                createNode('overall', "Overall view")
+                setLevel('overall',0)
+
+                createNode('economics', "Economics")
+                setLevel('economics',1)
+                createLink('overall', 'economics', '+')
+                createNode('health', "Health")
+                setLevel('health',1)
+                createLink('overall', 'health', '+')
+                createNode('society', "Society")
+                setLevel('society',1)
+                createLink('overall', 'society', '+')
+
+
+                createNode('real_compensation', "Real compensation per hour\n---\n2017: TBD\n---\n2000 → 2017: +11.5%\n---\nSource: Federal Reserve Bank of St. Louis")
+                setLevel('real_compensation',2)
+                createLink('economics', 'real_compensation', '+')
+                createNode('real_median', "Real median personal income\n---\n2016: TBD\n---\n2000 → 2016: +3.7%\n---\nSource: Federal Reserve Bank of St. Louis")
+                setLevel('real_median',2)
+                createLink('economics', 'real_median', '+')
+                createNode('child_poverty', "Child poverty: % of children living in poverty\n---\n2016: 15.6%\n---\n2000 → 2016: -13% | -2.4pp\n---\nSource: Center on Budget and Policy Priorities")
+                setLevel('child_poverty',2)
+                createLink('economics', 'child_poverty', '-')
+                createNode('homelessness', "Homelessness: % of population that is homeless\n---\n2017: 0.21%\n---\n2007 → 2017: -21% | -0.04pp\n---\nSource: U.S. Department of Housing and Urban Development")
+                setLevel('homelessness',2)
+                createLink('economics', 'homelessness', '-')
+                createNode('employment', "Employment: Prime age employment rate\n---\n2018: 79%\n---\n1994 → 2018: +0.52% | +0.41pp\n---\nSource: Federal Reserve Bank of St. Louis")
+                setLevel('employment',2)
+                createLink('economics', 'employment', '+')
+                createNode('inequality', "Inequality")
+                setLevel('inequality',2)
+                createLink('economics', 'inequality', '-')
+                createNode('productivity', "Productivity: Annual total factor productivity growth rate\n---\n2013: +0.88%\n---\n1996-2004 avg → 2005-2013 avg: -50% | -0.87pp\n---\nSource: U.S. Total Factor Productivity Slowdown - Evidence from the U.S. States")
+                setLevel('productivity',2)
+                createLink('economics', 'productivity', '+')
+                createNode('mobility', "Wealth mobility: Chance of a child becoming richer than their parents\n---\n2014: 50%\n---\n1970 → 2014: -46% | -42pp\n---\nSource: http://www.nber.org/papers/w22910")
+                setLevel('mobility',2)
+                createLink('economics', 'mobility', '+')
+                createNode('product_quality', "Product quality + range: No quantitative measurement\n---\n2000 → 2018:Increased\n")
+                setLevel('product_quality',2)
+                createLink('economics', 'product_quality', '+')
+                // economics level 3
+                createNode('gini_index', "Gini index\n---\n2016: 41.5\n---\n2000 → 2016: +2.72% | +1.1pp\n---\nSource: Federal Reserve Bank of St. Louis")
+                setLevel('gini_index',3)
+                createLink('inequality', 'gini_index', '+')
+                createNode('wealth_1%', "Wealth share of top 1%\n---\n2012: 41.8%\n---\n2000 → 2012: +23% | +7.7pp\n---\nSource: Gabriel Zucman")
+                setLevel('wealth_1%',3)
+                createLink('inequality', 'wealth_1%', '+')
+                createNode('wealth_5%', "Wealth share of top 5%\n---\n2012: 64.6%\n---\n2000 → 2012: +14% | +8.1pp\n---\nSource: Gabriel Zucman")
+                setLevel('wealth_5%',3)
+                createLink('inequality', 'wealth_5%', '+')
+                createNode('gdp_growth_rate', "GDP growth rate\n---\n2017: 2.27%\n---\n1961-1980 avg → 1981-2017 avg: -30% | -1.17pp\n---\nSource: World Bank")
+                setLevel('gdp_growth_rate',3)
+                createLink('mobility', 'gdp_growth_rate', '+')
+                createNode('gdp_growth_distribution', "GDP growth distribution equality: TBD\n---\n1961→2017: Decreased")
+                setLevel('gdp_growth_distribution',3)
+                createLink('mobility', 'gdp_growth_distribution', '+')
+
+                createNode('life_expectancy', "Life expectancy\n---\n2016: 78.69y\n---\n2000 → 2016: +2.68% | +2.05y\n---\nSource: Federal Reserve Bank of St. Louis")
+                setLevel('life_expectancy',2)
+                createLink('health', 'life_expectancy', '+')
+                createNode('infant_mortality', "Infant mortality: % of births resulting in death\n---\n2016: 0.56%\n---\n1960 → 2016: -78.38% | -2.03pp\n---\nSource: Federal Reserve Bank of St. Louis")
+                setLevel('infant_mortality',2)
+                createLink('health', 'infant_mortality', '-')
+                createNode('minority_mortality', "Minority mortality: TBD\n---\n2000→2017:Decreased")
+                setLevel('minority_mortality',2)
+                createLink('health', 'minority_mortality', '-')
+                createNode('carbon_emissions', "Carbon emissions: Annual million metric tons\n---\n2017: 5087.7\n---\n2005 → 2017: -13.23% | -776\n---\nSource: https://bit.ly/2mnvG49")
+                setLevel('carbon_emissions',2)
+                createLink('health', 'carbon_emissions', '-')
+                createNode('opiods', "Opiods: Opioid prescriptions, millions\n---\n2013: 207m\n---\n2000 → 2013: +64% | +81m\n---\nSource: National Institute on Drug Abuse")
+                setLevel('opiods',2)
+                createLink('health', 'opiods', '-')
+                createNode('suicides', "Suicides: Per 100k residents\n---\n2015: 13.3\n---\n2000 → 2015: +28% | +2.9\n---\nSource: National Institute on Drug Abuse")
+                setLevel('suicides',2)
+                createLink('health', 'suicides', '-')
+                createNode('teen_pregnancy', "Teen pregnancy: Births per 1,000 females aged 15-19\n---\n2014: 24.2\n---\n1990 → 2014: -61% | -37.6\n---\nSource: Pew Research Center")
+                setLevel('teen_pregnancy',2)
+                createLink('health', 'teen_pregnancy', '-')
+                createNode('alcoholism', "Alcoholism: % of adults with dependency\n---\n2013: 13%\n---\n1992 → 2013: +73% | +5.5pp\n---\nSource: National Epidemiologic Survey on Alcohol and Related Conditions/JAMA")
+                setLevel('alcoholism',2)
+                createLink('health', 'alcoholism', '-')
+
+                createNode('crime', "Crime: Annual crime rate per 100k residents\n---\n2012: 3,200\n---\n1990 → 2012: -45% | -2,618\n---\nSource: https://bit.ly/1S5ohzu")
+                setLevel('crime',2)
+                createLink('society', 'crime', '-')
+                createNode('incarceration', "Incarceration: People in prison or local jail per 100k residents 18 or older\n---\n2016: 860\n---\n2000 → 2016: -7% | -60\n---\nSource: Bureau of Justice Statistics")
+                setLevel('incarceration',2)
+                createLink('society', 'incarceration', '-')
+                createNode('government_trust', "Trust in government: % who trust the govt in Washington always or most of the time\n---\n2017: 18%\n---\n2000 → 2017: -47% | -16pp\n---\nSource: Pew Research Center")
+                setLevel('government_trust',2)
+                createLink('society', 'government_trust', '+')
+                createNode('social_trust', "Social trust: % who say most people can be trusted\n---\n2014: 31%\n---\n2000 → 2014: -11% | -4pp\n---\nSource: Our World in Data")
+                setLevel('social_trust',2)
+                createLink('society', 'social_trust', '+')
+
+
+                // create a network
+                var container = document.getElementById('mynetwork');
+                var data = {
+                    nodes: nodes,
+                    edges: edges
+                };
+
+                var options = {
+                    edges: {
+                        smooth: {
+                            type: 'cubicBezier',
+                            forceDirection: 'vertical',
+                            roundness: 0.4
+                        }
+                    },
+                    layout: {
+                        hierarchical: {
+                            direction: "UD",
+                            nodeSpacing: 600,
+                            levelSeparation: 500
+                        }
+                    },
+                    physics:false
+                };
+                network = new vis.Network(container, data, options);
+            }
+        </script>
+    </head>
+    <body onload="draw();">
+        <h2>Political View Mapper: Noah Smith</h2>
+        <div id="mynetwork"></div>
+    </body>
+</html>
