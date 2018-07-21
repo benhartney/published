@@ -196,10 +196,14 @@
                 createNode('happiness', "Happiness: World Happiness Report score\n---\n2017: 6.886/10\n---\n2008 → 2017:-0.315\n---\nSource: http://worldhappiness.report/")
                 setLevel('happiness',2)
                 createLink('society', 'happiness', true)
-                // temp
                 createNode('hate_crimes', "Hate crimes: Amount in 10 largest cities\n---\n2017: 1,038\n---\n2010 → 2017: +33.08% | +258\n---\nSource: Center for the Study of Hate and Extremism")
                 setLevel('hate_crimes',2)
                 createLink('society', 'hate_crimes', false)
+                // temp
+                createNode('international_perception', "International perception: % of non-US people who perceive the US as a major threat to their country\n---\n2017: 38%\n---\n2013 → 2017: +52% | +13pp\n---\nSource: Pew Research Center")
+                setLevel('international_perception',2)
+                createLink('society', 'international_perception', false)
+
 
 
                 // create a network
