@@ -1,0 +1,41 @@
+
+
+notebook page
+
+
+overall help, hurt
+words
+dotted vs solid
+
+
+
+item can be defined as good or bad. this is "level"
+  suicide:
+    anything about 0 is bad. being above historical average is worse. progressively.
+  crime:
+    probably don't want to be 0 (there's got to be a better example, because you could want it to be 0 and also want civil rights, even if it's infeasible)
+  ---
+  most can be framed as either, by reversal
+  some data ones can't be
+    e.g. births by teenage mothers
+connection: if item definitions match, positive. otherwise, negative  
+  currently displayed in the connection
+trend: increase+goodDef=good,increase+badDef=bad,decrease+badDef=good,decrease+goodDef=bad
+  increase/decrease currently displayed in text.
+    could be in the connection, make it more like a flow
+  trend currently displayed via item color
+
+
+
+could try to phrase all things as good, it would eliminate an axis from the cognitive load
+
+current:
+nothing communicates if item is good/bad
+item color communicates trend
+not including connection
+
+alt:
+using "improve/worsen" communicates item good/bad
+
+alt:
+have different lenses. just show me the view structure. use box color to indicate item good/bad. then, show me trend. box color indicates trend.

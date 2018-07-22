@@ -19,9 +19,44 @@
 
     <main role="main" class="container-fluid">
 
-      <div class="starter-template">
-        <h2>Political View Mapper: Noah Smith</h2>
+      <div>
+        <h2 id='mainHeading'>Political View Mapper: Noah Smith</h2>
+        <div class="alert alert-dark alert-dismissible fade show" role="alert">
+          <p>This is an attempt to display Bloomberg writer Noah Smith's view on how the US is doing as a country in a new format.</p>
+          <p>The source material is <a href='https://www.bloomberg.com/view/articles/2018-07-13/eight-charts-show-where-america-stands-in-the-21st-century'>this article by Noah</a>. I've done a non-trival amount of interpretation, and made some alterations for convenience's sake. All errors are my own.</p>
+          <p>The benefits of this format are that:</p>
+          <ul>
+            <li>In theory, the structure is persistent and canonical - anytime Noah changes his worldview (for example, he could start monitoring an indicator around the average number of close friends people have), it would be added into this existing format, keeping it up-to-date</li>
+            <li>The numbers are automatically updated, so it's easier for the viewholder to track how things are going, and readers don't have to wait until the viewholder writes an updated article in a few years time to get an update</li>
+            <li>In addition to showing the issues the viewholder cares about and indicators for those issues, it can also show what the viewholder thinks have a causal influence on those issues
+              <ul>
+                <li>For example, one of Noah's indicators in the article is "absolute mobility" (a person's chance of being richer than their parents), which is falling. The article just talks about overall indicators, and not causes, but the paper he links to lists two causes for the drop in mobility - GDP growth rate and distribution. These have been added to the map.</li>
+              </ul>
+            </li>
+          </ul>
+          <p>You can zoom and move around using the standard Google Maps style interactions.</p>
+          <p>The green/red colors reflect whether that specific issue or indicator has been going well or not. White indicates that it's ambiguous.</p>
+          <p>There is some more explanation and detail further down this page, and at <a href='https://medium.com/@benhartney/improving-policy-discussions-1b8be6c7a318'>this post</a>.</p>
+          <p>If you have any thoughts or feedback, I'd love to hear it - <span class="redirect">moc.liamg@yentrahneb</span>
+          <hr>
+          <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <button type="button" data-dismiss="alert" aria-label="Close" class="btn btn-info">
+            <span aria-hidden="true">Close</span>
+          </button>
+        </div>
         <div id="map"></div>
+        <p>
+          PP: Percentage points
+        </p>
+        <p>
+          The article is great, better than the vast majority of political discource, is that it uses a lot of indicators.
+        </p>
+        <p>
+          Using the principles I outlined in <a href='https://medium.com/@benhartney/improving-policy-discussions-1b8be6c7a318'>this post</a>
+        </p>
       </div>
 
     </main><!-- /.container -->
