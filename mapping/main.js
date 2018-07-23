@@ -236,7 +236,7 @@ function draw() {
             hierarchical: {
                 direction: "UD",
                 nodeSpacing: 600,
-                levelSeparation: 500
+                levelSeparation: 300
             }
         },
         physics:false
