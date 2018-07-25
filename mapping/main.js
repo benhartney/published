@@ -19,7 +19,7 @@ function createNode(id, label, trend='neutral') {
     id: id,
     label: label,
     font: {
-        multi: true
+      multi: true
     },
     margin: 10,
     shape: 'box',
