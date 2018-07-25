@@ -21,6 +21,7 @@ function createNode(id, label, trend='neutral') {
     font: {
         multi: true
     },
+    margin: 10,
     shape: 'box',
     color: {
       background: backgroundColor,
