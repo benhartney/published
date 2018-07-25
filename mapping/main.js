@@ -32,7 +32,7 @@ function createNode(id, label, trend='neutral') {
   });
 }
 
-function createLink(from, to, positiveRelationship, lowerIsGood) {
+function createLink(from, to, positiveRelationship, lowerIsGood, custom=null) {
   //if (positiveRelationship) {
   //  var label = '→\n→'
   //} else {
@@ -47,10 +47,10 @@ function createLink(from, to, positiveRelationship, lowerIsGood) {
     from: from,
     to: to,
     arrows: 'from',
-    //label: label,
+    label: custom,
     font: {
       background: 'white',
-      size: 25
+      size: 15
     }
   });
 }
@@ -115,10 +115,10 @@ function draw() {
     createLink('inequality', 'wealth_5%', true, false)
     createNode('gdp_growth_rate', "GDP growth rate\n---\n2017: 2.27%\n---\n1961-1980 avg → 1981-2017 avg: -30% | -1.17pp\n---\nSource: World Bank", 'negative')
     setLevel('gdp_growth_rate',3)
-    createLink('mobility', 'gdp_growth_rate', true, true)
+    createLink('mobility', 'gdp_growth_rate', true, true, "Explanatory power: 29%\nSource:\nhttps://www.nber.org/papers/w22910")
     createNode('gdp_growth_distribution', "GDP growth distribution equality: TBD\n---\n1961→2017: Decreased", 'negative')
     setLevel('gdp_growth_distribution',3)
-    createLink('mobility', 'gdp_growth_distribution', true, true)
+    createLink('mobility', 'gdp_growth_distribution', true, true, "Explanatory power: 71%\nSource:\nhttps://www.nber.org/papers/w22910")
     createNode('real_compensation', "Real compensation per hour\n---\n2017: TBD\n---\n2000 → 2017: +11.5%\n---\nSource: Federal Reserve Bank of St. Louis", 'positive')
     setLevel('real_compensation',3)
     createLink('income', 'real_compensation', true, true)
