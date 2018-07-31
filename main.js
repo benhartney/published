@@ -36,7 +36,7 @@ function createNode(id, label, trend='neutral') {
   });
 }
 
-function createLink(from, to, positiveRelationship, lowerIsGood, custom=null) {
+function createLink(parent, child, positiveRelationship, lowerIsGood, custom=null) {
   //if (positiveRelationship) {
   //  var label = '→\n→'
   //} else {
@@ -48,8 +48,8 @@ function createLink(from, to, positiveRelationship, lowerIsGood, custom=null) {
   //  var label = 'worsens'
   //}
   edges.push({
-    from: from,
-    to: to,
+    from: parent,
+    to: child,
     arrows: 'from',
     label: custom,
     font: {
