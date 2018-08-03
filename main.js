@@ -5,7 +5,7 @@ var network = null;
 var nodes = []
 
 function nodeTemplate(node) {
-  return "<div class='alert alert-dark' role='alert'><a href=?id="+node["id"]+">"+node["label"]+"</a></div>"
+  return "<div class='col-sm-4'><div class='alert alert-dark' role='alert'><a href=?id="+node["id"]+">"+node["label"]+"</a></div></div>"
 }
 
 function getParameterByName(name, url) {
