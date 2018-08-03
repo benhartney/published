@@ -8,6 +8,9 @@
   text-align: center;
 }
 span.redirect { 
-unicode-bidi:bidi-override; 
-direction: rtl; 
+  unicode-bidi:bidi-override; 
+  direction: rtl; 
+}
+#openViewButton {
+  margin-bottom: 1rem;
 }
