@@ -4,8 +4,8 @@ var network = null;
 
 var nodes = []
 
-function nodeTemplate(label) {
-  "<div class='alert alert-dark' role='alert'>"+node["id"]+"</div>"
+function nodeTemplate(node) {
+  return "<div class='alert alert-dark' role='alert'><a href=?id="+node["id"]+">"+node["label"]+"</a></div>"
 }
 
 function getParameterByName(name, url) {
@@ -267,10 +267,10 @@ function draw() {
   };
   network = new vis.Network(container, data, options);
 }
+
 $(document).ready(function() {
   
   draw()
-  console.log(nodes)
 
   var id = getParameterByName('id')
   if (id === null) {
@@ -279,15 +279,18 @@ $(document).ready(function() {
 
   var node = nodes.find(function(element) {return element['id'] == id})
 
-  console.log(id)
-  console.log(node)
+  $('#node').append(nodeTemplate(node))
 
-  $('#temp').append("<div class='alert alert-dark' role='alert'>"+node["id"]+"</div>")
+  var edgesforParents = edgesForGraph.filter(edge => edge['to'] == id);
+  for (var i = 0; i < edgesforParents.length; i++) {
+    var parentNode = nodes.find(function(element) {return element['id'] == edgesforParents[i]["from"]})
+    $('#parentNodes').append(nodeTemplate(parentNode))
+  }
 
-  // find the child nodes
-  console.log(edgesForGraph)
-  var edges = edgesForGraph.filter(edge => edge['from'] == id);
-
-  console.log(edges)
+  var edgesforChildren = edgesForGraph.filter(edge => edge['from'] == id);
+  for (var i = 0; i < edgesforChildren.length; i++) {
+    var childNode = nodes.find(function(element) {return element['id'] == edgesforChildren[i]["to"]})
+    $('#childNodes').append(nodeTemplate(childNode))
+  }
 
 });
