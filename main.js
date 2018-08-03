@@ -1,7 +1,8 @@
-var nodes = null;
-var edges = null;
+var nodesForGraph = null;
+var edgesForGraph = null;
 var network = null;
-var directionInput = document.getElementById("direction");
+
+var nodes = []
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -14,7 +15,7 @@ function getParameterByName(name, url) {
 }
 
 function setLevel(id,level) {
-  nodes.find(function(element) {return element['id'] == id})["level"] = level;
+  nodesForGraph.find(function(element) {return element['id'] == id})["level"] = level;
 }
 
 function createNode(id, label, trend='neutral') {
@@ -25,7 +26,7 @@ function createNode(id, label, trend='neutral') {
   } else if (trend == 'negative') {
     var backgroundColor = 'rgb(255, 124, 124)'
   }
-  nodes.push({
+  nodesForGraph.push({
     id: id,
     label: label,
     font: {
@@ -44,6 +45,11 @@ function createNode(id, label, trend='neutral') {
       minimum: 120
     }
   });
+
+  nodes.push({
+    id: id,
+    label: label.replace("<b>","").replace("</b>","")
+  })
 }
 
 function createLink(parent, child, positiveRelationship, lowerIsGood, custom=null) {
@@ -57,7 +63,7 @@ function createLink(parent, child, positiveRelationship, lowerIsGood, custom=nul
   //} else {
   //  var label = 'worsens'
   //}
-  edges.push({
+  edgesForGraph.push({
     from: parent,
     to: child,
     arrows: 'from',
@@ -78,8 +84,8 @@ function destroy() {
 
 function draw() {
     destroy();
-    nodes = [];
-    edges = [];
+    nodesForGraph = [];
+    edgesForGraph = [];
     var connectionCount = [];
 
     createNode('overall', "<b>Overall view</b>")
@@ -231,8 +237,8 @@ function draw() {
     // create a network
     var container = document.getElementById('map');
     var data = {
-        nodes: nodes,
-        edges: edges
+        nodes: nodesForGraph,
+        edges: edgesForGraph
     };
 
     var options = {
@@ -257,7 +263,27 @@ function draw() {
     };
     network = new vis.Network(container, data, options);
 }
-$( document ).ready(function() {
-  console.log("hi");
+$(document).ready(function() {
+  
   draw()
+  console.log(nodes)
+
+  var id = getParameterByName('id')
+  if (id === null) {
+    id = 'overall'
+  }
+
+  var node = nodes.find(function(element) {return element['id'] == id})
+
+  console.log(id)
+  console.log(node)
+
+  $('#temp').append("<div class='alert alert-dark' role='alert'>"+node["id"]+"</div>")
+
+  // find the child nodes
+  console.log(edgesForGraph)
+  var edges = edgesForGraph.filter(edge => edge['from'] == id);
+
+  console.log(edges)
+
 });
