@@ -18,7 +18,7 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-function setLevel(id,level) {
+function setLevel(id, level) {
   nodesForGraph.find(function(element) {return element['id'] == id})["level"] = level;
 }
 
@@ -320,10 +320,14 @@ function draw() {
   setLevel('mortality',2)
   createLink('health', 'mortality', false, false)
   createNode({
+    id: 'carbon_emissions',
+    title: "Carbon emissions",
     metric: "Annual million metric tons",
     current_level: "2017: 5087.7",
+    trend: "2005 → 2017: -13.23% | -776",
     source: "https://bit.ly/2mnvG49",
     trend_direction: 'positive'
+  })
   setLevel('carbon_emissions',2)
   createLink('health', 'carbon_emissions', false, false)
   createNode({
