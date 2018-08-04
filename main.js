@@ -601,7 +601,6 @@ function addNodeToPage(node, $div) {
 
 $(document).ready(function() {
   
-  console.log(nodes)
   draw()
 
   var id = getParameterByName('id')
