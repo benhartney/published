@@ -25,7 +25,16 @@
     <script id="node-template" type="text/x-handlebars-template">
       <div class='col-sm-4'>
         <div class='alert alert-dark' role='alert'>
-          <a href="?id={{id}}">{{title}}</a>
+          <a href="?id={{id}}">{{title}}</a>{{#if metric}}: {{metric}}{{/if}}
+          {{#if current_level}}
+            <div>{{current_level}}</div>
+          {{/if}}
+          {{#if trend}}
+            <div>{{trend}}</div>
+          {{/if}}
+          {{#if source}}
+            <div>Source: {{source}}</div>
+          {{/if}}
         </div>
       </div>
     </script>

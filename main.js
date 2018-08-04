@@ -18,21 +18,6 @@ function setLevel(id, level) {
   nodesForGraph.find(function(element) {return element['id'] == id})["level"] = level;
 }
 
-function nodeTemplate(node) {
-  /*
-  {
-    id: "",
-    title: "",
-    metric: "",
-    current_level: "",
-    trend: "",
-    source: "",
-    trend_direction: ""
-  }
-  */ 
-  return "<div class='col-sm-4'><div class='alert alert-dark' role='alert'><a href=?id=" + node["id"] + ">" + node["title"] + "</a></div></div>"
-}
-
 function createNode(opts) {
   /*
   {
