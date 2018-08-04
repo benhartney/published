@@ -71,6 +71,13 @@ function createNode(opts) {
     }
   });
 
+  if (opts.trend_direction == 'neutral') {
+    opts["isNeutral"] = true
+  } else if (opts.trend_direction == 'positive') {
+    opts["isPositive"] = true
+  } else if (opts.trend_direction == 'negative') {
+    opts["isNegative"] = true
+  }
   nodes.push(opts)
 }
 
