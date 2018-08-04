@@ -22,17 +22,42 @@ function setLevel(id,level) {
   nodesForGraph.find(function(element) {return element['id'] == id})["level"] = level;
 }
 
-function createNode(id, label, trend='neutral') {
-  if (trend == 'neutral') {
+function createNode(opts) {
+  /*
+  {
+    id: "",
+    title: "",
+    metric: "",
+    current_level: "",
+    trend: "",
+    source: "",
+    trend_direction: ""
+  }
+  */ 
+  if (opts.trend_direction == 'neutral') {
     var backgroundColor = 'white'
-  } else if (trend == 'positive') {
+  } else if (opts.trend_direction == 'positive') {
     var backgroundColor = 'rgb(187, 247, 200)'
-  } else if (trend == 'negative') {
+  } else if (opts.trend_direction == 'negative') {
     var backgroundColor = 'rgb(255, 124, 124)'
   }
+  //build label
+  var labelForGraph = "<b>" + opts.title + "</b>"
+  if (opts.hasOwnProperty("metric") && opts["metric"] != null) {
+    labelForGraph = labelForGraph + ": " + opts["metric"]
+  }
+  if (opts.hasOwnProperty("current_level") && opts["current_level"] != null) {
+    labelForGraph = labelForGraph + "\n---\n" + opts["current_level"]
+  }
+  if (opts.hasOwnProperty("trend") && opts["trend"] != null) {
+    labelForGraph = labelForGraph + "\n---\n" + opts["trend"]
+  }
+  if (opts.hasOwnProperty("source") && opts["source"] != null) {
+    labelForGraph = labelForGraph + "\n---\nSource: " + opts["source"]
+  }
   nodesForGraph.push({
-    id: id,
-    label: label,
+    id: opts.id,
+    label: labelForGraph,
     font: {
       multi: true
     },
@@ -51,8 +76,8 @@ function createNode(id, label, trend='neutral') {
   });
 
   nodes.push({
-    id: id,
-    label: label.replace("<b>","").replace("</b>","")
+    id: opts.id,
+    label: opts.title
   })
 }
 
@@ -92,147 +117,449 @@ function draw() {
   edgesForGraph = [];
   var connectionCount = [];
 
-  createNode('overall', "<b>Overall view</b>")
+  createNode({
+    id: 'overall',
+    title: "Overall view",
+    trend_direction: 'neutral'
+  })
   setLevel('overall',0)
 
-  createNode('economics', "<b>Economics</b>")
+  createNode({
+    id: 'economics',
+    title: "Economics",
+    trend_direction: 'neutral'
+  })
   setLevel('economics',1)
   createLink('overall', 'economics', true, true)
-  createNode('health', "<b>Health</b>")
+  createNode({
+    id: 'health',
+    title: "Health",
+    trend_direction: 'neutral'
+  })
   setLevel('health',1)
   createLink('overall', 'health', true, true)
-  createNode('society', "<b>Society</b>")
+  createNode({
+    id: 'society',
+    title: "Society",
+    trend_direction: 'neutral'
+  })
   setLevel('society',1)
   createLink('overall', 'society', true, true)
 
   // economics
-  createNode('inequality', "<b>Inequality</b>", 'negative')
+  createNode({
+    id: 'inequality',
+    title: "Inequality",
+    trend_direction: 'negative'
+  })
   setLevel('inequality',2)
   createLink('economics', 'inequality', false, false)
-  createNode('mobility', "<b>Wealth mobility: Chance of a child becoming richer than their parents</b>\n---\n2014: 50%\n---\n1970 → 2014: -46% | -42pp\n---\nSource: http://www.nber.org/papers/w22910", 'negative')
+  createNode({
+    id: 'mobility',
+    title: "Wealth mobility",
+    metric: "Chance of a child becoming richer than their parents",
+    current_level: "2014: 50%",
+    trend: "1970 → 2014: -46% | -42pp",
+    source: "http://www.nber.org/papers/w22910",
+    trend_direction: 'negative'
+  })
   setLevel('mobility',2)
   createLink('economics', 'mobility', true, true)
-  createNode('income', "<b>Income</b>", 'positive')
+  createNode({
+    id: 'income',
+    title: "Income",
+    trend_direction: 'positive'
+  })
   setLevel('income',2)
   createLink('economics', 'income', true, true)
-  createNode('poverty', "<b>Poverty</b>", 'positive')
+  createNode({
+    id: 'poverty',
+    title: "Poverty",
+    trend_direction: 'positive'
+  })
   setLevel('poverty',2)
   createLink('economics', 'poverty', false, false)
-  createNode('employment', "<b>Employment: Prime age employment rate</b>\n---\n2018: 79%\n---\n1994 → 2018: +0.52% | +0.41pp\n---\nSource: Federal Reserve Bank of St. Louis", 'positive')
+  createNode({
+    id: 'employment',
+    title: "Employment",
+    metric: "Prime age employment rate",
+    current_level: "2018: 79%",
+    trend: "1994 → 2018: +0.52% | +0.41pp",
+    source: "Federal Reserve Bank of St. Louis",
+    trend_direction: 'positive'
+  })
   setLevel('employment',2)
   createLink('economics', 'employment', true, true)
-  createNode('productivity', "<b>Productivity: Annual total factor productivity growth rate</b>\n---\n2013: +0.88%\n---\n1996-2004 avg → 2005-2013 avg: -50% | -0.87pp\n---\nSource: U.S. Total Factor Productivity Slowdown - Evidence from the U.S. States", 'negative')
+  createNode({
+    id: 'productivity',
+    title: "Productivity",
+    metric: "Annual total factor productivity growth rate",
+    current_level: "2013: +0.88%",
+    trend: "1996-2004 avg → 2005-2013 avg: -50% | -0.87pp",
+    source: "U.S. Total Factor Productivity Slowdown - Evidence from the U.S. States",
+    trend_direction: 'negative'
+  })
   setLevel('productivity',2)
   createLink('economics', 'productivity', true, true)
-  createNode('product_quality', "<b>Product quality & range: No quantitative measurement</b>\n---\n2000 → 2018:Increased\n", 'positive')
+  createNode({
+    id: 'product_quality',
+    title: "Product quality & range",
+    metric: "No quantitative measurement",
+    current_level: "2000 → 2018: Increased",
+    trend_direction: 'positive'
+  })
   setLevel('product_quality',2)
   createLink('economics', 'product_quality', true, true)
   // economics level 3
-  createNode('gini_index', "<b>Gini index</b>\n---\n2016: 41.5\n---\n2000 → 2016: +2.72% | +1.1pp\n---\nSource: Federal Reserve Bank of St. Louis", 'negative')
+  createNode({
+    id: 'gini_index',
+    title: "Gini index",
+    current_level: "2016: 41.5",
+    trend: "2000 → 2016: +2.72% | +1.1pp",
+    source: "Federal Reserve Bank of St. Louis",
+    trend_direction: 'negative'
+  })
   setLevel('gini_index',3)
   createLink('inequality', 'gini_index', true, false)
-  createNode('wealth_1%', "<b>Wealth share of top 1%</b>\n---\n2012: 41.8%\n---\n2000 → 2012: +23% | +7.7pp\n---\nSource: Gabriel Zucman", 'negative')
+  createNode({
+    id: 'wealth_1%',
+    title: "Wealth share of top 1%",
+    current_level: "2012: 41.8%",
+    trend: "2000 → 2012: +23% | +7.7pp",
+    source: "Gabriel Zucman",
+    trend_direction: 'negative'
+  })
   setLevel('wealth_1%',3)
   createLink('inequality', 'wealth_1%', true, false)
-  createNode('wealth_5%', "<b>Wealth share of top 5%</b>\n---\n2012: 64.6%\n---\n2000 → 2012: +14% | +8.1pp\n---\nSource: Gabriel Zucman", 'negative')
+  createNode({
+    id: 'wealth_5%',
+    title: "Wealth share of top 5%",
+    current_level: "2012: 64.6%",
+    trend: "2000 → 2012: +14% | +8.1pp",
+    source: "Gabriel Zucman",
+    trend_direction: 'negative'
+  })
   setLevel('wealth_5%',3)
   createLink('inequality', 'wealth_5%', true, false)
-  createNode('gdp_growth_rate', "<b>GDP growth rate</b>\n---\n2017: 2.27%\n---\n1961-1980 avg → 1981-2017 avg: -30% | -1.17pp\n---\nSource: World Bank", 'negative')
+  createNode({
+    id: 'gdp_growth_rate',
+    title: "GDP growth rate",
+    current_level: "2017: 2.27%",
+    trend: "1961-1980 avg → 1981-2017 avg: -30% | -1.17pp",
+    source: "World Bank",
+    trend_direction: 'negative'
+  })
   setLevel('gdp_growth_rate',3)
   createLink('mobility', 'gdp_growth_rate', true, true, "Explanatory power: 29%\nSource:\nhttps://www.nber.org/papers/w22910")
-  createNode('gdp_growth_distribution', "<b>GDP growth distribution equality: TBD</b>\n---\n1961→2017: Decreased", 'negative')
+  createNode({
+    id: 'gdp_growth_distribution',
+    title: "GDP growth distribution equality",
+    metric: "TBD",
+    trend: "1961→2017: Decreased",
+    trend_direction: 'negative'
+  })
   setLevel('gdp_growth_distribution',3)
   createLink('mobility', 'gdp_growth_distribution', true, true, "Explanatory power: 71%\nSource:\nhttps://www.nber.org/papers/w22910")
-  createNode('real_compensation', "<b>Real compensation per hour</b>\n---\n2017: TBD\n---\n2000 → 2017: +11.5%\n---\nSource: Federal Reserve Bank of St. Louis", 'positive')
+  createNode({
+    id: 'real_compensation',
+    title: "Real compensation per hour",
+    current_level: "2017: TBD",
+    trend: "2000 → 2017: +11.5%",
+    source: "Federal Reserve Bank of St. Louis",
+    trend_direction: 'positive'
+  })
   setLevel('real_compensation',3)
   createLink('income', 'real_compensation', true, true)
-  createNode('real_median', "<b>Real median personal income</b>\n---\n2016: TBD\n---\n2000 → 2016: +3.7%\n---\nSource: Federal Reserve Bank of St. Louis", 'positive')
+  createNode({
+    id: 'real_median',
+    title: "Real median personal income",
+    current_level: "2016: TBD",
+    trend: "2000 → 2016: +3.7%",
+    source: "Federal Reserve Bank of St. Louis",
+    trend_direction: 'positive'
+  })
   setLevel('real_median',3)
   createLink('income', 'real_median', true, true)
   //
-  createNode('child_poverty', "<b>Child poverty: % of children living in poverty</b>\n---\n2016: 15.6%\n---\n2000 → 2016: -13% | -2.4pp\n---\nSource: Center on Budget and Policy Priorities", 'positive')
+  createNode({
+    id: 'child_poverty',
+    title: "Child poverty",
+    metric: "% of children living in poverty",
+    current_level: "2016: 15.6%",
+    trend: "2000 → 2016: -13% | -2.4pp",
+    source: "Center on Budget and Policy Priorities",
+    trend_direction: 'positive'
+  })
   setLevel('child_poverty',3)
   createLink('poverty', 'child_poverty', true, false)
-  createNode('homelessness', "<b>Homelessness: % of population that is homeless</b>\n---\n2017: 0.21%\n---\n2007 → 2017: -21% | -0.04pp\n---\nSource: U.S. Department of Housing and Urban Development", 'positive')
+  createNode({
+    id: 'homelessness',
+    title: "Homelessness",
+    metric: "% of population that is homeless",
+    current_level: "2017: 0.21%",
+    trend: "2007 → 2017: -21% | -0.04pp",
+    source: "U.S. Department of Housing and Urban Development",
+    trend_direction: 'positive'
+  })
   setLevel('homelessness',3)
   createLink('poverty', 'homelessness', true, false)
 
   // health
-  createNode('drugs', "<b>Drugs</b>", 'negative')
+  createNode({
+    id: 'drugs',
+    title: "Drugs",
+    trend_direction: 'negative'
+  })
   setLevel('drugs',2)
   createLink('health', 'drugs', false, false)
-  createNode('mortality', "<b>Mortality</b>")
+  createNode({
+    id: 'mortality',
+    title: "Mortality",
+    trend_direction: 'neutral'
+  })
   setLevel('mortality',2)
   createLink('health', 'mortality', false, false)
-  createNode('carbon_emissions', "<b>Carbon emissions: Annual million metric tons</b>\n---\n2017: 5087.7\n---\n2005 → 2017: -13.23% | -776\n---\nSource: https://bit.ly/2mnvG49", 'positive')
+  createNode({
+    metric: "Annual million metric tons",
+    current_level: "2017: 5087.7",
+    source: "https://bit.ly/2mnvG49",
+    trend_direction: 'positive'
   setLevel('carbon_emissions',2)
   createLink('health', 'carbon_emissions', false, false)
-  createNode('teen_pregnancy', "<b>Teen pregnancy: Births per 1,000 females aged 15-19</b>\n---\n2014: 24.2\n---\n1990 → 2014: -61% | -37.6\n---\nSource: Pew Research Center", 'positive')
+  createNode({
+    id: "teen_pregnancy",
+    title: "Teen pregnancy",
+    metric: "Births per 1,000 females aged 15-19",
+    current_level: "2014: 24.2",
+    trend: "1990 → 2014: -61% | -37.6",
+    source: "Pew Research Center",
+    trend_direction: "positive"
+  })
   setLevel('teen_pregnancy',2)
   createLink('health', 'teen_pregnancy', false, false)
   // health level 3, mortality
-  createNode('life_expectancy', "<b>Life expectancy</b>\n---\n2016: 78.69y\n---\n2000 → 2016: +2.68% | +2.05y\n---\nSource: Federal Reserve Bank of St. Louis", 'positive')
+  createNode({
+    id: "life_expectancy",
+    title: "Life expectancy",
+    metric: null,
+    current_level: "2016: 78.69y",
+    trend: "2000 → 2016: +2.68% | +2.05y",
+    source: "Federal Reserve Bank of St Louis",
+    trend_direction: "positive"
+  })
   setLevel('life_expectancy',3)
   createLink('mortality', 'life_expectancy', false, true)
-  createNode('infant_mortality', "<b>Infant mortality: % of births resulting in death</b>\n---\n2016: 0.56%\n---\n1960 → 2016: -78.38% | -2.03pp\n---\nSource: Federal Reserve Bank of St. Louis", 'positive')
+  createNode({
+    id: "infant_mortality",
+    title: "Infant mortality",
+    metric: "% of births resulting in death",
+    current_level: "2016: 0.56%",
+    trend: "1960 → 2016: -78.38% | -2.03pp",
+    source: "Federal Reserve Bank of St. Louis",
+    trend_direction: "positive"
+  })
   setLevel('infant_mortality',3)
   createLink('mortality', 'infant_mortality', true, false)
-  createNode('minority_mortality', "<b>Minority mortality: TBD</b>\n---\n2000→2017:Decreased", 'positive')
+  createNode({
+    id: "minority_mortality",
+    title: "Minority mortality",
+    metric: "TBD",
+    current_level: null,
+    trend: "2000 → 2017:Decreased",
+    source: null,
+    trend_direction: "positive"
+  })
   setLevel('minority_mortality',3)
   createLink('mortality', 'minority_mortality', true, false)
-  createNode('white_mortality', "<b>White mortality: TBD</b>\n---\n2000→2017:Increased", 'negative')
+  createNode({
+    id: "white_mortality",
+    title: "White mortality",
+    metric: "TBD",
+    current_level: null,
+    trend: "2000 → 2017:Increased",
+    source: null,
+    trend_direction: "negative"
+  })
   setLevel('white_mortality',3)
   createLink('mortality', 'white_mortality', true, false)
-  createNode('suicides', "<b>Suicides: Per 100k residents</b>\n---\n2015: 13.3\n---\n2000 → 2015: +28% | +2.9\n---\nSource: National Institute on Drug Abuse", 'negative')
+  createNode({
+    id: "suicides",
+    title: "Suicides",
+    metric: "Per 100k residents",
+    current_level: "2015: 13.3",
+    trend: "2000 → 2015: +28% | +2.9",
+    source: "National Institute on Drug Abuse",
+    trend_direction: "negative"
+  })
   setLevel('suicides',3)
   createLink('mortality', 'suicides', true, false)
   // health level 3, drugs
-  createNode('alcoholism', "<b>Alcoholism: % of adults with dependency</b>\n---\n2013: 13%\n---\n1992 → 2013: +73% | +5.5pp\n---\nSource: National Epidemiologic Survey on Alcohol and Related Conditions/JAMA", 'negative')
+  createNode({
+    id: "alcoholism",
+    title: "Alcoholism",
+    metric: "% of adults with dependency",
+    current_level: "2013: 13%",
+    trend: "1992 → 2013: +73% | +5.5pp",
+    source: "National Epidemiologic Survey on Alcohol and Related Conditions/JAMA",
+    trend_direction: "negative"
+  })
   setLevel('alcoholism',3)
   createLink('drugs', 'alcoholism', true, false)
-  createNode('opiods', "<b>Opiods: Opioid prescriptions, millions</b>\n---\n2013: 207m\n---\n2000 → 2013: +64% | +81m\n---\nSource: National Institute on Drug Abuse", 'negative')
+  createNode({
+    id: "opiods",
+    title: "Opiods",
+    metric: "Opioid prescriptions, millions",
+    current_level: "2013: 207m",
+    trend: "2000 → 2013: +64% | +81m",
+    source: "National Institute on Drug Abuse",
+    trend_direction: "negative"
+  })
   setLevel('opiods',3)
   createLink('drugs', 'opiods', true, false)
-  createNode('heroin', "<b>Heroin: % of population who used</b>\n---\n2013: 0.22%\n---\n2002 → 2013: +57% | +0.08pp\n---\nSource: Substance Abuse and Mental Health Services Administration", 'negative')
+  createNode({
+    id: "heroin",
+    title: "Heroin",
+    metric: "% of population who used",
+    current_level: "2013: 0.22%",
+    trend: "2002 → 2013: +57% | +0.08pp",
+    source: "Substance Abuse and Mental Health Services Administration",
+    trend_direction: "negative"
+  })
   setLevel('heroin',3)
   createLink('drugs', 'heroin', true, false)
-  createNode('drug_deaths', "<b>Drug deaths: % of population</b>\n---\n2016: 0.020%\n---\n1999 → 2016: +233% | +0.014pp\n---\nSource: https://www.drugabuse.gov", 'negative')
+  createNode({
+    id: "drug_deaths",
+    title: "Drug deaths",
+    metric: "% of population",
+    current_level: "2016: 0.020%",
+    trend: "1999 → 2016: +233% | +0.014pp",
+    source: "https://www.drugabuse.gov",
+    trend_direction: "negative"
+  })
   setLevel('drug_deaths',3)
   createLink('drugs', 'drug_deaths', true, false)
 
   // society
-  createNode('crime', "<b>Crime</b>", 'positive')
+  createNode({
+    id: "crime",
+    title: "Crime",
+    metric: null,
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "positive"
+  })
   setLevel('crime',2)
   createLink('society', 'crime', false, false)
-  createNode('trust', "<b>Trust</b>", 'negative')
+  createNode({
+    id: "trust",
+    title: "Trust",
+    metric: null,
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "negative"
+  })
   setLevel('trust',2)
   createLink('society', 'trust', true, true)
-  createNode('minority_rights', "<b>Minority rights</b>")
+  createNode({
+    id: "minority_rights",
+    title: "Minority rights",
+    metric: null,
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "neutral"
+  })
   setLevel('minority_rights',2)
   createLink('society', 'minority_rights', true, true)
-  createNode('happiness', "<b>Happiness: World Happiness Report score</b>\n---\n2017: 6.886/10\n---\n2008 → 2017:-0.315\n---\nSource: http://worldhappiness.report/", 'negative')
+  createNode({
+    id: "happiness",
+    title: "Happiness",
+    metric: "World Happiness Report score",
+    current_level: "2017: 6.886/10",
+    trend: "2008 → 2017:-0.315",
+    source: "http://worldhappiness.report/",
+    trend_direction: "negative"
+  })
   setLevel('happiness',2)
   createLink('society', 'happiness', true, true)
-  createNode('international_perception', "<b>International perception: % of non-US people who perceive the US as a major threat to their country</b>\n---\n2017: 38%\n---\n2013 → 2017: +52% | +13pp\n---\nSource: Pew Research Center", 'negative')
+  createNode({
+    id: "international_perception",
+    title: "International perception",
+    metric: "% of non-US people who perceive the US as a major threat to their country",
+    current_level: "2017: 38%",
+    trend: "2013 → 2017: +52% | +13pp",
+    source: "Pew Research Center",
+    trend_direction: "negative"
+  })
   setLevel('international_perception',2)
   createLink('society', 'international_perception', false, false)
   // society level 3
-  createNode('crime_rate', "<b>Crime: Annual crime rate per 100k residents</b>\n---\n2012: 3,200\n---\n1990 → 2012: -45% | -2,618\n---\nSource: https://bit.ly/1S5ohzu", 'positive')
+  createNode({
+    id: "crime_rate",
+    title: "Crime",
+    metric: "Annual crime rate per 100k residents",
+    current_level: "2012: 3,200",
+    trend: "1990 → 2012: -45% | -2,618",
+    source: "https://bit.ly/1S5ohzu",
+    trend_direction: "positive"
+  })
   setLevel('crime_rate',3)
   createLink('crime', 'crime_rate', true, false)
-  createNode('incarceration', "<b>Incarceration: People in prison or local jail per 100k residents 18 or older</b>\n---\n2016: 860\n---\n2000 → 2016: -7% | -60\n---\nSource: Bureau of Justice Statistics", 'positive')
+  createNode({
+    id: "incarceration",
+    title: "Incarceration",
+    metric: "People in prison or local jail per 100k residents 18 or older",
+    current_level: "2016: 860",
+    trend: "2000 → 2016: -7% | -60",
+    source: "Bureau of Justice Statistics",
+    trend_direction: "positive"
+  })
   setLevel('incarceration',3)
   createLink('crime', 'incarceration', true, false)
-  createNode('government_trust', "<b>Trust in government: % who trust the govt in Washington always or most of the time</b>\n---\n2017: 18%\n---\n2000 → 2017: -47% | -16pp\n---\nSource: Pew Research Center", 'negative')
+  createNode({
+    id: "government_trust",
+    title: "Trust in government",
+    metric: "% who trust the govt in Washington always or most of the time",
+    current_level: "2017: 18%",
+    trend: "2000 → 2017: -47% | -16pp",
+    source: "Pew Research Center",
+    trend_direction: "negative"
+  })
   setLevel('government_trust',3)
   createLink('trust', 'government_trust', true, true)
-  createNode('social_trust', "<b>Social trust: % who say most people can be trusted</b>\n---\n2014: 31%\n---\n2000 → 2014: -11% | -4pp\n---\nSource: Our World in Data", 'negative')
+  createNode({
+    id: "social_trust",
+    title: "Social trust",
+    metric: "% who say most people can be trusted",
+    current_level: "2014: 31%",
+    trend: "2000 → 2014: -11% | -4pp",
+    source: "Our World in Data",
+    trend_direction: "negative"
+  })
   setLevel('social_trust',3)
   createLink('trust', 'social_trust', true, true)
-  createNode('gay_rights', "<b>Gay rights: No quantitative measurement</b>\n---\n2000 → 2018:Increased\n", 'positive')
+  createNode({
+    id: "gay_rights",
+    title: "Gay rights",
+    metric: "No quantitative measurement",
+    current_level: null,
+    trend: "2000 → 2018: Increased",
+    source: null,
+    trend_direction: "positive"
+  })
   setLevel('gay_rights',3)
   createLink('minority_rights', 'gay_rights', true, true)
-  createNode('hate_crimes', "<b>Hate crimes: Amount in 10 largest cities</b>\n---\n2017: 1,038\n---\n2010 → 2017: +33.08% | +258\n---\nSource: Center for the Study of Hate and Extremism", 'negative')
+  createNode({
+    id: "hate_crimes",
+    title: "Hate crimes",
+    metric: "Amount in 10 largest cities",
+    current_level: "2017: 1,038",
+    trend: "2010 → 2017: +33.08% | +258",
+    source: "Center for the Study of Hate and Extremism",
+    trend_direction: "negative"
+  })
   setLevel('hate_crimes',3)
   createLink('minority_rights', 'hate_crimes', false, false)
 
@@ -270,6 +597,7 @@ function draw() {
 
 $(document).ready(function() {
   
+  console.log(nodes)
   draw()
 
   var id = getParameterByName('id')
