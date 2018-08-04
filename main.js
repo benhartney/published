@@ -30,7 +30,7 @@ function nodeTemplate(node) {
     trend_direction: ""
   }
   */ 
-  return "<div class='col-sm-4'><div class='alert alert-dark' role='alert'><a href=?id="+node["id"]+">"+node["label"]+"</a></div></div>"
+  return "<div class='col-sm-4'><div class='alert alert-dark' role='alert'><a href=?id=" + node["id"] + ">" + node["title"] + "</a></div></div>"
 }
 
 function createNode(opts) {
@@ -86,10 +86,7 @@ function createNode(opts) {
     }
   });
 
-  nodes.push({
-    id: opts.id,
-    label: opts.title
-  })
+  nodes.push(opts)
 }
 
 function createLink(parent, child, positiveRelationship, lowerIsGood, custom=null) {
@@ -610,6 +607,13 @@ function draw() {
   network = new vis.Network(container, data, options);
 }
 
+function addNodeToPage(node, $div) {
+  var source = document.getElementById("node-template").innerHTML;
+  var template = Handlebars.compile(source);
+  var html = template(node);
+  $div.append(html)
+}
+
 $(document).ready(function() {
   
   console.log(nodes)
@@ -622,18 +626,18 @@ $(document).ready(function() {
 
   var node = nodes.find(function(element) {return element['id'] == id})
 
-  $('#node').append(nodeTemplate(node))
+  addNodeToPage(node, $('#node'))
 
   var edgesforParents = edgesForGraph.filter(edge => edge['to'] == id);
   for (var i = 0; i < edgesforParents.length; i++) {
     var parentNode = nodes.find(function(element) {return element['id'] == edgesforParents[i]["from"]})
-    $('#parentNodes').append(nodeTemplate(parentNode))
+    addNodeToPage(parentNode, $('#parentNodes'))
   }
 
   var edgesforChildren = edgesForGraph.filter(edge => edge['from'] == id);
   for (var i = 0; i < edgesforChildren.length; i++) {
     var childNode = nodes.find(function(element) {return element['id'] == edgesforChildren[i]["to"]})
-    $('#childNodes').append(nodeTemplate(childNode))
+    addNodeToPage(childNode, $('#childNodes'))
   }
 
 });
