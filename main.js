@@ -4,10 +4,6 @@ var network = null;
 
 var nodes = []
 
-function nodeTemplate(node) {
-  return "<div class='col-sm-4'><div class='alert alert-dark' role='alert'><a href=?id="+node["id"]+">"+node["label"]+"</a></div></div>"
-}
-
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, '\\$&');
@@ -20,6 +16,21 @@ function getParameterByName(name, url) {
 
 function setLevel(id, level) {
   nodesForGraph.find(function(element) {return element['id'] == id})["level"] = level;
+}
+
+function nodeTemplate(node) {
+  /*
+  {
+    id: "",
+    title: "",
+    metric: "",
+    current_level: "",
+    trend: "",
+    source: "",
+    trend_direction: ""
+  }
+  */ 
+  return "<div class='col-sm-4'><div class='alert alert-dark' role='alert'><a href=?id="+node["id"]+">"+node["label"]+"</a></div></div>"
 }
 
 function createNode(opts) {
