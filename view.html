@@ -38,6 +38,12 @@
         </div>
       </div>
     </script>
+
+    <script id="parent-chain-template" type="text/x-handlebars-template">
+      <div>
+        <a href="?id={{id}}">{{title}}</a> >
+      </div>
+    </script>
   </head>
 
   <body>
@@ -49,8 +55,17 @@
       </div>
 
       <div class="container">
-        <div class='row' id='parentNodes'></div>
+        <div class='row'>
+          <div id='parentNodes' class='col-sm'></div>
+        </div>
         <div class='row' id='node'></div>
+        <div class='row'>
+          <div class='col-sm'>
+            <h3>
+              Components
+            </h3>
+          </div>
+        </div>
         <div class='row' id='childNodes'></div>
       </div>
 

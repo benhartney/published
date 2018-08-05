@@ -619,10 +619,20 @@ $(document).ready(function() {
 
   addNodeToPage(node, $('#node'))
 
-  var edgesforParents = edgesForGraph.filter(edge => edge['to'] == id);
-  for (var i = 0; i < edgesforParents.length; i++) {
-    var parentNode = nodes.find(function(element) {return element['id'] == edgesforParents[i]["from"]})
-    addNodeToPage(parentNode, $('#parentNodes'))
+  var parentChain = [];
+  // assumes only one parent
+  var edgeforParent = edgesForGraph.find(function(edge) {return edge['to'] == id})
+  while (edgeforParent != undefined){
+    var parentNode = nodes.find(function(element) {return element['id'] == edgeforParent["from"]})
+    parentChain.unshift(parentNode)
+    var edgeforParent = edgesForGraph.find(function(edge) {return edge['to'] == parentNode.id})
+  }
+  
+  for (var i = 0; i < parentChain.length; i++) {
+    var source = document.getElementById("parent-chain-template").innerHTML;
+    var template = Handlebars.compile(source);
+    var html = template(parentChain[i]);
+    $('#parentNodes').append(html)
   }
 
   var edgesforChildren = edgesForGraph.filter(edge => edge['from'] == id);
