@@ -23,18 +23,6 @@ function createNode(opts) {
     console.log(opts)
     throw "Missing property"
   }
-  if (opts["metric"] == null) {
-    opts["metric"] = "-"
-  }
-  if (opts["current_level"] == null) {
-    opts["current_level"] = "-"
-  }
-  if (opts["trend"] == null) {
-    opts["trend"] = "-"
-  }
-  if (opts["source"] == null) {
-    opts["source"] = "-"
-  }
   
   /*
   {
@@ -88,6 +76,19 @@ function createNode(opts) {
     }
   });
 
+  if (opts["metric"] == null) {
+    opts["metric"] = "-"
+  }
+  if (opts["current_level"] == null) {
+    opts["current_level"] = "-"
+  }
+  if (opts["trend"] == null) {
+    opts["trend"] = "-"
+  }
+  if (opts["source"] == null) {
+    opts["source"] = "-"
+  }
+
   if (opts.trend_direction == 'neutral') {
     opts["isNeutral"] = true
   } else if (opts.trend_direction == 'positive') {
@@ -137,7 +138,7 @@ function draw() {
   createNode({
     id: "overall",
     title: "Overall view",
-    metric: "Metric: NA",
+    metric: null,
     current_level: null,
     trend: null,
     source: null,
@@ -149,7 +150,7 @@ function draw() {
   createNode({
     id: "economy",
     title: "Economy",
-    metric: "Metric: NA",
+    metric: null,
     current_level: null,
     trend: null,
     source: null,
@@ -161,7 +162,7 @@ function draw() {
   createNode({
     id: "health",
     title: "Health",
-    metric: "Metric: NA",
+    metric: null,
     current_level: null,
     trend: null,
     source: null,
@@ -173,7 +174,7 @@ function draw() {
   createNode({
     id: "society",
     title: "Society",
-    metric: "Metric: NA",
+    metric: null,
     current_level: null,
     trend: null,
     source: null,
