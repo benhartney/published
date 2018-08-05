@@ -144,7 +144,7 @@ function draw() {
     trend_direction: "neutral",
     noMetricExpected: true
   })
-  setLevel('overall',0)
+  setLevel('overall', 0)
 
   createNode({
     id: "economy",
@@ -156,7 +156,7 @@ function draw() {
     trend_direction: "neutral",
     noMetricExpected: true
   })
-  setLevel('economy',1)
+  setLevel('economy', 1)
   createLink('overall', 'economy', true, true)
   createNode({
     id: "health",
@@ -168,7 +168,7 @@ function draw() {
     trend_direction: "neutral",
     noMetricExpected: true
   })
-  setLevel('health',1)
+  setLevel('health', 1)
   createLink('overall', 'health', true, true)
   createNode({
     id: "society",
@@ -180,7 +180,7 @@ function draw() {
     trend_direction: "neutral",
     noMetricExpected: true
   })
-  setLevel('society',1)
+  setLevel('society', 1)
   createLink('overall', 'society', true, true)
 
   // economy
@@ -194,7 +194,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('inequality',2)
+  setLevel('inequality', 2)
   createLink('economy', 'inequality', false, false)
   createNode({
     id: 'mobility',
@@ -206,7 +206,7 @@ function draw() {
     trend_direction: 'negative',
     noMetricExpected: false
   })
-  setLevel('mobility',2)
+  setLevel('mobility', 2)
   createLink('economy', 'mobility', true, true)
   createNode({
     id: "income",
@@ -218,7 +218,7 @@ function draw() {
     trend_direction: "positive",
     noMetricExpected: false
   })
-  setLevel('income',2)
+  setLevel('income', 2)
   createLink('economy', 'income', true, true)
   createNode({
     id: "poverty",
@@ -230,7 +230,7 @@ function draw() {
     trend_direction: "positive",
     noMetricExpected: false
   })
-  setLevel('poverty',2)
+  setLevel('poverty', 2)
   createLink('economy', 'poverty', false, false)
   createNode({
     id: 'employment',
@@ -242,7 +242,7 @@ function draw() {
     trend_direction: 'positive',
     noMetricExpected: false
   })
-  setLevel('employment',2)
+  setLevel('employment', 2)
   createLink('economy', 'employment', true, true)
   createNode({
     id: 'productivity',
@@ -254,7 +254,7 @@ function draw() {
     trend_direction: 'negative',
     noMetricExpected: false
   })
-  setLevel('productivity',2)
+  setLevel('productivity', 2)
   createLink('economy', 'productivity', true, true)
   createNode({
     id: "product_quality",
@@ -266,7 +266,7 @@ function draw() {
     trend_direction: "positive",
     noMetricExpected: false
   })
-  setLevel('product_quality',2)
+  setLevel('product_quality', 2)
   createLink('economy', 'product_quality', true, true)
   // economy level 3
   createNode({
@@ -279,7 +279,7 @@ function draw() {
     trend_direction: 'negative',
     noMetricExpected: false
   })
-  setLevel('gini_index',3)
+  setLevel('gini_index', 3)
   createLink('inequality', 'gini_index', true, false)
   createNode({
     id: 'wealth_1',
@@ -291,7 +291,7 @@ function draw() {
     trend_direction: 'negative',
     noMetricExpected: false
   })
-  setLevel('wealth_1',3)
+  setLevel('wealth_1', 3)
   createLink('inequality', 'wealth_1', true, false)
   createNode({
     id: 'wealth_5',
@@ -303,7 +303,7 @@ function draw() {
     trend_direction: 'negative',
     noMetricExpected: false
   })
-  setLevel('wealth_5',3)
+  setLevel('wealth_5', 3)
   createLink('inequality', 'wealth_5', true, false)
   createNode({
     id: 'gdp_growth_rate',
@@ -315,7 +315,7 @@ function draw() {
     trend_direction: 'negative',
     noMetricExpected: false
   })
-  setLevel('gdp_growth_rate',3)
+  setLevel('gdp_growth_rate', 3)
   createLink('mobility', 'gdp_growth_rate', true, true, "Explanatory power: 29%\nSource:\nhttps://www.nber.org/papers/w22910")
   createNode({
     id: 'gdp_growth_distribution',
@@ -327,7 +327,7 @@ function draw() {
     trend_direction: 'negative',
     noMetricExpected: false
   })
-  setLevel('gdp_growth_distribution',3)
+  setLevel('gdp_growth_distribution', 3)
   createLink('mobility', 'gdp_growth_distribution', true, true, "Explanatory power: 71%\nSource:\nhttps://www.nber.org/papers/w22910")
   createNode({
     id: 'real_compensation',
@@ -339,7 +339,7 @@ function draw() {
     trend_direction: 'positive',
     noMetricExpected: false
   })
-  setLevel('real_compensation',3)
+  setLevel('real_compensation', 3)
   createLink('income', 'real_compensation', true, true)
   createNode({
     id: 'real_median',
@@ -351,7 +351,7 @@ function draw() {
     trend_direction: 'positive',
     noMetricExpected: false
   })
-  setLevel('real_median',3)
+  setLevel('real_median', 3)
   createLink('income', 'real_median', true, true)
   //
   createNode({
@@ -364,7 +364,7 @@ function draw() {
     trend_direction: 'positive',
     noMetricExpected: false
   })
-  setLevel('child_poverty',3)
+  setLevel('child_poverty', 3)
   createLink('poverty', 'child_poverty', true, false)
   createNode({
     id: 'homelessness',
@@ -376,7 +376,7 @@ function draw() {
     trend_direction: 'positive',
     noMetricExpected: false
   })
-  setLevel('homelessness',3)
+  setLevel('homelessness', 3)
   createLink('poverty', 'homelessness', true, false)
 
   // health
@@ -390,7 +390,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('drugs',2)
+  setLevel('drugs', 2)
   createLink('health', 'drugs', false, false)
   createNode({
     id: "mortality",
@@ -402,7 +402,7 @@ function draw() {
     trend_direction: "neutral",
     noMetricExpected: false
   })
-  setLevel('mortality',2)
+  setLevel('mortality', 2)
   createLink('health', 'mortality', false, false)
   createNode({
     id: 'carbon_emissions',
@@ -414,7 +414,7 @@ function draw() {
     trend_direction: 'positive',
     noMetricExpected: false
   })
-  setLevel('carbon_emissions',2)
+  setLevel('carbon_emissions', 2)
   createLink('health', 'carbon_emissions', false, false)
   createNode({
     id: "teen_pregnancy",
@@ -426,7 +426,7 @@ function draw() {
     trend_direction: "positive",
     noMetricExpected: false
   })
-  setLevel('teen_pregnancy',2)
+  setLevel('teen_pregnancy', 2)
   createLink('health', 'teen_pregnancy', false, false)
   // health level 3, mortality
   createNode({
@@ -439,7 +439,7 @@ function draw() {
     trend_direction: "positive",
     noMetricExpected: false
   })
-  setLevel('life_expectancy',3)
+  setLevel('life_expectancy', 3)
   createLink('mortality', 'life_expectancy', false, true)
   createNode({
     id: "infant_mortality",
@@ -451,7 +451,7 @@ function draw() {
     trend_direction: "positive",
     noMetricExpected: false
   })
-  setLevel('infant_mortality',3)
+  setLevel('infant_mortality', 3)
   createLink('mortality', 'infant_mortality', true, false)
   createNode({
     id: "minority_mortality",
@@ -463,7 +463,7 @@ function draw() {
     trend_direction: "positive",
     noMetricExpected: false
   })
-  setLevel('minority_mortality',3)
+  setLevel('minority_mortality', 3)
   createLink('mortality', 'minority_mortality', true, false)
   createNode({
     id: "white_mortality",
@@ -475,7 +475,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('white_mortality',3)
+  setLevel('white_mortality', 3)
   createLink('mortality', 'white_mortality', true, false)
   createNode({
     id: "suicides",
@@ -487,7 +487,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('suicides',3)
+  setLevel('suicides', 3)
   createLink('mortality', 'suicides', true, false)
   // health level 3, drugs
   createNode({
@@ -500,7 +500,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('alcoholism',3)
+  setLevel('alcoholism', 3)
   createLink('drugs', 'alcoholism', true, false)
   createNode({
     id: "opiods",
@@ -512,7 +512,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('opiods',3)
+  setLevel('opiods', 3)
   createLink('drugs', 'opiods', true, false)
   createNode({
     id: "heroin",
@@ -524,7 +524,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('heroin',3)
+  setLevel('heroin', 3)
   createLink('drugs', 'heroin', true, false)
   createNode({
     id: "drug_deaths",
@@ -536,7 +536,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('drug_deaths',3)
+  setLevel('drug_deaths', 3)
   createLink('drugs', 'drug_deaths', true, false)
 
   // society
@@ -550,7 +550,7 @@ function draw() {
     trend_direction: "positive",
     noMetricExpected: false
   })
-  setLevel('crime',2)
+  setLevel('crime', 2)
   createLink('society', 'crime', false, false)
   createNode({
     id: "trust",
@@ -562,7 +562,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('trust',2)
+  setLevel('trust', 2)
   createLink('society', 'trust', true, true)
   createNode({
     id: "minority_rights",
@@ -574,7 +574,7 @@ function draw() {
     trend_direction: "neutral",
     noMetricExpected: false
   })
-  setLevel('minority_rights',2)
+  setLevel('minority_rights', 2)
   createLink('society', 'minority_rights', true, true)
   createNode({
     id: "happiness",
@@ -586,7 +586,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('happiness',2)
+  setLevel('happiness', 2)
   createLink('society', 'happiness', true, true)
   createNode({
     id: "international_perception",
@@ -598,7 +598,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('international_perception',2)
+  setLevel('international_perception', 2)
   createLink('society', 'international_perception', false, false)
   // society level 3
   createNode({
@@ -611,7 +611,7 @@ function draw() {
     trend_direction: "positive",
     noMetricExpected: false
   })
-  setLevel('crime_rate',3)
+  setLevel('crime_rate', 3)
   createLink('crime', 'crime_rate', true, false)
   createNode({
     id: "incarceration",
@@ -623,7 +623,7 @@ function draw() {
     trend_direction: "positive",
     noMetricExpected: false
   })
-  setLevel('incarceration',3)
+  setLevel('incarceration', 3)
   createLink('crime', 'incarceration', true, false)
   createNode({
     id: "government_trust",
@@ -635,7 +635,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('government_trust',3)
+  setLevel('government_trust', 3)
   createLink('trust', 'government_trust', true, true)
   createNode({
     id: "social_trust",
@@ -647,7 +647,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('social_trust',3)
+  setLevel('social_trust', 3)
   createLink('trust', 'social_trust', true, true)
   createNode({
     id: "gay_rights",
@@ -659,7 +659,7 @@ function draw() {
     trend_direction: "positive",
     noMetricExpected: false
   })
-  setLevel('gay_rights',3)
+  setLevel('gay_rights', 3)
   createLink('minority_rights', 'gay_rights', true, true)
   createNode({
     id: "hate_crimes",
@@ -671,7 +671,7 @@ function draw() {
     trend_direction: "negative",
     noMetricExpected: false
   })
-  setLevel('hate_crimes',3)
+  setLevel('hate_crimes', 3)
   createLink('minority_rights', 'hate_crimes', false, false)
 
 
