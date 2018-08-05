@@ -141,7 +141,8 @@ function draw() {
     current_level: null,
     trend: null,
     source: null,
-    trend_direction: "neutral"
+    trend_direction: "neutral",
+    noMetricExpected: true
   })
   setLevel('overall',0)
 
@@ -152,7 +153,8 @@ function draw() {
     current_level: null,
     trend: null,
     source: null,
-    trend_direction: "neutral"
+    trend_direction: "neutral",
+    noMetricExpected: true
   })
   setLevel('economy',1)
   createLink('overall', 'economy', true, true)
@@ -163,7 +165,8 @@ function draw() {
     current_level: null,
     trend: null,
     source: null,
-    trend_direction: "neutral"
+    trend_direction: "neutral",
+    noMetricExpected: true
   })
   setLevel('health',1)
   createLink('overall', 'health', true, true)
@@ -174,7 +177,8 @@ function draw() {
     current_level: null,
     trend: null,
     source: null,
-    trend_direction: "neutral"
+    trend_direction: "neutral",
+    noMetricExpected: true
   })
   setLevel('society',1)
   createLink('overall', 'society', true, true)
@@ -187,7 +191,8 @@ function draw() {
     current_level: null,
     trend: null,
     source: null,
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('inequality',2)
   createLink('economy', 'inequality', false, false)
@@ -198,7 +203,8 @@ function draw() {
     current_level: "2014: 50%",
     trend: "1970 → 2014: -46% | -42pp",
     source: "http://www.nber.org/papers/w22910",
-    trend_direction: 'negative'
+    trend_direction: 'negative',
+    noMetricExpected: false
   })
   setLevel('mobility',2)
   createLink('economy', 'mobility', true, true)
@@ -209,7 +215,8 @@ function draw() {
     current_level: null,
     trend: null,
     source: null,
-    trend_direction: "positive"
+    trend_direction: "positive",
+    noMetricExpected: false
   })
   setLevel('income',2)
   createLink('economy', 'income', true, true)
@@ -220,7 +227,8 @@ function draw() {
     current_level: null,
     trend: null,
     source: null,
-    trend_direction: "positive"
+    trend_direction: "positive",
+    noMetricExpected: false
   })
   setLevel('poverty',2)
   createLink('economy', 'poverty', false, false)
@@ -231,7 +239,8 @@ function draw() {
     current_level: "2018: 79%",
     trend: "1994 → 2018: +0.52% | +0.41pp",
     source: "Federal Reserve Bank of St. Louis",
-    trend_direction: 'positive'
+    trend_direction: 'positive',
+    noMetricExpected: false
   })
   setLevel('employment',2)
   createLink('economy', 'employment', true, true)
@@ -242,7 +251,8 @@ function draw() {
     current_level: "2013: +0.88%",
     trend: "1996-2004 avg → 2005-2013 avg: -50% | -0.87pp",
     source: "U.S. Total Factor Productivity Slowdown - Evidence from the U.S. States",
-    trend_direction: 'negative'
+    trend_direction: 'negative',
+    noMetricExpected: false
   })
   setLevel('productivity',2)
   createLink('economy', 'productivity', true, true)
@@ -253,7 +263,8 @@ function draw() {
     current_level: "2000 → 2018: Increased",
     trend: null,
     source: null,
-    trend_direction: "positive"
+    trend_direction: "positive",
+    noMetricExpected: false
   })
   setLevel('product_quality',2)
   createLink('economy', 'product_quality', true, true)
@@ -265,7 +276,8 @@ function draw() {
     current_level: "2016: 41.5",
     trend: "2000 → 2016: +2.72% | +1.1pp",
     source: "Federal Reserve Bank of St. Louis",
-    trend_direction: 'negative'
+    trend_direction: 'negative',
+    noMetricExpected: false
   })
   setLevel('gini_index',3)
   createLink('inequality', 'gini_index', true, false)
@@ -276,7 +288,8 @@ function draw() {
     current_level: "2012: 41.8%",
     trend: "2000 → 2012: +23% | +7.7pp",
     source: "Gabriel Zucman",
-    trend_direction: 'negative'
+    trend_direction: 'negative',
+    noMetricExpected: false
   })
   setLevel('wealth_1',3)
   createLink('inequality', 'wealth_1', true, false)
@@ -287,7 +300,8 @@ function draw() {
     current_level: "2012: 64.6%",
     trend: "2000 → 2012: +14% | +8.1pp",
     source: "Gabriel Zucman",
-    trend_direction: 'negative'
+    trend_direction: 'negative',
+    noMetricExpected: false
   })
   setLevel('wealth_5',3)
   createLink('inequality', 'wealth_5', true, false)
@@ -298,7 +312,8 @@ function draw() {
     current_level: "2017: 2.27%",
     trend: "1961-1980 avg → 1981-2017 avg: -30% | -1.17pp",
     source: "World Bank",
-    trend_direction: 'negative'
+    trend_direction: 'negative',
+    noMetricExpected: false
   })
   setLevel('gdp_growth_rate',3)
   createLink('mobility', 'gdp_growth_rate', true, true, "Explanatory power: 29%\nSource:\nhttps://www.nber.org/papers/w22910")
@@ -309,7 +324,8 @@ function draw() {
     current_level: null,
     trend: "1961 → 2017: Decreased",
     source: "World Bank",
-    trend_direction: 'negative'
+    trend_direction: 'negative',
+    noMetricExpected: false
   })
   setLevel('gdp_growth_distribution',3)
   createLink('mobility', 'gdp_growth_distribution', true, true, "Explanatory power: 71%\nSource:\nhttps://www.nber.org/papers/w22910")
@@ -320,7 +336,8 @@ function draw() {
     current_level: "2017: TBD",
     trend: "2000 → 2017: +11.5%",
     source: "Federal Reserve Bank of St. Louis",
-    trend_direction: 'positive'
+    trend_direction: 'positive',
+    noMetricExpected: false
   })
   setLevel('real_compensation',3)
   createLink('income', 'real_compensation', true, true)
@@ -331,7 +348,8 @@ function draw() {
     current_level: "2016: TBD",
     trend: "2000 → 2016: +3.7%",
     source: "Federal Reserve Bank of St. Louis",
-    trend_direction: 'positive'
+    trend_direction: 'positive',
+    noMetricExpected: false
   })
   setLevel('real_median',3)
   createLink('income', 'real_median', true, true)
@@ -343,7 +361,8 @@ function draw() {
     current_level: "2016: 15.6%",
     trend: "2000 → 2016: -13% | -2.4pp",
     source: "Center on Budget and Policy Priorities",
-    trend_direction: 'positive'
+    trend_direction: 'positive',
+    noMetricExpected: false
   })
   setLevel('child_poverty',3)
   createLink('poverty', 'child_poverty', true, false)
@@ -354,7 +373,8 @@ function draw() {
     current_level: "2017: 0.21%",
     trend: "2007 → 2017: -21% | -0.04pp",
     source: "U.S. Department of Housing and Urban Development",
-    trend_direction: 'positive'
+    trend_direction: 'positive',
+    noMetricExpected: false
   })
   setLevel('homelessness',3)
   createLink('poverty', 'homelessness', true, false)
@@ -367,7 +387,8 @@ function draw() {
     current_level: null,
     trend: null,
     source: null,
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('drugs',2)
   createLink('health', 'drugs', false, false)
@@ -378,7 +399,8 @@ function draw() {
     current_level: null,
     trend: null,
     source: null,
-    trend_direction: "neutral"
+    trend_direction: "neutral",
+    noMetricExpected: false
   })
   setLevel('mortality',2)
   createLink('health', 'mortality', false, false)
@@ -389,7 +411,8 @@ function draw() {
     current_level: "2017: 5087.7",
     trend: "2005 → 2017: -13.23% | -776",
     source: "https://bit.ly/2mnvG49",
-    trend_direction: 'positive'
+    trend_direction: 'positive',
+    noMetricExpected: false
   })
   setLevel('carbon_emissions',2)
   createLink('health', 'carbon_emissions', false, false)
@@ -400,7 +423,8 @@ function draw() {
     current_level: "2014: 24.2",
     trend: "1990 → 2014: -61% | -37.6",
     source: "Pew Research Center",
-    trend_direction: "positive"
+    trend_direction: "positive",
+    noMetricExpected: false
   })
   setLevel('teen_pregnancy',2)
   createLink('health', 'teen_pregnancy', false, false)
@@ -412,7 +436,8 @@ function draw() {
     current_level: "2016: 78.69y",
     trend: "2000 → 2016: +2.68% | +2.05y",
     source: "Federal Reserve Bank of St Louis",
-    trend_direction: "positive"
+    trend_direction: "positive",
+    noMetricExpected: false
   })
   setLevel('life_expectancy',3)
   createLink('mortality', 'life_expectancy', false, true)
@@ -423,7 +448,8 @@ function draw() {
     current_level: "2016: 0.56%",
     trend: "1960 → 2016: -78.38% | -2.03pp",
     source: "Federal Reserve Bank of St. Louis",
-    trend_direction: "positive"
+    trend_direction: "positive",
+    noMetricExpected: false
   })
   setLevel('infant_mortality',3)
   createLink('mortality', 'infant_mortality', true, false)
@@ -434,7 +460,8 @@ function draw() {
     current_level: null,
     trend: "2000 → 2017: Decreased",
     source: null,
-    trend_direction: "positive"
+    trend_direction: "positive",
+    noMetricExpected: false
   })
   setLevel('minority_mortality',3)
   createLink('mortality', 'minority_mortality', true, false)
@@ -445,7 +472,8 @@ function draw() {
     current_level: null,
     trend: "2000 → 2017: Increased",
     source: null,
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('white_mortality',3)
   createLink('mortality', 'white_mortality', true, false)
@@ -456,7 +484,8 @@ function draw() {
     current_level: "2015: 13.3",
     trend: "2000 → 2015: +28% | +2.9",
     source: "National Institute on Drug Abuse",
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('suicides',3)
   createLink('mortality', 'suicides', true, false)
@@ -468,7 +497,8 @@ function draw() {
     current_level: "2013: 13%",
     trend: "1992 → 2013: +73% | +5.5pp",
     source: "National Epidemiologic Survey on Alcohol and Related Conditions/JAMA",
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('alcoholism',3)
   createLink('drugs', 'alcoholism', true, false)
@@ -479,7 +509,8 @@ function draw() {
     current_level: "2013: 207m",
     trend: "2000 → 2013: +64% | +81m",
     source: "National Institute on Drug Abuse",
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('opiods',3)
   createLink('drugs', 'opiods', true, false)
@@ -490,7 +521,8 @@ function draw() {
     current_level: "2013: 0.22%",
     trend: "2002 → 2013: +57% | +0.08pp",
     source: "Substance Abuse and Mental Health Services Administration",
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('heroin',3)
   createLink('drugs', 'heroin', true, false)
@@ -501,7 +533,8 @@ function draw() {
     current_level: "2016: 0.020%",
     trend: "1999 → 2016: +233% | +0.014pp",
     source: "https://www.drugabuse.gov",
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('drug_deaths',3)
   createLink('drugs', 'drug_deaths', true, false)
@@ -514,7 +547,8 @@ function draw() {
     current_level: null,
     trend: null,
     source: null,
-    trend_direction: "positive"
+    trend_direction: "positive",
+    noMetricExpected: false
   })
   setLevel('crime',2)
   createLink('society', 'crime', false, false)
@@ -525,7 +559,8 @@ function draw() {
     current_level: null,
     trend: null,
     source: null,
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('trust',2)
   createLink('society', 'trust', true, true)
@@ -536,7 +571,8 @@ function draw() {
     current_level: null,
     trend: null,
     source: null,
-    trend_direction: "neutral"
+    trend_direction: "neutral",
+    noMetricExpected: false
   })
   setLevel('minority_rights',2)
   createLink('society', 'minority_rights', true, true)
@@ -547,7 +583,8 @@ function draw() {
     current_level: "2017: 6.886/10",
     trend: "2008 → 2017:-0.315",
     source: "http://worldhappiness.report/",
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('happiness',2)
   createLink('society', 'happiness', true, true)
@@ -558,7 +595,8 @@ function draw() {
     current_level: "2017: 38%",
     trend: "2013 → 2017: +52% | +13pp",
     source: "Pew Research Center",
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('international_perception',2)
   createLink('society', 'international_perception', false, false)
@@ -570,7 +608,8 @@ function draw() {
     current_level: "2012: 3,200",
     trend: "1990 → 2012: -45% | -2,618",
     source: "https://bit.ly/1S5ohzu",
-    trend_direction: "positive"
+    trend_direction: "positive",
+    noMetricExpected: false
   })
   setLevel('crime_rate',3)
   createLink('crime', 'crime_rate', true, false)
@@ -581,7 +620,8 @@ function draw() {
     current_level: "2016: 860",
     trend: "2000 → 2016: -7% | -60",
     source: "Bureau of Justice Statistics",
-    trend_direction: "positive"
+    trend_direction: "positive",
+    noMetricExpected: false
   })
   setLevel('incarceration',3)
   createLink('crime', 'incarceration', true, false)
@@ -592,7 +632,8 @@ function draw() {
     current_level: "2017: 18%",
     trend: "2000 → 2017: -47% | -16pp",
     source: "Pew Research Center",
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('government_trust',3)
   createLink('trust', 'government_trust', true, true)
@@ -603,7 +644,8 @@ function draw() {
     current_level: "2014: 31%",
     trend: "2000 → 2014: -11% | -4pp",
     source: "Our World in Data",
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('social_trust',3)
   createLink('trust', 'social_trust', true, true)
@@ -614,7 +656,8 @@ function draw() {
     current_level: null,
     trend: "2000 → 2018: Increased",
     source: null,
-    trend_direction: "positive"
+    trend_direction: "positive",
+    noMetricExpected: false
   })
   setLevel('gay_rights',3)
   createLink('minority_rights', 'gay_rights', true, true)
@@ -625,7 +668,8 @@ function draw() {
     current_level: "2017: 1,038",
     trend: "2010 → 2017: +33.08% | +258",
     source: "Center for the Study of Hate and Extremism",
-    trend_direction: "negative"
+    trend_direction: "negative",
+    noMetricExpected: false
   })
   setLevel('hate_crimes',3)
   createLink('minority_rights', 'hate_crimes', false, false)
