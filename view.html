@@ -26,10 +26,12 @@
       <div class='col-sm-4'>
         <div class='alert alert-{{#if isNeutral}}dark{{/if}}{{#if isPositive}}success{{/if}}{{#if isNegative}}danger{{/if}}' role='alert'>
           {{#if isMainNode}}
-            {{title}}{{#if metric}}: {{metric}}{{/if}}
+            <h5>{{title}}</h5>
           {{else}}
-            <a href="?id={{id}}">{{title}}</a>{{#if metric}}: {{metric}}{{/if}}
+            <h5><a href="?id={{id}}">{{title}}</a></h5>
           {{/if}}
+          <hr>
+          {{#if metric}}: {{metric}}{{/if}}
           {{#if current_level}}
             <hr>
             <div>{{current_level}}</div>
