@@ -26,3 +26,6 @@ span.redirect {
 #homeLink {
   margin-top: 1rem;
 }
+.childNodeLink,.contributingFactorsLink {
+  text-decoration: underline;
+}
