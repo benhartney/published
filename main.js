@@ -222,25 +222,25 @@ function draw() {
   setLevel('gini_index',3)
   createLink('inequality', 'gini_index', true, false)
   createNode({
-    id: 'wealth_1%',
+    id: 'wealth_1',
     title: "Wealth share of top 1%",
     current_level: "2012: 41.8%",
     trend: "2000 → 2012: +23% | +7.7pp",
     source: "Gabriel Zucman",
     trend_direction: 'negative'
   })
-  setLevel('wealth_1%',3)
-  createLink('inequality', 'wealth_1%', true, false)
+  setLevel('wealth_1',3)
+  createLink('inequality', 'wealth_1', true, false)
   createNode({
-    id: 'wealth_5%',
+    id: 'wealth_5',
     title: "Wealth share of top 5%",
     current_level: "2012: 64.6%",
     trend: "2000 → 2012: +14% | +8.1pp",
     source: "Gabriel Zucman",
     trend_direction: 'negative'
   })
-  setLevel('wealth_5%',3)
-  createLink('inequality', 'wealth_5%', true, false)
+  setLevel('wealth_5',3)
+  createLink('inequality', 'wealth_5', true, false)
   createNode({
     id: 'gdp_growth_rate',
     title: "GDP growth rate",
