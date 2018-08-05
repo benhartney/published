@@ -645,7 +645,7 @@ $(document).ready(function() {
     childNode["childCount"] = edgesforChildsChildren.length
     addNodeToPage(childNode, $('#childNodes'))
   }
-  $('#contributing_factor_count').text(edgesforChildren.length)
+  $('#childCount').text(edgesforChildren.length)
   if (edgesforChildren.length == 0) {
     $('#nothingHere').show()
   }
