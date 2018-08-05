@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Policy View Mapper: Noah Smith</title>
+    <title>Policy Views: Noah Smith</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
@@ -31,7 +31,7 @@
             <h5><a href="?id={{id}}">{{title}}</a></h5>
           {{/if}}
           <hr>
-          {{#if metric}}: {{metric}}{{/if}}
+          {{metric}}
           {{#if current_level}}
             <hr>
             <div>{{current_level}}</div>
@@ -44,11 +44,8 @@
             <hr>
             <div>Source: {{source}}</div>
           {{/if}}
-          {{#if isMainNode}}
-          {{else}}
-            <hr>
-            <div>{{childCount}} contributing factors</div>
-          {{/if}}
+          <hr>
+          <div>{{childCount}} contributing factors</div>
         </div>
       </div>
     </script>
@@ -63,7 +60,7 @@
     <main role="main">
 
       <div class="container-fluid">
-        <h2 id='mainHeading'>Policy View Mapper: Noah Smith</h2>
+        <h2 id='mainHeading'>Policy Views: Noah Smith</h2>
       </div>
 
       <div class="container">

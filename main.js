@@ -19,6 +19,23 @@ function setLevel(id, level) {
 }
 
 function createNode(opts) {
+  if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("trend_direction")) {
+    console.log(opts)
+    throw "Missing property"
+  }
+  if (opts["metric"] == null) {
+    opts["metric"] = "No metric"
+  }
+  if (opts["current_level"] == null) {
+    opts["current_level"] = "No current level"
+  }
+  if (opts["trend"] == null) {
+    opts["trend"] = "No trend data"
+  }
+  if (opts["source"] == null) {
+    opts["source"] = "TBD"
+  }
+  
   /*
   {
     id: "",
@@ -118,42 +135,62 @@ function draw() {
   var connectionCount = [];
 
   createNode({
-    id: 'overall',
+    id: "overall",
     title: "Overall view",
-    trend_direction: 'neutral'
+    metric: "Metric: NA",
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "neutral"
   })
   setLevel('overall',0)
 
   createNode({
-    id: 'economics',
-    title: "Economics",
-    trend_direction: 'neutral'
+    id: "economy",
+    title: "Economy",
+    metric: "Metric: NA",
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "neutral"
   })
-  setLevel('economics',1)
-  createLink('overall', 'economics', true, true)
+  setLevel('economy',1)
+  createLink('overall', 'economy', true, true)
   createNode({
-    id: 'health',
+    id: "health",
     title: "Health",
-    trend_direction: 'neutral'
+    metric: "Metric: NA",
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "neutral"
   })
   setLevel('health',1)
   createLink('overall', 'health', true, true)
   createNode({
-    id: 'society',
+    id: "society",
     title: "Society",
-    trend_direction: 'neutral'
+    metric: "Metric: NA",
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "neutral"
   })
   setLevel('society',1)
   createLink('overall', 'society', true, true)
 
-  // economics
+  // economy
   createNode({
-    id: 'inequality',
+    id: "inequality",
     title: "Inequality",
-    trend_direction: 'negative'
+    metric: null,
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "negative"
   })
   setLevel('inequality',2)
-  createLink('economics', 'inequality', false, false)
+  createLink('economy', 'inequality', false, false)
   createNode({
     id: 'mobility',
     title: "Wealth mobility",
@@ -164,21 +201,29 @@ function draw() {
     trend_direction: 'negative'
   })
   setLevel('mobility',2)
-  createLink('economics', 'mobility', true, true)
+  createLink('economy', 'mobility', true, true)
   createNode({
-    id: 'income',
+    id: "income",
     title: "Income",
-    trend_direction: 'positive'
+    metric: null,
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "positive"
   })
   setLevel('income',2)
-  createLink('economics', 'income', true, true)
+  createLink('economy', 'income', true, true)
   createNode({
-    id: 'poverty',
+    id: "poverty",
     title: "Poverty",
-    trend_direction: 'positive'
+    metric: null,
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "positive"
   })
   setLevel('poverty',2)
-  createLink('economics', 'poverty', false, false)
+  createLink('economy', 'poverty', false, false)
   createNode({
     id: 'employment',
     title: "Employment",
@@ -189,7 +234,7 @@ function draw() {
     trend_direction: 'positive'
   })
   setLevel('employment',2)
-  createLink('economics', 'employment', true, true)
+  createLink('economy', 'employment', true, true)
   createNode({
     id: 'productivity',
     title: "Productivity",
@@ -200,20 +245,23 @@ function draw() {
     trend_direction: 'negative'
   })
   setLevel('productivity',2)
-  createLink('economics', 'productivity', true, true)
+  createLink('economy', 'productivity', true, true)
   createNode({
-    id: 'product_quality',
+    id: "product_quality",
     title: "Product quality & range",
-    metric: "No quantitative measurement",
+    metric: null,
     current_level: "2000 → 2018: Increased",
-    trend_direction: 'positive'
+    trend: null,
+    source: null,
+    trend_direction: "positive"
   })
   setLevel('product_quality',2)
-  createLink('economics', 'product_quality', true, true)
-  // economics level 3
+  createLink('economy', 'product_quality', true, true)
+  // economy level 3
   createNode({
     id: 'gini_index',
     title: "Gini index",
+    metric: "Gini index",
     current_level: "2016: 41.5",
     trend: "2000 → 2016: +2.72% | +1.1pp",
     source: "Federal Reserve Bank of St. Louis",
@@ -224,6 +272,7 @@ function draw() {
   createNode({
     id: 'wealth_1',
     title: "Wealth share of top 1%",
+    metric: "Wealth share of top 1%",
     current_level: "2012: 41.8%",
     trend: "2000 → 2012: +23% | +7.7pp",
     source: "Gabriel Zucman",
@@ -234,6 +283,7 @@ function draw() {
   createNode({
     id: 'wealth_5',
     title: "Wealth share of top 5%",
+    metric: "Wealth share of top 5%",
     current_level: "2012: 64.6%",
     trend: "2000 → 2012: +14% | +8.1pp",
     source: "Gabriel Zucman",
@@ -244,6 +294,7 @@ function draw() {
   createNode({
     id: 'gdp_growth_rate',
     title: "GDP growth rate",
+    metric: "GDP growth rate",
     current_level: "2017: 2.27%",
     trend: "1961-1980 avg → 1981-2017 avg: -30% | -1.17pp",
     source: "World Bank",
@@ -254,8 +305,10 @@ function draw() {
   createNode({
     id: 'gdp_growth_distribution',
     title: "GDP growth distribution equality",
-    metric: "TBD",
-    trend: "1961→2017: Decreased",
+    metric: null,
+    current_level: null,
+    trend: "1961 → 2017: Decreased",
+    source: "World Bank",
     trend_direction: 'negative'
   })
   setLevel('gdp_growth_distribution',3)
@@ -263,6 +316,7 @@ function draw() {
   createNode({
     id: 'real_compensation',
     title: "Real compensation per hour",
+    metric: "Real compensation per hour",
     current_level: "2017: TBD",
     trend: "2000 → 2017: +11.5%",
     source: "Federal Reserve Bank of St. Louis",
@@ -273,6 +327,7 @@ function draw() {
   createNode({
     id: 'real_median',
     title: "Real median personal income",
+    metric: "Real median personal income",
     current_level: "2016: TBD",
     trend: "2000 → 2016: +3.7%",
     source: "Federal Reserve Bank of St. Louis",
@@ -306,16 +361,24 @@ function draw() {
 
   // health
   createNode({
-    id: 'drugs',
+    id: "drugs",
     title: "Drugs",
-    trend_direction: 'negative'
+    metric: null,
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "negative"
   })
   setLevel('drugs',2)
   createLink('health', 'drugs', false, false)
   createNode({
-    id: 'mortality',
+    id: "mortality",
     title: "Mortality",
-    trend_direction: 'neutral'
+    metric: null,
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "neutral"
   })
   setLevel('mortality',2)
   createLink('health', 'mortality', false, false)
@@ -345,7 +408,7 @@ function draw() {
   createNode({
     id: "life_expectancy",
     title: "Life expectancy",
-    metric: null,
+    metric: "Life expectancy",
     current_level: "2016: 78.69y",
     trend: "2000 → 2016: +2.68% | +2.05y",
     source: "Federal Reserve Bank of St Louis",
@@ -367,9 +430,9 @@ function draw() {
   createNode({
     id: "minority_mortality",
     title: "Minority mortality",
-    metric: "TBD",
+    metric: null,
     current_level: null,
-    trend: "2000 → 2017:Decreased",
+    trend: "2000 → 2017: Decreased",
     source: null,
     trend_direction: "positive"
   })
@@ -378,9 +441,9 @@ function draw() {
   createNode({
     id: "white_mortality",
     title: "White mortality",
-    metric: "TBD",
+    metric: null,
     current_level: null,
-    trend: "2000 → 2017:Increased",
+    trend: "2000 → 2017: Increased",
     source: null,
     trend_direction: "negative"
   })
@@ -617,7 +680,7 @@ $(document).ready(function() {
 
   var node = nodes.find(function(element) {return element['id'] == id})
   node["isMainNode"] = true
-  addNodeToPage(node, $('#node'))
+
 
   var parentChain = [];
   // assumes only one parent
@@ -639,13 +702,17 @@ $(document).ready(function() {
   }
 
   var edgesforChildren = edgesForGraph.filter(edge => edge['from'] == id);
+  //
+  node["childCount"] = edgesforChildren.length
+  addNodeToPage(node, $('#node'))
+  $('#childCount').text(edgesforChildren.length)
+  //
   for (var i = 0; i < edgesforChildren.length; i++) {
     var childNode = nodes.find(function(element) {return element['id'] == edgesforChildren[i]["to"]})
     var edgesforChildsChildren = edgesForGraph.filter(edge => edge['from'] == childNode.id);
     childNode["childCount"] = edgesforChildsChildren.length
     addNodeToPage(childNode, $('#childNodes'))
   }
-  $('#childCount').text(edgesforChildren.length)
   if (edgesforChildren.length == 0) {
     $('#nothingHere').show()
   }
