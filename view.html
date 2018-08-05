@@ -44,6 +44,11 @@
             <hr>
             <div>Source: {{source}}</div>
           {{/if}}
+          {{#if isMainNode}}
+          {{else}}
+            <hr>
+            <div>{{childCount}} contributing factors</div>
+          {{/if}}
         </div>
       </div>
     </script>

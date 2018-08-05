@@ -641,6 +641,8 @@ $(document).ready(function() {
   var edgesforChildren = edgesForGraph.filter(edge => edge['from'] == id);
   for (var i = 0; i < edgesforChildren.length; i++) {
     var childNode = nodes.find(function(element) {return element['id'] == edgesforChildren[i]["to"]})
+    var edgesforChildsChildren = edgesForGraph.filter(edge => edge['from'] == childNode.id);
+    childNode["childCount"] = edgesforChildsChildren.length
     addNodeToPage(childNode, $('#childNodes'))
   }
   $('#contributing_factor_count').text(edgesforChildren.length)
