@@ -25,14 +25,21 @@
     <script id="node-template" type="text/x-handlebars-template">
       <div class='col-sm-4'>
         <div class='alert alert-{{#if isNeutral}}dark{{/if}}{{#if isPositive}}success{{/if}}{{#if isNegative}}danger{{/if}}' role='alert'>
-          <a href="?id={{id}}">{{title}}</a>{{#if metric}}: {{metric}}{{/if}}
+          {{#if isMainNode}}
+            {{title}}{{#if metric}}: {{metric}}{{/if}}
+          {{else}}
+            <a href="?id={{id}}">{{title}}</a>{{#if metric}}: {{metric}}{{/if}}
+          {{/if}}
           {{#if current_level}}
+            <hr>
             <div>{{current_level}}</div>
           {{/if}}
           {{#if trend}}
+            <hr>
             <div>{{trend}}</div>
           {{/if}}
           {{#if source}}
+            <hr>
             <div>Source: {{source}}</div>
           {{/if}}
         </div>
@@ -40,9 +47,7 @@
     </script>
 
     <script id="parent-chain-template" type="text/x-handlebars-template">
-      <div>
-        <a href="?id={{id}}">{{title}}</a> >
-      </div>
+      <a href="?id={{id}}">{{title}}</a> >
     </script>
   </head>
 
@@ -62,11 +67,24 @@
         <div class='row'>
           <div class='col-sm'>
             <h4>
-              Components
+              <span id='contributing_factor_count'></span> Contributing Factors:
             </h4>
           </div>
         </div>
         <div class='row' id='childNodes'></div>
+        <div class='row' id='nothingHere'>
+          <div class='col-sm'>
+            You've reached the bottom of this particular thread.
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="container">
+        <div class='row'>
+          <div class='col-sm' id='graphIntro'>
+            Here is the entire view. You can zoom and move around using the standard Google Maps style interactions.
+          </div>
+        </div>
       </div>
 
       <div class="container-fluid">

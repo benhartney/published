@@ -14,3 +14,12 @@ span.redirect {
 #openViewButton {
   margin-bottom: 1rem;
 }
+#nothingHere {
+  display: none;
+}
+#parentNodes {
+  margin-bottom: 1rem;
+}
+#graphIntro {
+  margin-bottom: 1rem; 
+}

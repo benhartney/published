@@ -616,7 +616,7 @@ $(document).ready(function() {
   }
 
   var node = nodes.find(function(element) {return element['id'] == id})
-
+  node["isMainNode"] = true
   addNodeToPage(node, $('#node'))
 
   var parentChain = [];
@@ -634,11 +634,18 @@ $(document).ready(function() {
     var html = template(parentChain[i]);
     $('#parentNodes').append(html)
   }
+  if (parentChain.length == 0) {
+    $('#parentNodes').hide()
+  }
 
   var edgesforChildren = edgesForGraph.filter(edge => edge['from'] == id);
   for (var i = 0; i < edgesforChildren.length; i++) {
     var childNode = nodes.find(function(element) {return element['id'] == edgesforChildren[i]["to"]})
     addNodeToPage(childNode, $('#childNodes'))
+  }
+  $('#contributing_factor_count').text(edgesforChildren.length)
+  if (edgesforChildren.length == 0) {
+    $('#nothingHere').show()
   }
 
 });
