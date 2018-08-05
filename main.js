@@ -523,7 +523,7 @@ function draw() {
     title: "Drugs",
     metric: null,
     current_level: null,
-    trend: null,
+    trend: "1992 → 2016: Increased",
     source: null,
     trend_direction: "negative",
     noMetricExpected: false
@@ -779,7 +779,7 @@ function draw() {
     title: "Trust",
     metric: null,
     current_level: null,
-    trend: null,
+    trend: "2000 → 2017: Decreased",
     source: null,
     trend_direction: "negative",
     noMetricExpected: false
