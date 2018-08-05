@@ -1020,4 +1020,6 @@ $(document).ready(function() {
     $('#nothingHere').show()
   }
 
+  $('#introModal').modal('toggle')
+
 });
