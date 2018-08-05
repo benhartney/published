@@ -30,22 +30,38 @@
           {{else}}
             <h5><a href="?id={{id}}">{{title}}</a></h5>
           {{/if}}
+          {{#if noMetricExpected}}
+          {{else}}
+            <hr>
+            <div class="font-weight-bold">Metric</div>
+            {{metric}}
+            {{#if current_level}}
+              <hr>
+              <div>
+                <div class="font-weight-bold">Current level</div>
+                {{current_level}}
+              </div>
+            {{/if}}
+            {{#if trend}}
+              <hr>
+              <div>
+                <div class="font-weight-bold">Trend</div>
+                {{trend}}
+              </div>
+            {{/if}}
+            {{#if source}}
+              <hr>
+              <div>
+                <div class="font-weight-bold">Source</div>
+                {{source}}
+              </div>
+            {{/if}}
+          {{/if}}
           <hr>
-          {{metric}}
-          {{#if current_level}}
-            <hr>
-            <div>{{current_level}}</div>
-          {{/if}}
-          {{#if trend}}
-            <hr>
-            <div>{{trend}}</div>
-          {{/if}}
-          {{#if source}}
-            <hr>
-            <div>Source: {{source}}</div>
-          {{/if}}
-          <hr>
-          <div>{{childCount}} contributing factors</div>
+          <div>
+            <div class="font-weight-bold">Contributing factors</div>
+            <a href="?id={{id}}">{{childCount}}</a>
+          </div>
         </div>
       </div>
     </script>
@@ -59,11 +75,21 @@
 
     <main role="main">
 
-      <div class="container-fluid">
-        <h2 id='mainHeading'>Policy Views: Noah Smith</h2>
+      <div class="container">
+        <div class='row'>
+          <div class='col-sm' id='homeLink'>
+            <a href="index.html">Home</a>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col-sm'>
+            <h2 id='mainHeading'>Policy Views: Noah Smith</h2>
+          </div>
+        </div>
       </div>
 
       <div class="container">
+
         <div class='row'>
           <div id='parentNodes' class='col-sm'></div>
         </div>
@@ -71,7 +97,7 @@
         <div class='row'>
           <div class='col-sm'>
             <h4>
-              <span id='childCount'></span> Contributing Factors:
+              <span id='childCount'></span> contributing factors:
             </h4>
           </div>
         </div>

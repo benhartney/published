@@ -24,16 +24,16 @@ function createNode(opts) {
     throw "Missing property"
   }
   if (opts["metric"] == null) {
-    opts["metric"] = "No metric"
+    opts["metric"] = "-"
   }
   if (opts["current_level"] == null) {
-    opts["current_level"] = "No current level"
+    opts["current_level"] = "-"
   }
   if (opts["trend"] == null) {
-    opts["trend"] = "No trend data"
+    opts["trend"] = "-"
   }
   if (opts["source"] == null) {
-    opts["source"] = "TBD"
+    opts["source"] = "-"
   }
   
   /*
