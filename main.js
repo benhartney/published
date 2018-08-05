@@ -225,7 +225,7 @@ function draw() {
     title: "Poverty",
     metric: null,
     current_level: null,
-    trend: null,
+    trend: "2000 → 2017: Improved",
     source: null,
     trend_direction: "positive",
     noMetricExpected: false
