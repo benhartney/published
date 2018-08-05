@@ -99,22 +99,22 @@ function createNode(opts) {
   nodes.push(opts)
 }
 
-function createLink(parent, child, positiveRelationship, lowerIsGood, custom=null) {
-  //if (positiveRelationship) {
+function createLink(opts){//(parent, child, positiveRelationship, lowerIsGood, custom=null) {
+  //if (opts.positiveRelationship) {
   //  var label = '→\n→'
   //} else {
   //  var label = '→\n←'
   //}
-  //if (lowerIsGood) {
+  //if (opts.lowerIsGood) {
   //  var label = 'improves'
   //} else {
   //  var label = 'worsens'
   //}
   edgesForGraph.push({
-    from: parent,
-    to: child,
+    from: opts.parent_id,
+    to: opts.child_id,
     arrows: 'from',
-    label: custom,
+    label: opts.label,
     font: {
       background: 'white',
       size: 15
@@ -158,7 +158,13 @@ function draw() {
     noMetricExpected: true
   })
   setLevel('economy', 1)
-  createLink('overall', 'economy', true, true)
+  createLink({
+    parent_id: 'overall',
+    child_id: 'economy',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: "health",
     title: "Health",
@@ -170,7 +176,13 @@ function draw() {
     noMetricExpected: true
   })
   setLevel('health', 1)
-  createLink('overall', 'health', true, true)
+  createLink({
+    parent_id: 'overall',
+    child_id: 'health',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: "society",
     title: "Society",
@@ -182,7 +194,13 @@ function draw() {
     noMetricExpected: true
   })
   setLevel('society', 1)
-  createLink('overall', 'society', true, true)
+  createLink({
+    parent_id: 'overall',
+    child_id: 'society',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
 
   // economy
   createNode({
@@ -196,7 +214,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('inequality', 2)
-  createLink('economy', 'inequality', false, false)
+  createLink({
+    parent_id: 'economy',
+    child_id: 'inequality',
+    positiveRelationship: false,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: 'mobility',
     title: "Wealth mobility",
@@ -208,7 +232,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('mobility', 2)
-  createLink('economy', 'mobility', true, true)
+  createLink({
+    parent_id: 'economy',
+    child_id: 'mobility',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: "income",
     title: "Income",
@@ -220,7 +250,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('income', 2)
-  createLink('economy', 'income', true, true)
+  createLink({
+    parent_id: 'economy',
+    child_id: 'income',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: "poverty",
     title: "Poverty",
@@ -232,7 +268,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('poverty', 2)
-  createLink('economy', 'poverty', false, false)
+  createLink({
+    parent_id: 'economy',
+    child_id: 'poverty',
+    positiveRelationship: false,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: 'employment',
     title: "Employment",
@@ -244,7 +286,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('employment', 2)
-  createLink('economy', 'employment', true, true)
+  createLink({
+    parent_id: 'economy',
+    child_id: 'employment',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: 'productivity',
     title: "Productivity",
@@ -256,7 +304,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('productivity', 2)
-  createLink('economy', 'productivity', true, true)
+  createLink({
+    parent_id: 'economy',
+    child_id: 'productivity',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: "product_quality",
     title: "Product quality & range",
@@ -268,7 +322,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('product_quality', 2)
-  createLink('economy', 'product_quality', true, true)
+  createLink({
+    parent_id: 'economy',
+    child_id: 'product_quality',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   // economy level 3
   createNode({
     id: 'gini_index',
@@ -281,7 +341,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('gini_index', 3)
-  createLink('inequality', 'gini_index', true, false)
+  createLink({
+    parent_id: 'inequality',
+    child_id: 'gini_index',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: 'wealth_1',
     title: "Wealth share of top 1%",
@@ -293,7 +359,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('wealth_1', 3)
-  createLink('inequality', 'wealth_1', true, false)
+  createLink({
+    parent_id: 'inequality',
+    child_id: 'wealth_1',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: 'wealth_5',
     title: "Wealth share of top 5%",
@@ -305,7 +377,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('wealth_5', 3)
-  createLink('inequality', 'wealth_5', true, false)
+  createLink({
+    parent_id: 'inequality',
+    child_id: 'wealth_5',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: 'gdp_growth_rate',
     title: "GDP growth rate",
@@ -317,7 +395,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('gdp_growth_rate', 3)
-  createLink('mobility', 'gdp_growth_rate', true, true, "Explanatory power: 29%\nSource:\nhttps://www.nber.org/papers/w22910")
+  createLink({
+    parent_id: 'mobility',
+    child_id: 'gdp_growth_rate',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: "Explanatory power: 29%\nSource:\nhttps://www.nber.org/papers/w22910"
+  })
   createNode({
     id: 'gdp_growth_distribution',
     title: "GDP growth distribution equality",
@@ -329,7 +413,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('gdp_growth_distribution', 3)
-  createLink('mobility', 'gdp_growth_distribution', true, true, "Explanatory power: 71%\nSource:\nhttps://www.nber.org/papers/w22910")
+  createLink({
+    parent_id: 'mobility',
+    child_id: 'gdp_growth_distribution',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: "Explanatory power: 71%\nSource:\nhttps://www.nber.org/papers/w22910"
+  })
   createNode({
     id: 'real_compensation',
     title: "Real compensation per hour",
@@ -341,7 +431,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('real_compensation', 3)
-  createLink('income', 'real_compensation', true, true)
+  createLink({
+    parent_id: 'income',
+    child_id: 'real_compensation',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: 'real_median',
     title: "Real median personal income",
@@ -353,7 +449,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('real_median', 3)
-  createLink('income', 'real_median', true, true)
+  createLink({
+    parent_id: 'income',
+    child_id: 'real_median',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   //
   createNode({
     id: 'child_poverty',
@@ -366,7 +468,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('child_poverty', 3)
-  createLink('poverty', 'child_poverty', true, false)
+  createLink({
+    parent_id: 'poverty',
+    child_id: 'child_poverty',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: 'homelessness',
     title: "Homelessness",
@@ -378,7 +486,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('homelessness', 3)
-  createLink('poverty', 'homelessness', true, false)
+  createLink({
+    parent_id: 'poverty',
+    child_id: 'homelessness',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
 
   // health
   createNode({
@@ -392,7 +506,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('drugs', 2)
-  createLink('health', 'drugs', false, false)
+  createLink({
+    parent_id: 'health',
+    child_id: 'drugs',
+    positiveRelationship: false,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: "mortality",
     title: "Mortality",
@@ -404,7 +524,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('mortality', 2)
-  createLink('health', 'mortality', false, false)
+  createLink({
+    parent_id: 'health',
+    child_id: 'mortality',
+    positiveRelationship: false,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: 'carbon_emissions',
     title: "Carbon emissions",
@@ -416,7 +542,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('carbon_emissions', 2)
-  createLink('health', 'carbon_emissions', false, false)
+  createLink({
+    parent_id: 'health',
+    child_id: 'carbon_emissions',
+    positiveRelationship: false,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: "teen_pregnancy",
     title: "Teen pregnancy",
@@ -428,7 +560,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('teen_pregnancy', 2)
-  createLink('health', 'teen_pregnancy', false, false)
+  createLink({
+    parent_id: 'health',
+    child_id: 'teen_pregnancy',
+    positiveRelationship: false,
+    lowerIsGood: false,
+    label: null
+  })
   // health level 3, mortality
   createNode({
     id: "life_expectancy",
@@ -441,7 +579,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('life_expectancy', 3)
-  createLink('mortality', 'life_expectancy', false, true)
+  createLink({
+    parent_id: 'mortality',
+    child_id: 'life_expectancy',
+    positiveRelationship: false,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: "infant_mortality",
     title: "Infant mortality",
@@ -453,7 +597,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('infant_mortality', 3)
-  createLink('mortality', 'infant_mortality', true, false)
+  createLink({
+    parent_id: 'mortality',
+    child_id: 'infant_mortality',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: "minority_mortality",
     title: "Minority mortality",
@@ -465,7 +615,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('minority_mortality', 3)
-  createLink('mortality', 'minority_mortality', true, false)
+  createLink({
+    parent_id: 'mortality',
+    child_id: 'minority_mortality',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: "white_mortality",
     title: "White mortality",
@@ -477,7 +633,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('white_mortality', 3)
-  createLink('mortality', 'white_mortality', true, false)
+  createLink({
+    parent_id: 'mortality',
+    child_id: 'white_mortality',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: "suicides",
     title: "Suicides",
@@ -489,7 +651,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('suicides', 3)
-  createLink('mortality', 'suicides', true, false)
+  createLink({
+    parent_id: 'mortality',
+    child_id: 'suicides',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   // health level 3, drugs
   createNode({
     id: "alcoholism",
@@ -502,7 +670,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('alcoholism', 3)
-  createLink('drugs', 'alcoholism', true, false)
+  createLink({
+    parent_id: 'drugs',
+    child_id: 'alcoholism',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: "opiods",
     title: "Opiods",
@@ -514,7 +688,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('opiods', 3)
-  createLink('drugs', 'opiods', true, false)
+  createLink({
+    parent_id: 'drugs',
+    child_id: 'opiods',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: "heroin",
     title: "Heroin",
@@ -526,7 +706,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('heroin', 3)
-  createLink('drugs', 'heroin', true, false)
+  createLink({
+    parent_id: 'drugs',
+    child_id: 'heroin',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: "drug_deaths",
     title: "Drug deaths",
@@ -538,7 +724,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('drug_deaths', 3)
-  createLink('drugs', 'drug_deaths', true, false)
+  createLink({
+    parent_id: 'drugs',
+    child_id: 'drug_deaths',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
 
   // society
   createNode({
@@ -552,7 +744,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('crime', 2)
-  createLink('society', 'crime', false, false)
+  createLink({
+    parent_id: 'society',
+    child_id: 'crime',
+    positiveRelationship: false,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: "trust",
     title: "Trust",
@@ -564,7 +762,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('trust', 2)
-  createLink('society', 'trust', true, true)
+  createLink({
+    parent_id: 'society',
+    child_id: 'trust',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: "minority_rights",
     title: "Minority rights",
@@ -576,7 +780,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('minority_rights', 2)
-  createLink('society', 'minority_rights', true, true)
+  createLink({
+    parent_id: 'society',
+    child_id: 'minority_rights',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: "happiness",
     title: "Happiness",
@@ -588,7 +798,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('happiness', 2)
-  createLink('society', 'happiness', true, true)
+  createLink({
+    parent_id: 'society',
+    child_id: 'happiness',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: "international_perception",
     title: "International perception",
@@ -600,7 +816,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('international_perception', 2)
-  createLink('society', 'international_perception', false, false)
+  createLink({
+    parent_id: 'society',
+    child_id: 'international_perception',
+    positiveRelationship: false,
+    lowerIsGood: false,
+    label: null
+  })
   // society level 3
   createNode({
     id: "crime_rate",
@@ -613,7 +835,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('crime_rate', 3)
-  createLink('crime', 'crime_rate', true, false)
+  createLink({
+    parent_id: 'crime',
+    child_id: 'crime_rate',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: "incarceration",
     title: "Incarceration",
@@ -625,7 +853,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('incarceration', 3)
-  createLink('crime', 'incarceration', true, false)
+  createLink({
+    parent_id: 'crime',
+    child_id: 'incarceration',
+    positiveRelationship: true,
+    lowerIsGood: false,
+    label: null
+  })
   createNode({
     id: "government_trust",
     title: "Trust in government",
@@ -637,7 +871,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('government_trust', 3)
-  createLink('trust', 'government_trust', true, true)
+  createLink({
+    parent_id: 'trust',
+    child_id: 'government_trust',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: "social_trust",
     title: "Social trust",
@@ -649,7 +889,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('social_trust', 3)
-  createLink('trust', 'social_trust', true, true)
+  createLink({
+    parent_id: 'trust',
+    child_id: 'social_trust',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: "gay_rights",
     title: "Gay rights",
@@ -661,7 +907,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('gay_rights', 3)
-  createLink('minority_rights', 'gay_rights', true, true)
+  createLink({
+    parent_id: 'minority_rights',
+    child_id: 'gay_rights',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
   createNode({
     id: "hate_crimes",
     title: "Hate crimes",
@@ -673,7 +925,13 @@ function draw() {
     noMetricExpected: false
   })
   setLevel('hate_crimes', 3)
-  createLink('minority_rights', 'hate_crimes', false, false)
+  createLink({
+    parent_id: 'minority_rights',
+    child_id: 'hate_crimes',
+    positiveRelationship: false,
+    lowerIsGood: false,
+    label: null
+  })
 
 
 
