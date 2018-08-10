@@ -33,8 +33,17 @@
           {{#if noMetricExpected}}
           {{else}}
             <hr>
-            <div class="font-weight-bold">Metric</div>
+            <div class="font-weight-bold">
+              Metric
+            </div>
             {{metric}}
+            {{#if connection_label}}
+              <hr>
+              <div>
+                <div class="font-weight-bold">Details on how it contributes</div>
+                {{connection_label}}
+              </div>
+            {{/if}}
             {{#if current_level}}
               <hr>
               <div>

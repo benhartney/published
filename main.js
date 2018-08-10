@@ -423,7 +423,7 @@ function draw() {
     child_id: 'gdp_growth_rate',
     positiveRelationship: true,
     lowerIsGood: true,
-    label: "Explanatory power: 29%\nSource:\nhttps://www.nber.org/papers/w22910"
+    label: "Explanatory power: 29%.\nSource:\nhttps://www.nber.org/papers/w22910"
   })
   createNode({
     id: 'gdp_growth_distribution',
@@ -1040,7 +1040,7 @@ $(document).ready(function() {
     var connectionsForChildsChildren = connectionForGraph.filter(edge => edge['from'] == childNode.id);
     childNode["childCount"] = connectionsForChildsChildren.length
     if (connectionsForChildren[i]["label"] != null) {
-      childNode["label"] = connectionsForChildren[i]["label"]
+      childNode["connection_label"] = connectionsForChildren[i]["label"]
     }
     addNodeToPage(childNode, $('#childNodes'))
   }
