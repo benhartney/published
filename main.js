@@ -1,5 +1,5 @@
 var nodesForGraph = null;
-var edgesForGraph = null;
+var connectionForGraph = null;
 var network = null;
 
 var nodes = []
@@ -133,7 +133,7 @@ function createLink(opts){//(parent, child, positiveRelationship, lowerIsGood, c
   //} else {
   //  var label = 'worsens'
   //}
-  edgesForGraph.push({
+  connectionForGraph.push({
     from: opts.parent_id,
     to: opts.child_id,
     arrows: 'from',
@@ -155,7 +155,7 @@ function destroy() {
 function draw() {
   destroy();
   nodesForGraph = [];
-  edgesForGraph = [];
+  connectionForGraph = [];
   var connectionCount = [];
 
   createNode({
@@ -962,7 +962,7 @@ function draw() {
   var container = document.getElementById('map');
   var data = {
     nodes: nodesForGraph,
-    edges: edgesForGraph
+    edges: connectionForGraph
   };
 
   var options = {
@@ -1010,11 +1010,11 @@ $(document).ready(function() {
 
   var parentChain = [];
   // assumes only one parent
-  var edgeforParent = edgesForGraph.find(function(edge) {return edge['to'] == id})
-  while (edgeforParent != undefined){
-    var parentNode = nodes.find(function(element) {return element['id'] == edgeforParent["from"]})
+  var connectionForParent = connectionForGraph.find(function(edge) {return edge['to'] == id})
+  while (connectionForParent != undefined){
+    var parentNode = nodes.find(function(element) {return element['id'] == connectionForParent["from"]})
     parentChain.unshift(parentNode)
-    var edgeforParent = edgesForGraph.find(function(edge) {return edge['to'] == parentNode.id})
+    var connectionForParent = connectionForGraph.find(function(edge) {return edge['to'] == parentNode.id})
   }
   
   for (var i = 0; i < parentChain.length; i++) {
@@ -1027,23 +1027,26 @@ $(document).ready(function() {
     $('#parentNodes').hide()
   }
 
-  var edgesforChildren = edgesForGraph.filter(edge => edge['from'] == id);
+  var connectionsForChildren = connectionForGraph.filter(edge => edge['from'] == id);
   //
-  node["childCount"] = edgesforChildren.length
+  console.log("connectionsForChildren")
+  console.log(connectionsForChildren)
+  node["childCount"] = connectionsForChildren.length
   addNodeToPage(node, $('#node'))
-  $('#childCount').text(edgesforChildren.length)
+  $('#childCount').text(connectionsForChildren.length)
   //
-  for (var i = 0; i < edgesforChildren.length; i++) {
-    var childNode = nodes.find(function(element) {return element['id'] == edgesforChildren[i]["to"]})
-    var edgesforChildsChildren = edgesForGraph.filter(edge => edge['from'] == childNode.id);
-    childNode["childCount"] = edgesforChildsChildren.length
+  for (var i = 0; i < connectionsForChildren.length; i++) {
+    var childNode = nodes.find(function(element) {return element['id'] == connectionsForChildren[i]["to"]})
+    var connectionsForChildsChildren = connectionForGraph.filter(edge => edge['from'] == childNode.id);
+    childNode["childCount"] = connectionsForChildsChildren.length
+    if (connectionsForChildren[i]["label"] != null) {
+      childNode["label"] = connectionsForChildren[i]["label"]
+    }
     addNodeToPage(childNode, $('#childNodes'))
   }
-  if (edgesforChildren.length == 0) {
+  if (connectionsForChildren.length == 0) {
     $('#nothingHere').show()
   }
-
-
   
 
   var introModalViewedCookie = getCookie('introModalViewed');
