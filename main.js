@@ -45,8 +45,6 @@ function setLevel(id, level) {
 }
 
 function createNode(opts) {
-  console.log("in createNode")
-  console.log(window.source_id)
   if (window.source_id == 'all' || window.source_id == opts["source_id"] || opts["id"] == "overall") {
     if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("trend_direction") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_id")) {
       console.log(opts)
@@ -1084,7 +1082,6 @@ $(document).ready(function() {
   if (node_id === null) {
     node_id = 'overall'
   }
-  console.log(nodesForGraph)
 
   draw()
 
@@ -1113,11 +1110,20 @@ $(document).ready(function() {
     $('#parentNodes').hide()
   }
 
-  var connectionsLeadingToChildren = connectionsForGraph.filter(edge => edge['from'] == node_id);
+  var connectionsLeadingToChildren = connectionsForGraph.filter(edge => edge['from'] == node_id).filter(val => {
+    console.log(val["to"])
+    return nodes.find(function(element) {return element['id'] == val["to"]}) != null;
+  });
   //
   node["childCount"] = connectionsLeadingToChildren.length
   addNodeToPage(node, $('#node'))
   $('#childCount').text(connectionsLeadingToChildren.length)
+  if (connectionsLeadingToChildren.length == 1) {
+    $('#contributing_factor_s').hide()
+  } else {
+    $('#contributing_factor_s').show()
+  }
+
   //
   for (var i = 0; i < connectionsLeadingToChildren.length; i++) {
     var childNode = nodes.find(function(element) {return element['id'] == connectionsLeadingToChildren[i]["to"]})
