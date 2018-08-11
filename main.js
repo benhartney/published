@@ -1050,7 +1050,7 @@ $(document).ready(function() {
   
 
   var introModalViewedCookie = getCookie('introModalViewed');
-  if (introModalViewedCookie == null) {
+  if (introModalViewedCookie == null && window.location.href.indexOf("policyviews") > -1) {
     $('#introModal').modal('toggle')
     setCookie('introModalViewed', 'true');
   }

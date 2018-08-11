@@ -105,6 +105,7 @@
 
     <main role="main">
 
+      <!-- header -->
       <div class="container">
         <div class='row'>
           <div class='col-sm' id='homeLink'>
@@ -118,27 +119,45 @@
         </div>
       </div>
 
+      <!-- mobile view -->
       <div class="container">
 
-        <div class='row'>
-          <div id='parentNodes' class='col-sm'></div>
-        </div>
-        <div class='row' id='node'></div>
-        <div class='row'>
-          <div class='col-sm'>
-            <h4>
-              <span id='childCount'></span> contributing factors:
-            </h4>
+        <div class="row">
+          <div class="col-sm-2">
+            <div>
+              <button type="button" class="btn btn-primary">All</button>
+            </div>
+            <div>
+              <button type="button" class="btn btn-light">Bloomberg</button>
+            </div>
+          </div>
+          <div class="col-sm-10">
+            <div class='row'>
+              <div id='parentNodes' class='col-sm'></div>
+            </div>
+            <div class='row' id='node'></div>
+            <div class='row'>
+              <div class='col-sm'>
+                <h4>
+                  <span id='childCount'></span> contributing factors:
+                </h4>
+              </div>
+            </div>
+            <div class='row' id='childNodes'></div>
+            <div class='row' id='nothingHere'>
+              <div class='col-sm'>
+                You've reached the bottom of this particular thread.
+              </div>
+            </div>
           </div>
         </div>
-        <div class='row' id='childNodes'></div>
-        <div class='row' id='nothingHere'>
-          <div class='col-sm'>
-            You've reached the bottom of this particular thread.
-          </div>
-        </div>
+
+
       </div>
+
       <hr>
+
+      <!-- full view intro -->
       <div class="container">
         <div class='row'>
           <div class='col-sm' id='graphIntro'>
@@ -147,11 +166,12 @@
         </div>
       </div>
 
+      <!-- full view -->
       <div class="container-fluid">
         <div id="map"></div>
       </div>
 
-    </main><!-- /.container -->
+    </main>
 
 
     <!-- Bootstrap core JavaScript
