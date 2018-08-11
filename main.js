@@ -1,5 +1,5 @@
-var nodesForGraph = null;
-var connectionForGraph = null;
+var nodesForGraph = [];
+var connectionsForGraph = [];
 var network = null;
 
 var nodes = []
@@ -38,88 +38,95 @@ function getParameterByName(name, url) {
 }
 
 function setLevel(id, level) {
-  nodesForGraph.find(function(element) {return element['id'] == id})["level"] = level;
+  var nodeToSetLevelFor = nodesForGraph.find(function(element) {return element['id'] == id})
+  if (nodeToSetLevelFor != null) {
+    nodeToSetLevelFor["level"] = level;
+  }
 }
 
 function createNode(opts) {
-  if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("trend_direction") || !opts.hasOwnProperty("noMetricExpected")) {
-    console.log(opts)
-    throw "Missing property"
-  }
-  
-  /*
-  {
-    id: "",
-    title: "",
-    metric: "",
-    current_level: "",
-    trend: "",
-    source: "",
-    trend_direction: ""
-  }
-  */ 
-  if (opts.trend_direction == 'neutral') {
-    var backgroundColor = 'white'
-  } else if (opts.trend_direction == 'positive') {
-    var backgroundColor = 'rgb(187, 247, 200)'
-  } else if (opts.trend_direction == 'negative') {
-    var backgroundColor = 'rgb(255, 124, 124)'
-  }
-  //build label
-  var labelForGraph = "<b>" + opts.title + "</b>"
-  if (opts.hasOwnProperty("metric") && opts["metric"] != null) {
-    labelForGraph = labelForGraph + ": " + opts["metric"]
-  }
-  if (opts.hasOwnProperty("current_level") && opts["current_level"] != null) {
-    labelForGraph = labelForGraph + "\n---\n" + opts["current_level"]
-  }
-  if (opts.hasOwnProperty("trend") && opts["trend"] != null) {
-    labelForGraph = labelForGraph + "\n---\n" + opts["trend"]
-  }
-  if (opts.hasOwnProperty("source") && opts["source"] != null) {
-    labelForGraph = labelForGraph + "\n---\nSource: " + opts["source"]
-  }
-  nodesForGraph.push({
-    id: opts.id,
-    label: labelForGraph,
-    font: {
-      multi: true
-    },
-    margin: 10,
-    shape: 'box',
-    color: {
-      background: backgroundColor,
-      border: 'black'
-    },
-    widthConstraint: {
-      minimum: 200
-    },
-    heightConstraint: {
-      minimum: 120
+  console.log("in createNode")
+  console.log(window.source_id)
+  if (window.source_id == 'all' || window.source_id == opts["source_id"] || opts["id"] == "overall") {
+    if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("trend_direction") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_id")) {
+      console.log(opts)
+      throw "Missing property"
     }
-  });
+    
+    /*
+    {
+      id: "",
+      title: "",
+      metric: "",
+      current_level: "",
+      trend: "",
+      source: "",
+      trend_direction: ""
+    }
+    */ 
+    if (opts.trend_direction == 'neutral') {
+      var backgroundColor = 'white'
+    } else if (opts.trend_direction == 'positive') {
+      var backgroundColor = 'rgb(187, 247, 200)'
+    } else if (opts.trend_direction == 'negative') {
+      var backgroundColor = 'rgb(255, 124, 124)'
+    }
+    //build label
+    var labelForGraph = "<b>" + opts.title + "</b>"
+    if (opts.hasOwnProperty("metric") && opts["metric"] != null) {
+      labelForGraph = labelForGraph + ": " + opts["metric"]
+    }
+    if (opts.hasOwnProperty("current_level") && opts["current_level"] != null) {
+      labelForGraph = labelForGraph + "\n---\n" + opts["current_level"]
+    }
+    if (opts.hasOwnProperty("trend") && opts["trend"] != null) {
+      labelForGraph = labelForGraph + "\n---\n" + opts["trend"]
+    }
+    if (opts.hasOwnProperty("source") && opts["source"] != null) {
+      labelForGraph = labelForGraph + "\n---\nSource: " + opts["source"]
+    }
+    nodesForGraph.push({
+      id: opts.id,
+      label: labelForGraph,
+      font: {
+        multi: true
+      },
+      margin: 10,
+      shape: 'box',
+      color: {
+        background: backgroundColor,
+        border: 'black'
+      },
+      widthConstraint: {
+        minimum: 200
+      },
+      heightConstraint: {
+        minimum: 120
+      }
+    });
 
-  if (opts["metric"] == null) {
-    opts["metric"] = "-"
-  }
-  if (opts["current_level"] == null) {
-    opts["current_level"] = "-"
-  }
-  if (opts["trend"] == null) {
-    opts["trend"] = "-"
-  }
-  if (opts["source"] == null) {
-    opts["source"] = "-"
-  }
+    if (opts["metric"] == null) {
+      opts["metric"] = "-"
+    }
+    if (opts["current_level"] == null) {
+      opts["current_level"] = "-"
+    }
+    if (opts["trend"] == null) {
+      opts["trend"] = "-"
+    }
+    if (opts["source"] == null) {
+      opts["source"] = "-"
+    }
 
-  if (opts.trend_direction == 'neutral') {
-    opts["isNeutral"] = true
-  } else if (opts.trend_direction == 'positive') {
-    opts["isPositive"] = true
-  } else if (opts.trend_direction == 'negative') {
-    opts["isNegative"] = true
+    if (opts.trend_direction == 'neutral') {
+      opts["isNeutral"] = true
+    } else if (opts.trend_direction == 'positive') {
+      opts["isPositive"] = true
+    } else if (opts.trend_direction == 'negative') {
+      opts["isNegative"] = true
+    }
+    nodes.push(opts)
   }
-  nodes.push(opts)
 }
 
 function createLink(opts){//(parent, child, positiveRelationship, lowerIsGood, custom=null) {
@@ -133,7 +140,7 @@ function createLink(opts){//(parent, child, positiveRelationship, lowerIsGood, c
   //} else {
   //  var label = 'worsens'
   //}
-  connectionForGraph.push({
+  connectionsForGraph.push({
     from: opts.parent_id,
     to: opts.child_id,
     arrows: 'from',
@@ -152,12 +159,7 @@ function destroy() {
   }
 }
 
-function draw() {
-  destroy();
-  nodesForGraph = [];
-  connectionForGraph = [];
-  var connectionCount = [];
-
+function setupData() {
   createNode({
     id: "overall",
     title: "Overall view",
@@ -166,9 +168,30 @@ function draw() {
     trend: null,
     source: null,
     trend_direction: "neutral",
-    noMetricExpected: true
+    noMetricExpected: true,
+    source_id: 'noah_bloomberg'
   })
   setLevel('overall', 0)
+
+  createNode({
+    id: "other_thing_node",
+    title: "Other thing",
+    metric: null,
+    current_level: null,
+    trend: null,
+    source: null,
+    trend_direction: "neutral",
+    noMetricExpected: true,
+    source_id: 'other_thing'
+  })
+  setLevel('other_thing_node', 1)
+  createLink({
+    parent_id: 'overall',
+    child_id: 'other_thing_node',
+    positiveRelationship: true,
+    lowerIsGood: true,
+    label: null
+  })
 
   createNode({
     id: "economy",
@@ -178,7 +201,8 @@ function draw() {
     trend: null,
     source: null,
     trend_direction: "neutral",
-    noMetricExpected: true
+    noMetricExpected: true,
+    source_id: 'noah_bloomberg'
   })
   setLevel('economy', 1)
   createLink({
@@ -196,7 +220,8 @@ function draw() {
     trend: null,
     source: null,
     trend_direction: "neutral",
-    noMetricExpected: true
+    noMetricExpected: true,
+    source_id: 'noah_bloomberg'
   })
   setLevel('health', 1)
   createLink({
@@ -214,7 +239,8 @@ function draw() {
     trend: null,
     source: null,
     trend_direction: "neutral",
-    noMetricExpected: true
+    noMetricExpected: true,
+    source_id: 'noah_bloomberg'
   })
   setLevel('society', 1)
   createLink({
@@ -234,7 +260,8 @@ function draw() {
     trend: "2000 → 2016: Increased",
     source: null,
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('inequality', 2)
   createLink({
@@ -252,7 +279,8 @@ function draw() {
     trend: "1970 → 2014: -46% | -42pp",
     source: "http://www.nber.org/papers/w22910",
     trend_direction: 'negative',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('mobility', 2)
   createLink({
@@ -270,7 +298,8 @@ function draw() {
     trend: null,
     source: null,
     trend_direction: "positive",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('income', 2)
   createLink({
@@ -288,7 +317,8 @@ function draw() {
     trend: "2000 → 2017: Improved",
     source: null,
     trend_direction: "positive",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('poverty', 2)
   createLink({
@@ -306,7 +336,8 @@ function draw() {
     trend: "1994 → 2018: +0.52% | +0.41pp",
     source: "Federal Reserve Bank of St. Louis",
     trend_direction: 'positive',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('employment', 2)
   createLink({
@@ -324,7 +355,8 @@ function draw() {
     trend: "1996-2004 avg → 2005-2013 avg: -50% | -0.87pp",
     source: "U.S. Total Factor Productivity Slowdown - Evidence from the U.S. States",
     trend_direction: 'negative',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('productivity', 2)
   createLink({
@@ -342,7 +374,8 @@ function draw() {
     trend: null,
     source: null,
     trend_direction: "positive",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('product_quality', 2)
   createLink({
@@ -361,7 +394,8 @@ function draw() {
     trend: "2000 → 2016: +2.72% | +1.1pp",
     source: "Federal Reserve Bank of St. Louis",
     trend_direction: 'negative',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('gini_index', 3)
   createLink({
@@ -379,7 +413,8 @@ function draw() {
     trend: "2000 → 2012: +23% | +7.7pp",
     source: "Gabriel Zucman",
     trend_direction: 'negative',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('wealth_1', 3)
   createLink({
@@ -397,7 +432,8 @@ function draw() {
     trend: "2000 → 2012: +14% | +8.1pp",
     source: "Gabriel Zucman",
     trend_direction: 'negative',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('wealth_5', 3)
   createLink({
@@ -415,7 +451,8 @@ function draw() {
     trend: "1961-1980 avg → 1981-2017 avg: -30% | -1.17pp",
     source: "World Bank",
     trend_direction: 'negative',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('gdp_growth_rate', 3)
   createLink({
@@ -433,7 +470,8 @@ function draw() {
     trend: "1961 → 2017: Decreased",
     source: "World Bank",
     trend_direction: 'negative',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('gdp_growth_distribution', 3)
   createLink({
@@ -451,7 +489,8 @@ function draw() {
     trend: "2000 → 2017: +11.5%",
     source: "Federal Reserve Bank of St. Louis",
     trend_direction: 'positive',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('real_compensation', 3)
   createLink({
@@ -469,7 +508,8 @@ function draw() {
     trend: "2000 → 2016: +3.7%",
     source: "Federal Reserve Bank of St. Louis",
     trend_direction: 'positive',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('real_median', 3)
   createLink({
@@ -488,7 +528,8 @@ function draw() {
     trend: "2000 → 2016: -13% | -2.4pp",
     source: "Center on Budget and Policy Priorities",
     trend_direction: 'positive',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('child_poverty', 3)
   createLink({
@@ -506,7 +547,8 @@ function draw() {
     trend: "2007 → 2017: -21% | -0.04pp",
     source: "U.S. Department of Housing and Urban Development",
     trend_direction: 'positive',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('homelessness', 3)
   createLink({
@@ -526,7 +568,8 @@ function draw() {
     trend: "1992 → 2016: Increased",
     source: null,
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('drugs', 2)
   createLink({
@@ -544,7 +587,8 @@ function draw() {
     trend: null,
     source: null,
     trend_direction: "neutral",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('mortality', 2)
   createLink({
@@ -562,7 +606,8 @@ function draw() {
     trend: "2005 → 2017: -13.23% | -776",
     source: "https://bit.ly/2mnvG49",
     trend_direction: 'positive',
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('carbon_emissions', 2)
   createLink({
@@ -580,7 +625,8 @@ function draw() {
     trend: "1990 → 2014: -61% | -37.6",
     source: "Pew Research Center",
     trend_direction: "positive",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('teen_pregnancy', 2)
   createLink({
@@ -599,7 +645,8 @@ function draw() {
     trend: "2000 → 2016: +2.68% | +2.05y",
     source: "Federal Reserve Bank of St Louis",
     trend_direction: "positive",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('life_expectancy', 3)
   createLink({
@@ -617,7 +664,8 @@ function draw() {
     trend: "1960 → 2016: -78.38% | -2.03pp",
     source: "Federal Reserve Bank of St. Louis",
     trend_direction: "positive",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('infant_mortality', 3)
   createLink({
@@ -635,7 +683,8 @@ function draw() {
     trend: "2000 → 2017: Decreased",
     source: null,
     trend_direction: "positive",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('minority_mortality', 3)
   createLink({
@@ -653,7 +702,8 @@ function draw() {
     trend: "2000 → 2017: Increased",
     source: null,
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('white_mortality', 3)
   createLink({
@@ -671,7 +721,8 @@ function draw() {
     trend: "2000 → 2015: +28% | +2.9",
     source: "National Institute on Drug Abuse",
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('suicides', 3)
   createLink({
@@ -690,7 +741,8 @@ function draw() {
     trend: "1992 → 2013: +73% | +5.5pp",
     source: "National Epidemiologic Survey on Alcohol and Related Conditions/JAMA",
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('alcoholism', 3)
   createLink({
@@ -708,7 +760,8 @@ function draw() {
     trend: "2000 → 2013: +64% | +81m",
     source: "National Institute on Drug Abuse",
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('opiods', 3)
   createLink({
@@ -726,7 +779,8 @@ function draw() {
     trend: "2002 → 2013: +57% | +0.08pp",
     source: "Substance Abuse and Mental Health Services Administration",
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('heroin', 3)
   createLink({
@@ -744,7 +798,8 @@ function draw() {
     trend: "1999 → 2016: +233% | +0.014pp",
     source: "https://www.drugabuse.gov",
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('drug_deaths', 3)
   createLink({
@@ -764,7 +819,8 @@ function draw() {
     trend: null,
     source: null,
     trend_direction: "positive",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('crime', 2)
   createLink({
@@ -782,7 +838,8 @@ function draw() {
     trend: "2000 → 2017: Decreased",
     source: null,
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('trust', 2)
   createLink({
@@ -800,7 +857,8 @@ function draw() {
     trend: null,
     source: null,
     trend_direction: "neutral",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('minority_rights', 2)
   createLink({
@@ -818,7 +876,8 @@ function draw() {
     trend: "2008 → 2017:-0.315",
     source: "http://worldhappiness.report/",
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('happiness', 2)
   createLink({
@@ -836,7 +895,8 @@ function draw() {
     trend: "2013 → 2017: +52% | +13pp",
     source: "Pew Research Center",
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('international_perception', 2)
   createLink({
@@ -855,7 +915,8 @@ function draw() {
     trend: "1990 → 2012: -45% | -2,618",
     source: "https://bit.ly/1S5ohzu",
     trend_direction: "positive",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('crime_rate', 3)
   createLink({
@@ -873,7 +934,8 @@ function draw() {
     trend: "2000 → 2016: -7% | -60",
     source: "Bureau of Justice Statistics",
     trend_direction: "positive",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('incarceration', 3)
   createLink({
@@ -891,7 +953,8 @@ function draw() {
     trend: "2000 → 2017: -47% | -16pp",
     source: "Pew Research Center",
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('government_trust', 3)
   createLink({
@@ -909,7 +972,8 @@ function draw() {
     trend: "2000 → 2014: -11% | -4pp",
     source: "Our World in Data",
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('social_trust', 3)
   createLink({
@@ -927,7 +991,8 @@ function draw() {
     trend: "2000 → 2018: Increased",
     source: null,
     trend_direction: "positive",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('gay_rights', 3)
   createLink({
@@ -945,7 +1010,8 @@ function draw() {
     trend: "2010 → 2017: +33.08% | +258",
     source: "Center for the Study of Hate and Extremism",
     trend_direction: "negative",
-    noMetricExpected: false
+    noMetricExpected: false,
+    source_id: 'noah_bloomberg'
   })
   setLevel('hate_crimes', 3)
   createLink({
@@ -955,6 +1021,13 @@ function draw() {
     lowerIsGood: false,
     label: null
   })
+}
+
+function draw() {
+  destroy();
+  //var connectionCount = [];
+
+
 
 
 
@@ -962,7 +1035,7 @@ function draw() {
   var container = document.getElementById('map');
   var data = {
     nodes: nodesForGraph,
-    edges: connectionForGraph
+    edges: connectionsForGraph
   };
 
   var options = {
@@ -996,25 +1069,38 @@ function addNodeToPage(node, $div) {
 }
 
 $(document).ready(function() {
+
+  window.source_id = getParameterByName('source_id')
+  if (source_id === null) {
+    window.source_id = 'all'
+  }
   
+  $("[data-source_id='"+window.source_id+"']").removeClass("btn-light").addClass("btn-primary")
+
+  setupData()
+  
+
+  var node_id = getParameterByName('id')
+  if (node_id === null) {
+    node_id = 'overall'
+  }
+  console.log(nodesForGraph)
+
   draw()
 
-  var id = getParameterByName('id')
-  if (id === null) {
-    id = 'overall'
-  }
 
-  var node = nodes.find(function(element) {return element['id'] == id})
+
+  var node = nodes.find(function(element) {return element['id'] == node_id})
   node["isMainNode"] = true
 
 
   var parentChain = [];
   // assumes only one parent
-  var connectionForParent = connectionForGraph.find(function(edge) {return edge['to'] == id})
+  var connectionForParent = connectionsForGraph.find(function(edge) {return edge['to'] == node_id})
   while (connectionForParent != undefined){
     var parentNode = nodes.find(function(element) {return element['id'] == connectionForParent["from"]})
     parentChain.unshift(parentNode)
-    var connectionForParent = connectionForGraph.find(function(edge) {return edge['to'] == parentNode.id})
+    var connectionForParent = connectionsForGraph.find(function(edge) {return edge['to'] == parentNode.id})
   }
   
   for (var i = 0; i < parentChain.length; i++) {
@@ -1027,24 +1113,22 @@ $(document).ready(function() {
     $('#parentNodes').hide()
   }
 
-  var connectionsForChildren = connectionForGraph.filter(edge => edge['from'] == id);
+  var connectionsLeadingToChildren = connectionsForGraph.filter(edge => edge['from'] == node_id);
   //
-  console.log("connectionsForChildren")
-  console.log(connectionsForChildren)
-  node["childCount"] = connectionsForChildren.length
+  node["childCount"] = connectionsLeadingToChildren.length
   addNodeToPage(node, $('#node'))
-  $('#childCount').text(connectionsForChildren.length)
+  $('#childCount').text(connectionsLeadingToChildren.length)
   //
-  for (var i = 0; i < connectionsForChildren.length; i++) {
-    var childNode = nodes.find(function(element) {return element['id'] == connectionsForChildren[i]["to"]})
-    var connectionsForChildsChildren = connectionForGraph.filter(edge => edge['from'] == childNode.id);
-    childNode["childCount"] = connectionsForChildsChildren.length
-    if (connectionsForChildren[i]["label"] != null) {
-      childNode["connection_label"] = connectionsForChildren[i]["label"]
+  for (var i = 0; i < connectionsLeadingToChildren.length; i++) {
+    var childNode = nodes.find(function(element) {return element['id'] == connectionsLeadingToChildren[i]["to"]})
+    var connectionsLeadingToChildsChildren = connectionsForGraph.filter(edge => edge['from'] == childNode.id);
+    childNode["childCount"] = connectionsLeadingToChildsChildren.length
+    if (connectionsLeadingToChildren[i]["label"] != null) {
+      childNode["connection_label"] = connectionsLeadingToChildren[i]["label"]
     }
     addNodeToPage(childNode, $('#childNodes'))
   }
-  if (connectionsForChildren.length == 0) {
+  if (connectionsLeadingToChildren.length == 0) {
     $('#nothingHere').show()
   }
   
