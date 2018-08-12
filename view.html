@@ -128,14 +128,18 @@
 
         <div class="row">
           <div class="col-sm-2">
-            <div>
-              <a href='?source_id=all' role="button" class="btn btn-light" data-source_id="all">All</a>
+            <h4>Source</h4>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="source_selector_all" name="source_selector" class="custom-control-input" value="all">
+              <label class="custom-control-label" for="source_selector_all">All</label>
             </div>
-            <div>
-              <a href='?source_id=noah_bloomberg' role="button" class="btn btn-light" data-source_id="noah_bloomberg">Bloomberg</a>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="source_selector_bloomberg" name="source_selector" class="custom-control-input" value="noah_bloomberg">
+              <label class="custom-control-label" for="source_selector_bloomberg">Bloomberg</label>
             </div>
-            <div>
-              <a href='?source_id=civil_asset_forfeiture' role="button" class="btn btn-light" data-source_id="civil_asset_forfeiture">Tweet: Civil asset forfeiture</a>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="source_selector_civil_asset_forfeiture_tweet" name="source_selector" class="custom-control-input" value="civil_asset_forfeiture_tweet">
+              <label class="custom-control-label" for="source_selector_civil_asset_forfeiture_tweet">Tweet: Civil asset forfeiture</label>
             </div>
           </div>
           <div class="col-sm-10">

@@ -227,7 +227,7 @@ function setupData() {
     source: null,
     trend_direction: "neutral",
     noMetricExpected: true,
-    source_ids: ['noah_bloomberg', "civil_asset_forfeiture"]
+    source_ids: ['noah_bloomberg', "civil_asset_forfeiture_tweet"]
   })
   setLevel('society', 1)
   createLink({
@@ -807,7 +807,7 @@ function setupData() {
     source: null,
     trend_direction: "positive",
     noMetricExpected: false,
-    source_ids: ['noah_bloomberg', "civil_asset_forfeiture"]
+    source_ids: ['noah_bloomberg', "civil_asset_forfeiture_tweet"]
   })
   setLevel('crime', 2)
   createLink({
@@ -903,7 +903,7 @@ function setupData() {
     source: "https://oig.justice.gov/reports/2017/e1702.pdf",
     trend_direction: "neutral",
     noMetricExpected: false,
-    source_ids: ['civil_asset_forfeiture']
+    source_ids: ['civil_asset_forfeiture_tweet']
   })
   setLevel('civil_asset_forfeiture', 3)
   createLink({
@@ -1080,7 +1080,15 @@ $(document).ready(function() {
   if (source_id === null) {
     window.source_id = 'all'
   }
-  $("[data-source_id='" + window.source_id + "']").removeClass("btn-light").addClass("btn-primary")
+
+  $("input[name=source_selector][value=" + window.source_id + "]").prop('checked', true);
+
+  $('input[type=radio][name=source_selector]').change(function() {
+    console.log(this)
+    window.location = "view.html?source_id="+this.value;
+  });
+
+  
   setupData()
   var node_id = getParameterByName('id')
   if (node_id === null) {
