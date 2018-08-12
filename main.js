@@ -126,7 +126,10 @@ function createNode(opts) {
   }
 }
 
-function createLink(opts){//(parent, child, positiveRelationship, lowerIsGood, custom=null) {
+function createLink(opts){
+
+  // both nodes must already exist!
+
   //if (opts.positiveRelationship) {
   //  var label = '→\n→'
   //} else {
@@ -137,16 +140,23 @@ function createLink(opts){//(parent, child, positiveRelationship, lowerIsGood, c
   //} else {
   //  var label = 'worsens'
   //}
-  connectionsForGraph.push({
-    from: opts.parent_id,
-    to: opts.child_id,
-    arrows: 'from',
-    label: opts.label,
-    font: {
-      background: 'white',
-      size: 15
-    }
-  });
+
+  //
+  var parent_node = nodes.find(function(element) {return element['id'] == opts.parent_id})
+  var child_node = nodes.find(function(element) {return element['id'] == opts.child_id})
+  if (parent_node != null && child_node != null) {
+
+    connectionsForGraph.push({
+      from: opts.parent_id,
+      to: opts.child_id,
+      arrows: 'from',
+      label: opts.label,
+      font: {
+        background: 'white',
+        size: 15
+      }
+    });
+  }
 }
 
 function destroy() {
@@ -169,25 +179,6 @@ function setupData() {
     source_ids: ['noah_bloomberg']
   })
   setLevel('overall', 0)
-  createNode({
-    id: "other_thing_node",
-    title: "Other thing",
-    metric: null,
-    current_level: null,
-    trend: null,
-    source: null,
-    trend_direction: "neutral",
-    noMetricExpected: true,
-    source_ids: ['other_thing']
-  })
-  setLevel('other_thing_node', 1)
-  createLink({
-    parent_id: 'overall',
-    child_id: 'other_thing_node',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
-  })
 
   createNode({
     id: "economy",
@@ -236,7 +227,7 @@ function setupData() {
     source: null,
     trend_direction: "neutral",
     noMetricExpected: true,
-    source_ids: ['noah_bloomberg']
+    source_ids: ['noah_bloomberg', "civil_asset_forfeiture"]
   })
   setLevel('society', 1)
   createLink({
@@ -809,14 +800,14 @@ function setupData() {
   // society
   createNode({
     id: "crime",
-    title: "Crime",
+    title: "Crime & Legal System",
     metric: null,
     current_level: null,
     trend: null,
     source: null,
     trend_direction: "positive",
     noMetricExpected: false,
-    source_ids: ['noah_bloomberg']
+    source_ids: ['noah_bloomberg', "civil_asset_forfeiture"]
   })
   setLevel('crime', 2)
   createLink({
@@ -1069,7 +1060,7 @@ $(document).ready(function() {
   if (source_id === null) {
     window.source_id = 'all'
   }
-  $("[data-source_id='"+window.source_id+"']").removeClass("btn-light").addClass("btn-primary")
+  $("[data-source_id='" + window.source_id + "']").removeClass("btn-light").addClass("btn-primary")
   setupData()
   var node_id = getParameterByName('id')
   if (node_id === null) {
@@ -1132,5 +1123,15 @@ $(document).ready(function() {
     $('#introModal').modal('toggle')
     setCookie('introModalViewed', 'true');
   }
+
+  $('.childNodeLink').each(function() {
+    var href = $(this).attr('href');
+    $(this).attr('href', href+"&source_id="+window.source_id);
+  });
+  $('.contributingFactorsLink').each(function() {
+    var href = $(this).attr('href');
+    $(this).attr('href', href+"&source_id="+window.source_id);
+  });
+  
 
 });
