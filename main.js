@@ -895,6 +895,26 @@ function setupData() {
   })
   // society level 3
   createNode({
+    id: "civil_asset_forfeiture",
+    title: "Civil asset forfeiture",
+    metric: "Cash seized by DEA without civil/criminal charges filed or judicial review",
+    current_level: "2007 → 2016: $3.2 billion",
+    trend: "-",
+    source: "https://oig.justice.gov/reports/2017/e1702.pdf",
+    trend_direction: "neutral",
+    noMetricExpected: false,
+    source_ids: ['civil_asset_forfeiture']
+  })
+  setLevel('civil_asset_forfeiture', 3)
+  createLink({
+    parent_id: 'crime',
+    child_id: 'civil_asset_forfeiture',
+    positiveRelationship: false,
+    lowerIsGood: false,
+    label: null
+  })
+  //
+  createNode({
     id: "crime_rate",
     title: "Crime",
     metric: "Annual crime rate per 100k residents",
