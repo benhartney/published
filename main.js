@@ -45,9 +45,8 @@ function setLevel(id, level) {
 }
 
 function createNode(opts) {
-  if (window.source_id == 'all' || window.source_id == opts["source_id"] || opts["id"] == "overall") {
-    if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("trend_direction") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_id")) {
-      console.log(opts)
+  if (window.source_id == 'all' || opts["id"] == "overall" || opts["source_ids"].includes(window.source_id)) {
+    if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("trend_direction") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_ids")) {
       throw "Missing property"
     }
     
@@ -167,10 +166,9 @@ function setupData() {
     source: null,
     trend_direction: "neutral",
     noMetricExpected: true,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('overall', 0)
-
   createNode({
     id: "other_thing_node",
     title: "Other thing",
@@ -180,7 +178,7 @@ function setupData() {
     source: null,
     trend_direction: "neutral",
     noMetricExpected: true,
-    source_id: 'other_thing'
+    source_ids: ['other_thing']
   })
   setLevel('other_thing_node', 1)
   createLink({
@@ -200,7 +198,7 @@ function setupData() {
     source: null,
     trend_direction: "neutral",
     noMetricExpected: true,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('economy', 1)
   createLink({
@@ -219,7 +217,7 @@ function setupData() {
     source: null,
     trend_direction: "neutral",
     noMetricExpected: true,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('health', 1)
   createLink({
@@ -238,7 +236,7 @@ function setupData() {
     source: null,
     trend_direction: "neutral",
     noMetricExpected: true,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('society', 1)
   createLink({
@@ -259,7 +257,7 @@ function setupData() {
     source: null,
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('inequality', 2)
   createLink({
@@ -278,7 +276,7 @@ function setupData() {
     source: "http://www.nber.org/papers/w22910",
     trend_direction: 'negative',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('mobility', 2)
   createLink({
@@ -297,7 +295,7 @@ function setupData() {
     source: null,
     trend_direction: "positive",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('income', 2)
   createLink({
@@ -316,7 +314,7 @@ function setupData() {
     source: null,
     trend_direction: "positive",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('poverty', 2)
   createLink({
@@ -335,7 +333,7 @@ function setupData() {
     source: "Federal Reserve Bank of St. Louis",
     trend_direction: 'positive',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('employment', 2)
   createLink({
@@ -354,7 +352,7 @@ function setupData() {
     source: "U.S. Total Factor Productivity Slowdown - Evidence from the U.S. States",
     trend_direction: 'negative',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('productivity', 2)
   createLink({
@@ -373,7 +371,7 @@ function setupData() {
     source: null,
     trend_direction: "positive",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('product_quality', 2)
   createLink({
@@ -393,7 +391,7 @@ function setupData() {
     source: "Federal Reserve Bank of St. Louis",
     trend_direction: 'negative',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('gini_index', 3)
   createLink({
@@ -412,7 +410,7 @@ function setupData() {
     source: "Gabriel Zucman",
     trend_direction: 'negative',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('wealth_1', 3)
   createLink({
@@ -431,7 +429,7 @@ function setupData() {
     source: "Gabriel Zucman",
     trend_direction: 'negative',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('wealth_5', 3)
   createLink({
@@ -450,7 +448,7 @@ function setupData() {
     source: "World Bank",
     trend_direction: 'negative',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('gdp_growth_rate', 3)
   createLink({
@@ -469,7 +467,7 @@ function setupData() {
     source: "World Bank",
     trend_direction: 'negative',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('gdp_growth_distribution', 3)
   createLink({
@@ -488,7 +486,7 @@ function setupData() {
     source: "Federal Reserve Bank of St. Louis",
     trend_direction: 'positive',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('real_compensation', 3)
   createLink({
@@ -507,7 +505,7 @@ function setupData() {
     source: "Federal Reserve Bank of St. Louis",
     trend_direction: 'positive',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('real_median', 3)
   createLink({
@@ -527,7 +525,7 @@ function setupData() {
     source: "Center on Budget and Policy Priorities",
     trend_direction: 'positive',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('child_poverty', 3)
   createLink({
@@ -546,7 +544,7 @@ function setupData() {
     source: "U.S. Department of Housing and Urban Development",
     trend_direction: 'positive',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('homelessness', 3)
   createLink({
@@ -567,7 +565,7 @@ function setupData() {
     source: null,
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('drugs', 2)
   createLink({
@@ -586,7 +584,7 @@ function setupData() {
     source: null,
     trend_direction: "neutral",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('mortality', 2)
   createLink({
@@ -605,7 +603,7 @@ function setupData() {
     source: "https://bit.ly/2mnvG49",
     trend_direction: 'positive',
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('carbon_emissions', 2)
   createLink({
@@ -624,7 +622,7 @@ function setupData() {
     source: "Pew Research Center",
     trend_direction: "positive",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('teen_pregnancy', 2)
   createLink({
@@ -644,7 +642,7 @@ function setupData() {
     source: "Federal Reserve Bank of St Louis",
     trend_direction: "positive",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('life_expectancy', 3)
   createLink({
@@ -663,7 +661,7 @@ function setupData() {
     source: "Federal Reserve Bank of St. Louis",
     trend_direction: "positive",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('infant_mortality', 3)
   createLink({
@@ -682,7 +680,7 @@ function setupData() {
     source: null,
     trend_direction: "positive",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('minority_mortality', 3)
   createLink({
@@ -701,7 +699,7 @@ function setupData() {
     source: null,
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('white_mortality', 3)
   createLink({
@@ -720,7 +718,7 @@ function setupData() {
     source: "National Institute on Drug Abuse",
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('suicides', 3)
   createLink({
@@ -740,7 +738,7 @@ function setupData() {
     source: "National Epidemiologic Survey on Alcohol and Related Conditions/JAMA",
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('alcoholism', 3)
   createLink({
@@ -759,7 +757,7 @@ function setupData() {
     source: "National Institute on Drug Abuse",
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('opiods', 3)
   createLink({
@@ -778,7 +776,7 @@ function setupData() {
     source: "Substance Abuse and Mental Health Services Administration",
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('heroin', 3)
   createLink({
@@ -797,7 +795,7 @@ function setupData() {
     source: "https://www.drugabuse.gov",
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('drug_deaths', 3)
   createLink({
@@ -818,7 +816,7 @@ function setupData() {
     source: null,
     trend_direction: "positive",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('crime', 2)
   createLink({
@@ -837,7 +835,7 @@ function setupData() {
     source: null,
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('trust', 2)
   createLink({
@@ -856,7 +854,7 @@ function setupData() {
     source: null,
     trend_direction: "neutral",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('minority_rights', 2)
   createLink({
@@ -875,7 +873,7 @@ function setupData() {
     source: "http://worldhappiness.report/",
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('happiness', 2)
   createLink({
@@ -894,7 +892,7 @@ function setupData() {
     source: "Pew Research Center",
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('international_perception', 2)
   createLink({
@@ -914,7 +912,7 @@ function setupData() {
     source: "https://bit.ly/1S5ohzu",
     trend_direction: "positive",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('crime_rate', 3)
   createLink({
@@ -933,7 +931,7 @@ function setupData() {
     source: "Bureau of Justice Statistics",
     trend_direction: "positive",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('incarceration', 3)
   createLink({
@@ -952,7 +950,7 @@ function setupData() {
     source: "Pew Research Center",
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('government_trust', 3)
   createLink({
@@ -971,7 +969,7 @@ function setupData() {
     source: "Our World in Data",
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('social_trust', 3)
   createLink({
@@ -990,7 +988,7 @@ function setupData() {
     source: null,
     trend_direction: "positive",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('gay_rights', 3)
   createLink({
@@ -1009,7 +1007,7 @@ function setupData() {
     source: "Center for the Study of Hate and Extremism",
     trend_direction: "negative",
     noMetricExpected: false,
-    source_id: 'noah_bloomberg'
+    source_ids: ['noah_bloomberg']
   })
   setLevel('hate_crimes', 3)
   createLink({
@@ -1067,29 +1065,21 @@ function addNodeToPage(node, $div) {
 }
 
 $(document).ready(function() {
-
   window.source_id = getParameterByName('source_id')
   if (source_id === null) {
     window.source_id = 'all'
   }
-  
   $("[data-source_id='"+window.source_id+"']").removeClass("btn-light").addClass("btn-primary")
-
   setupData()
-  
-
   var node_id = getParameterByName('id')
   if (node_id === null) {
     node_id = 'overall'
   }
-
   draw()
-
 
 
   var node = nodes.find(function(element) {return element['id'] == node_id})
   node["isMainNode"] = true
-
 
   var parentChain = [];
   // assumes only one parent
@@ -1099,7 +1089,6 @@ $(document).ready(function() {
     parentChain.unshift(parentNode)
     var connectionForParent = connectionsForGraph.find(function(edge) {return edge['to'] == parentNode.id})
   }
-  
   for (var i = 0; i < parentChain.length; i++) {
     var source = document.getElementById("parent-chain-template").innerHTML;
     var template = Handlebars.compile(source);
@@ -1111,7 +1100,6 @@ $(document).ready(function() {
   }
 
   var connectionsLeadingToChildren = connectionsForGraph.filter(edge => edge['from'] == node_id).filter(val => {
-    console.log(val["to"])
     return nodes.find(function(element) {return element['id'] == val["to"]}) != null;
   });
   //
