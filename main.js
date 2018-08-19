@@ -1076,6 +1076,7 @@ function addNodeToPage(node, $div) {
 }
 
 $(document).ready(function() {
+  window.entity_id = getParameterByName('id')
   window.source_id = getParameterByName('source_id')
   if (source_id === null) {
     window.source_id = 'all'
@@ -1085,7 +1086,7 @@ $(document).ready(function() {
 
   $('input[type=radio][name=source_selector]').change(function() {
     console.log(this)
-    window.location = "view.html?source_id="+this.value;
+    window.location = "view.html?source_id="+this.value+"&id="+window.entity_id;
   });
 
   
@@ -1152,13 +1153,9 @@ $(document).ready(function() {
     setCookie('introModalViewed', 'true');
   }
 
-  $('.childNodeLink').each(function() {
+  $('.nodeLink').each(function() {
     var href = $(this).attr('href');
-    $(this).attr('href', href+"&source_id="+window.source_id);
-  });
-  $('.contributingFactorsLink').each(function() {
-    var href = $(this).attr('href');
-    $(this).attr('href', href+"&source_id="+window.source_id);
+    $(this).attr('href', href+"&source_id="+window.source_id+"&id="+window.entity_id);
   });
   
 

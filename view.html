@@ -28,7 +28,7 @@
           {{#if isMainNode}}
             <h5>{{title}}</h5>
           {{else}}
-            <h5><a class='childNodeLink' href="?node_id={{id}}">{{title}}</a></h5>
+            <h5><a class='childNodeLink nodeLink' href="?node_id={{id}}">{{title}}</a></h5>
           {{/if}}
           {{#if noMetricExpected}}
           {{else}}
@@ -72,7 +72,7 @@
             {{#if isMainNode}}
               {{childCount}}
             {{else}}
-              <a class='contributingFactorsLink' href="?id={{id}}">{{childCount}}</a>
+              <a class='contributingFactorsLink nodeLink' href="?node_id={{id}}">{{childCount}}</a>
             {{/if}}
           </div>
         </div>
@@ -80,7 +80,7 @@
     </script>
 
     <script id="parent-chain-template" type="text/x-handlebars-template">
-      <a href="?id={{id}}">{{title}}</a> >
+      <a href="?node_id={{id}}" class='nodeLink'>{{title}}</a> >
     </script>
   </head>
 
