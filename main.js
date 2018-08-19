@@ -169,7 +169,7 @@ function destroy() {
 function setupData() {
   createNode({
     id: "overall",
-    title: "Overall view",
+    title: "Noah Smith's view",
     metric: null,
     current_level: null,
     trend: null,
