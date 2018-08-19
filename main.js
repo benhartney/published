@@ -1090,7 +1090,7 @@ $(document).ready(function() {
 
   
   setupData()
-  var node_id = getParameterByName('id')
+  var node_id = getParameterByName('node_id')
   if (node_id === null) {
     node_id = 'overall'
   }
