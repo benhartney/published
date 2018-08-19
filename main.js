@@ -1086,7 +1086,7 @@ $(document).ready(function() {
 
   $('input[type=radio][name=source_selector]').change(function() {
     console.log(this)
-    window.location = "view.html?source_id="+this.value+"&id="+window.entity_id;
+    window.location = "view.html?source_id=" + this.value + "&id=" + window.entity_id;
   });
 
   
@@ -1155,7 +1155,7 @@ $(document).ready(function() {
 
   $('.nodeLink').each(function() {
     var href = $(this).attr('href');
-    $(this).attr('href', href+"&source_id="+window.source_id+"&id="+window.entity_id);
+    $(this).attr('href', href + "&source_id=" + window.source_id + "&id="+window.entity_id);
   });
   
 
