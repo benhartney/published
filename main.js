@@ -43,10 +43,9 @@ function setLevel(id, level) {
     nodeToSetLevelFor["level"] = level;
   }
 }
-
 function createNode(opts) {
   if (window.source_id == 'all' || opts["id"] == "overall" || opts["source_ids"].includes(window.source_id)) {
-    if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("trend_direction") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_ids") || !opts.hasOwnProperty("level")) {
+    if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("trend_direction") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_ids") || !opts.hasOwnProperty("level") || !opts.hasOwnProperty("parent_link")) {
       throw "Missing property"
     }
     
@@ -101,7 +100,21 @@ function createNode(opts) {
         minimum: 120
       }
     });
+    setLevel(opts.id, opts.level)
+    if (opts.parent_link != null) {
+      createLink({
+        parent_id: opts.parent_link.parent_id,
+        child_id: opts.id,
+        positive_relationship: opts.parent_link.positive_relationship,
+        lower_is_good: opts.parent_link.lower_is_good,
+        label: opts.parent_link.label
+      })
+    }
 
+
+
+
+    // only for mobile view
     if (opts["metric"] == null) {
       opts["metric"] = "-"
     }
@@ -114,7 +127,6 @@ function createNode(opts) {
     if (opts["source"] == null) {
       opts["source"] = "-"
     }
-
     if (opts.trend_direction == 'neutral') {
       opts["isNeutral"] = true
     } else if (opts.trend_direction == 'positive') {
@@ -123,7 +135,6 @@ function createNode(opts) {
       opts["isNegative"] = true
     }
     nodes.push(opts)
-    setLevel(opts.id, opts.level)
   }
 }
 
@@ -131,20 +142,20 @@ function createLink(opts){
 
   // both nodes must already exist!
 
-  //if (opts.positiveRelationship) {
+  //if (opts.positive_relationship) {
   //  var label = '→\n→'
   //} else {
   //  var label = '→\n←'
   //}
-  //if (opts.lowerIsGood) {
+  //if (opts.lower_is_good) {
   //  var label = 'improves'
   //} else {
   //  var label = 'worsens'
   //}
 
   //
-  var parent_node = nodes.find(function(element) {return element['id'] == opts.parent_id})
-  var child_node = nodes.find(function(element) {return element['id'] == opts.child_id})
+  var parent_node = nodesForGraph.find(function(element) {return element['id'] == opts.parent_id})
+  var child_node = nodesForGraph.find(function(element) {return element['id'] == opts.child_id})
   if (parent_node != null && child_node != null) {
 
     connectionsForGraph.push({
@@ -178,9 +189,9 @@ function setupData() {
     trend_direction: "neutral",
     noMetricExpected: true,
     source_ids: ['noah_bloomberg'],
-    level: 0
+    level: 0,
+    parent_link: null
   })
-
   createNode({
     id: "economy",
     title: "Economy",
@@ -191,14 +202,13 @@ function setupData() {
     trend_direction: "neutral",
     noMetricExpected: true,
     source_ids: ['noah_bloomberg'],
-    level: 1
-  })
-  createLink({
-    parent_id: 'overall',
-    child_id: 'economy',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 1,
+    parent_link: {
+      parent_id: 'overall',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: "health",
@@ -210,14 +220,13 @@ function setupData() {
     trend_direction: "neutral",
     noMetricExpected: true,
     source_ids: ['noah_bloomberg'],
-    level: 1
-  })
-  createLink({
-    parent_id: 'overall',
-    child_id: 'health',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 1,
+    parent_link: {
+      parent_id: 'overall',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: "society",
@@ -229,17 +238,14 @@ function setupData() {
     trend_direction: "neutral",
     noMetricExpected: true,
     source_ids: ['noah_bloomberg', "civil_asset_forfeiture_tweet"],
-    level: 1
+    level: 1,
+    parent_link: {
+      parent_id: 'overall',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
-  createLink({
-    parent_id: 'overall',
-    child_id: 'society',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
-  })
-
-  // economy
   createNode({
     id: "inequality",
     title: "Inequality",
@@ -250,14 +256,13 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
-  })
-  createLink({
-    parent_id: 'economy',
-    child_id: 'inequality',
-    positiveRelationship: false,
-    lowerIsGood: false,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'economy',
+      positive_relationship: false,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: 'mobility',
@@ -269,14 +274,13 @@ function setupData() {
     trend_direction: 'negative',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
-  })
-  createLink({
-    parent_id: 'economy',
-    child_id: 'mobility',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'economy',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: "income",
@@ -288,14 +292,13 @@ function setupData() {
     trend_direction: "positive",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
-  })
-  createLink({
-    parent_id: 'economy',
-    child_id: 'income',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'economy',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: "poverty",
@@ -307,14 +310,13 @@ function setupData() {
     trend_direction: "positive",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
-  })
-  createLink({
-    parent_id: 'economy',
-    child_id: 'poverty',
-    positiveRelationship: false,
-    lowerIsGood: false,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'economy',
+      positive_relationship: false,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: 'employment',
@@ -326,14 +328,13 @@ function setupData() {
     trend_direction: 'positive',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
-  })
-  createLink({
-    parent_id: 'economy',
-    child_id: 'employment',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'economy',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: 'productivity',
@@ -345,14 +346,13 @@ function setupData() {
     trend_direction: 'negative',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
-  })
-  createLink({
-    parent_id: 'economy',
-    child_id: 'productivity',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'economy',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: "product_quality",
@@ -364,16 +364,14 @@ function setupData() {
     trend_direction: "positive",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
+    level: 2,
+    parent_link: {
+      parent_id: 'economy',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
-  createLink({
-    parent_id: 'economy',
-    child_id: 'product_quality',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
-  })
-  // economy level 3
   createNode({
     id: 'gini_index',
     title: "Gini index",
@@ -384,14 +382,13 @@ function setupData() {
     trend_direction: 'negative',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'inequality',
-    child_id: 'gini_index',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'inequality',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: 'wealth_1',
@@ -403,14 +400,13 @@ function setupData() {
     trend_direction: 'negative',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'inequality',
-    child_id: 'wealth_1',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'inequality',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: 'wealth_5',
@@ -422,14 +418,13 @@ function setupData() {
     trend_direction: 'negative',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'inequality',
-    child_id: 'wealth_5',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'inequality',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: 'gdp_growth_rate',
@@ -441,14 +436,13 @@ function setupData() {
     trend_direction: 'negative',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'mobility',
-    child_id: 'gdp_growth_rate',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: "Explanatory power: 29%.\nSource:\nhttps://www.nber.org/papers/w22910"
+    level: 3,
+    parent_link: {
+      parent_id: 'mobility',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: "Explanatory power: 29%.\nSource:\nhttps://www.nber.org/papers/w22910"
+    }
   })
   createNode({
     id: 'gdp_growth_distribution',
@@ -460,14 +454,13 @@ function setupData() {
     trend_direction: 'negative',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'mobility',
-    child_id: 'gdp_growth_distribution',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: "Explanatory power: 71%\nSource:\nhttps://www.nber.org/papers/w22910"
+    level: 3,
+    parent_link: {
+      parent_id: 'mobility',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: "Explanatory power: 71%\nSource:\nhttps://www.nber.org/papers/w22910"
+    }
   })
   createNode({
     id: 'real_compensation',
@@ -479,14 +472,13 @@ function setupData() {
     trend_direction: 'positive',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'income',
-    child_id: 'real_compensation',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'income',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: 'real_median',
@@ -498,16 +490,14 @@ function setupData() {
     trend_direction: 'positive',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
+    level: 3,
+    parent_link: {
+      parent_id: 'income',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
-  createLink({
-    parent_id: 'income',
-    child_id: 'real_median',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
-  })
-  //
   createNode({
     id: 'child_poverty',
     title: "Child poverty",
@@ -518,14 +508,13 @@ function setupData() {
     trend_direction: 'positive',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'poverty',
-    child_id: 'child_poverty',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'poverty',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: 'homelessness',
@@ -537,17 +526,14 @@ function setupData() {
     trend_direction: 'positive',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
+    level: 3,
+    parent_link: {
+      parent_id: 'poverty',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
-  createLink({
-    parent_id: 'poverty',
-    child_id: 'homelessness',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
-  })
-
-  // health
   createNode({
     id: "drugs",
     title: "Drugs",
@@ -558,14 +544,13 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
-  })
-  createLink({
-    parent_id: 'health',
-    child_id: 'drugs',
-    positiveRelationship: false,
-    lowerIsGood: false,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'health',
+      positive_relationship: false,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: "mortality",
@@ -577,14 +562,13 @@ function setupData() {
     trend_direction: "neutral",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
-  })
-  createLink({
-    parent_id: 'health',
-    child_id: 'mortality',
-    positiveRelationship: false,
-    lowerIsGood: false,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'health',
+      positive_relationship: false,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: 'carbon_emissions',
@@ -596,14 +580,13 @@ function setupData() {
     trend_direction: 'positive',
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
-  })
-  createLink({
-    parent_id: 'health',
-    child_id: 'carbon_emissions',
-    positiveRelationship: false,
-    lowerIsGood: false,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'health',
+      positive_relationship: false,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: "teen_pregnancy",
@@ -615,16 +598,14 @@ function setupData() {
     trend_direction: "positive",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
+    level: 2,
+    parent_link: {
+      parent_id: 'health',
+      positive_relationship: false,
+      lower_is_good: false,
+      label: null
+    }
   })
-  createLink({
-    parent_id: 'health',
-    child_id: 'teen_pregnancy',
-    positiveRelationship: false,
-    lowerIsGood: false,
-    label: null
-  })
-  // health level 3, mortality
   createNode({
     id: "life_expectancy",
     title: "Life expectancy",
@@ -635,14 +616,13 @@ function setupData() {
     trend_direction: "positive",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'mortality',
-    child_id: 'life_expectancy',
-    positiveRelationship: false,
-    lowerIsGood: true,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'mortality',
+      positive_relationship: false,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: "infant_mortality",
@@ -654,14 +634,13 @@ function setupData() {
     trend_direction: "positive",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'mortality',
-    child_id: 'infant_mortality',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'mortality',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: "minority_mortality",
@@ -673,14 +652,13 @@ function setupData() {
     trend_direction: "positive",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'mortality',
-    child_id: 'minority_mortality',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'mortality',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: "white_mortality",
@@ -692,14 +670,13 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'mortality',
-    child_id: 'white_mortality',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'mortality',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: "suicides",
@@ -711,16 +688,14 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
+    level: 3,
+    parent_link: {
+      parent_id: 'mortality',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
-  createLink({
-    parent_id: 'mortality',
-    child_id: 'suicides',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
-  })
-  // health level 3, drugs
   createNode({
     id: "alcoholism",
     title: "Alcoholism",
@@ -731,14 +706,13 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'drugs',
-    child_id: 'alcoholism',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'drugs',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: "opiods",
@@ -750,14 +724,13 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'drugs',
-    child_id: 'opiods',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'drugs',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: "heroin",
@@ -769,14 +742,13 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'drugs',
-    child_id: 'heroin',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'drugs',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: "drug_deaths",
@@ -788,17 +760,14 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
+    level: 3,
+    parent_link: {
+      parent_id: 'drugs',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
-  createLink({
-    parent_id: 'drugs',
-    child_id: 'drug_deaths',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
-  })
-
-  // society
   createNode({
     id: "crime",
     title: "Crime & Legal System",
@@ -809,14 +778,13 @@ function setupData() {
     trend_direction: "positive",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg', "civil_asset_forfeiture_tweet"],
-    level: 2
-  })
-  createLink({
-    parent_id: 'society',
-    child_id: 'crime',
-    positiveRelationship: false,
-    lowerIsGood: false,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'society',
+      positive_relationship: false,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: "trust",
@@ -828,14 +796,13 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
-  })
-  createLink({
-    parent_id: 'society',
-    child_id: 'trust',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'society',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: "minority_rights",
@@ -847,14 +814,13 @@ function setupData() {
     trend_direction: "neutral",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
-  })
-  createLink({
-    parent_id: 'society',
-    child_id: 'minority_rights',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'society',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: "happiness",
@@ -866,14 +832,13 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
-  })
-  createLink({
-    parent_id: 'society',
-    child_id: 'happiness',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 2,
+    parent_link: {
+      parent_id: 'society',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: "international_perception",
@@ -885,16 +850,14 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 2
+    level: 2,
+    parent_link: {
+      parent_id: 'society',
+      positive_relationship: false,
+      lower_is_good: false,
+      label: null
+    }
   })
-  createLink({
-    parent_id: 'society',
-    child_id: 'international_perception',
-    positiveRelationship: false,
-    lowerIsGood: false,
-    label: null
-  })
-  // society level 3
   createNode({
     id: "civil_asset_forfeiture",
     title: "Civil asset forfeiture",
@@ -905,16 +868,14 @@ function setupData() {
     trend_direction: "neutral",
     noMetricExpected: false,
     source_ids: ['civil_asset_forfeiture_tweet'],
-    level: 3
+    level: 3,
+    parent_link: {
+      parent_id: 'crime',
+      positive_relationship: false,
+      lower_is_good: false,
+      label: null
+    }
   })
-  createLink({
-    parent_id: 'crime',
-    child_id: 'civil_asset_forfeiture',
-    positiveRelationship: false,
-    lowerIsGood: false,
-    label: null
-  })
-  //
   createNode({
     id: "crime_rate",
     title: "Crime",
@@ -925,14 +886,13 @@ function setupData() {
     trend_direction: "positive",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'crime',
-    child_id: 'crime_rate',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'crime',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: "incarceration",
@@ -944,14 +904,13 @@ function setupData() {
     trend_direction: "positive",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'crime',
-    child_id: 'incarceration',
-    positiveRelationship: true,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'crime',
+      positive_relationship: true,
+      lower_is_good: false,
+      label: null
+    }
   })
   createNode({
     id: "government_trust",
@@ -963,14 +922,13 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'trust',
-    child_id: 'government_trust',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'trust',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: "social_trust",
@@ -982,14 +940,13 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'trust',
-    child_id: 'social_trust',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'trust',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: "gay_rights",
@@ -1001,14 +958,13 @@ function setupData() {
     trend_direction: "positive",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'minority_rights',
-    child_id: 'gay_rights',
-    positiveRelationship: true,
-    lowerIsGood: true,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'minority_rights',
+      positive_relationship: true,
+      lower_is_good: true,
+      label: null
+    }
   })
   createNode({
     id: "hate_crimes",
@@ -1020,14 +976,13 @@ function setupData() {
     trend_direction: "negative",
     noMetricExpected: false,
     source_ids: ['noah_bloomberg'],
-    level: 3
-  })
-  createLink({
-    parent_id: 'minority_rights',
-    child_id: 'hate_crimes',
-    positiveRelationship: false,
-    lowerIsGood: false,
-    label: null
+    level: 3,
+    parent_link: {
+      parent_id: 'minority_rights',
+      positive_relationship: false,
+      lower_is_good: false,
+      label: null
+    }
   })
 }
 
