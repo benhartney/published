@@ -11,7 +11,7 @@ span.redirect {
   unicode-bidi:bidi-override; 
   direction: rtl; 
 }
-#openViewButton {
+.openViewLink {
   margin-bottom: 1rem;
 }
 #nothingHere {

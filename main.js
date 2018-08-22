@@ -181,6 +181,39 @@ function destroy() {
 function setupData() {
   // order within each entity matters
   window.all_data = {
+    brookings: [
+      {
+        id: "overall",
+        title: "Brooking's view",
+        metric: null,
+        current_level: null,
+        trend: null,
+        source: null,
+        trend_direction: "neutral",
+        noMetricExpected: true,
+        source_ids: ['brookings_wage_article'],
+        level: 0,
+        parent_link: null
+      },
+      {
+        id: "economy",
+        title: "Economy",
+        metric: null,
+        current_level: null,
+        trend: null,
+        source: null,
+        trend_direction: "neutral",
+        noMetricExpected: true,
+        source_ids: ['brookings_wage_article'],
+        level: 1,
+        parent_link: {
+          parent_id: 'overall',
+          positive_relationship: true,
+          lower_is_good: true,
+          label: null
+        }
+      }
+    ],
     noah_smith: [
       {
         id: "overall",
@@ -191,7 +224,7 @@ function setupData() {
         source: null,
         trend_direction: "neutral",
         noMetricExpected: true,
-        source_ids: ['noah_bloomberg'],
+        source_ids: ['noah_bloomberg', "civil_asset_forfeiture_tweet"],
         level: 0,
         parent_link: null
       },
