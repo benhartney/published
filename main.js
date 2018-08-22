@@ -179,7 +179,6 @@ function destroy() {
 }
 
 function setupData() {
-  // xxx
   // order within each entity matters
   window.all_data = {
     noah_smith: [
