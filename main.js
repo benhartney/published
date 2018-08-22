@@ -1,8 +1,8 @@
-var nodesForGraph = [];
-var connectionsForGraph = [];
+var nodes_for_graph = [];
+var connections_for_graph = [];
 var network = null;
 
-var nodes = []
+var nodes_for_mobile_view = []
 
 function setCookie(name,value,days) {
   var expires = "";
@@ -38,7 +38,7 @@ function getParameterByName(name, url) {
 }
 
 function setLevel(id, level) {
-  var nodeToSetLevelFor = nodesForGraph.find(function(element) {return element['id'] == id})
+  var nodeToSetLevelFor = nodes_for_graph.find(function(element) {return element['id'] == id})
   if (nodeToSetLevelFor != null) {
     nodeToSetLevelFor["level"] = level;
   }
@@ -81,7 +81,7 @@ function createNode(opts) {
     if (opts.hasOwnProperty("source") && opts["source"] != null) {
       labelForGraph = labelForGraph + "\n---\nSource: " + opts["source"]
     }
-    nodesForGraph.push({
+    nodes_for_graph.push({
       id: opts.id,
       label: labelForGraph,
       font: {
@@ -134,7 +134,7 @@ function createNode(opts) {
     } else if (opts.trend_direction == 'negative') {
       opts["isNegative"] = true
     }
-    nodes.push(opts)
+    nodes_for_mobile_view.push(opts)
   }
 }
 
@@ -154,11 +154,11 @@ function createLink(opts){
   //}
 
   //
-  var parent_node = nodesForGraph.find(function(element) {return element['id'] == opts.parent_id})
-  var child_node = nodesForGraph.find(function(element) {return element['id'] == opts.child_id})
+  var parent_node = nodes_for_graph.find(function(element) {return element['id'] == opts.parent_id})
+  var child_node = nodes_for_graph.find(function(element) {return element['id'] == opts.child_id})
   if (parent_node != null && child_node != null) {
 
-    connectionsForGraph.push({
+    connections_for_graph.push({
       from: opts.parent_id,
       to: opts.child_id,
       arrows: 'from',
@@ -997,8 +997,8 @@ function draw() {
   // create a network
   var container = document.getElementById('map');
   var data = {
-    nodes: nodesForGraph,
-    edges: connectionsForGraph
+    nodes: nodes_for_graph,
+    edges: connections_for_graph
   };
 
   var options = {
@@ -1054,16 +1054,16 @@ $(document).ready(function() {
   draw()
 
 
-  var node = nodes.find(function(element) {return element['id'] == node_id})
+  var node = nodes_for_mobile_view.find(function(element) {return element['id'] == node_id})
   node["isMainNode"] = true
 
   var parentChain = [];
   // assumes only one parent
-  var connectionForParent = connectionsForGraph.find(function(edge) {return edge['to'] == node_id})
+  var connectionForParent = connections_for_graph.find(function(edge) {return edge['to'] == node_id})
   while (connectionForParent != undefined){
-    var parentNode = nodes.find(function(element) {return element['id'] == connectionForParent["from"]})
+    var parentNode = nodes_for_mobile_view.find(function(element) {return element['id'] == connectionForParent["from"]})
     parentChain.unshift(parentNode)
-    var connectionForParent = connectionsForGraph.find(function(edge) {return edge['to'] == parentNode.id})
+    var connectionForParent = connections_for_graph.find(function(edge) {return edge['to'] == parentNode.id})
   }
   for (var i = 0; i < parentChain.length; i++) {
     var source = document.getElementById("parent-chain-template").innerHTML;
@@ -1075,8 +1075,8 @@ $(document).ready(function() {
     $('#parentNodes').hide()
   }
 
-  var connectionsLeadingToChildren = connectionsForGraph.filter(edge => edge['from'] == node_id).filter(val => {
-    return nodes.find(function(element) {return element['id'] == val["to"]}) != null;
+  var connectionsLeadingToChildren = connections_for_graph.filter(edge => edge['from'] == node_id).filter(val => {
+    return nodes_for_mobile_view.find(function(element) {return element['id'] == val["to"]}) != null;
   });
   //
   node["childCount"] = connectionsLeadingToChildren.length
@@ -1090,8 +1090,8 @@ $(document).ready(function() {
 
   //
   for (var i = 0; i < connectionsLeadingToChildren.length; i++) {
-    var childNode = nodes.find(function(element) {return element['id'] == connectionsLeadingToChildren[i]["to"]})
-    var connectionsLeadingToChildsChildren = connectionsForGraph.filter(edge => edge['from'] == childNode.id);
+    var childNode = nodes_for_mobile_view.find(function(element) {return element['id'] == connectionsLeadingToChildren[i]["to"]})
+    var connectionsLeadingToChildsChildren = connections_for_graph.filter(edge => edge['from'] == childNode.id);
     childNode["childCount"] = connectionsLeadingToChildsChildren.length
     if (connectionsLeadingToChildren[i]["label"] != null) {
       childNode["connection_label"] = connectionsLeadingToChildren[i]["label"]
