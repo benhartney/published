@@ -296,13 +296,13 @@ function setupData() {
             label: null
           }
         },
-        {
-          id: "labor_share_of_output",
-          title: "Share of economic output that is received by workers",
+        {//xxx
+          id: "labor_share_of_national_income",
+          title: "Share of national income that is received by workers",
           metric: null,
-          current_level: null,
-          trend: null,
-          source: null,
+          current_level: "2017: 56.8%",
+          trend: "1974 → 2017:  -12% | -7.7pp",
+          source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth",
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
@@ -375,7 +375,7 @@ function setupData() {
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
           parent_link: {
-            parent_id: 'labor_share_of_output',
+            parent_id: 'labor_share_of_national_income',
             positive_relationship: true,
             lower_is_good: true,
             label: null
@@ -392,9 +392,94 @@ function setupData() {
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
           parent_link: {
-            parent_id: 'labor_share_of_output',
+            parent_id: 'labor_share_of_national_income',
             positive_relationship: true,
             lower_is_good: true,
+            label: null
+          }
+        },
+        {
+          id: "technological_progress",
+          title: "technological progress",
+          metric: null,
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "negative",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          parent_link: {
+            parent_id: 'labor_share_of_national_income',
+            positive_relationship: false,
+            lower_is_good: false,
+            label: null
+          }
+        },
+        {
+          id: "capital_intensity_of_production",
+          title: "Capital intensity of production",
+          metric: null,
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "negative",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          parent_link: {
+            parent_id: 'labor_share_of_national_income',
+            positive_relationship: false,
+            lower_is_good: false,
+            label: null
+          }
+        },
+        {
+          id: "offshoring_of_labor-intensive_production",
+          title: "offshoring of labor-intensive production",
+          metric: null,
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "negative",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          parent_link: {
+            parent_id: 'labor_share_of_national_income',
+            positive_relationship: false,
+            lower_is_good: false,
+            label: null
+          }
+        },
+        {
+          id: "superstar_firms",
+          title: "superstar firms",
+          metric: null,
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "negative",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          parent_link: {
+            parent_id: 'labor_share_of_national_income',
+            positive_relationship: false,
+            lower_is_good: false,
+            label: null
+          }
+        },
+        {
+          id: "market_concentration",
+          title: "Market concentration",
+          metric: null,
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "negative",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          parent_link: {
+            parent_id: 'labor_share_of_national_income',
+            positive_relationship: false,
+            lower_is_good: false,
             label: null
           }
         }
