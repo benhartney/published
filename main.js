@@ -1205,7 +1205,6 @@ $(document).ready(function() {
   $('#entity_name_heading').text(entity_display_name);
 
   for (var i = 0; i < window.all_data[window.entity_id].sources.length; i++) {
-    console.log(window.all_data[window.entity_id].sources[i])
     var source = document.getElementById("source-template").innerHTML;
     var template = Handlebars.compile(source);
     var html = template(window.all_data[window.entity_id].sources[i]);
