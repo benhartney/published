@@ -45,7 +45,7 @@ function setLevel(id, level) {
 }
 function createNode(opts) {
   if (window.source_id == 'all' || opts["id"] == "overall" || opts["source_ids"].includes(window.source_id)) {
-    if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("trend_direction") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_ids") || !opts.hasOwnProperty("level") || !opts.hasOwnProperty("parent_link")) {
+    if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("trend_direction") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_ids") || !opts.hasOwnProperty("parent_link")) {
       throw "Missing property"
     }
     
@@ -100,7 +100,15 @@ function createNode(opts) {
         minimum: 120
       }
     });
+
+    if (opts.parent_link == null) {
+      opts.level = 0
+    } else {
+      var parent_node = nodes_for_mobile_view.find(function(element) {return element['id'] == opts.parent_link.parent_id})
+      opts.level = parent_node.level + 1
+    }
     setLevel(opts.id, opts.level)
+    
     if (opts.parent_link != null) {
       createLink({
         parent_id: opts.parent_link.parent_id,
@@ -200,7 +208,6 @@ function setupData() {
           trend_direction: "neutral",
           noMetricExpected: true,
           source_ids: ['brookings_wage_article'],
-          level: 0,
           parent_link: null
         },
         {
@@ -213,7 +220,6 @@ function setupData() {
           trend_direction: "neutral",
           noMetricExpected: true,
           source_ids: ['brookings_wage_article'],
-          level: 1,
           parent_link: {
             parent_id: 'overall',
             positive_relationship: true,
@@ -231,7 +237,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
-          level: 2,
           parent_link: {
             parent_id: 'economy',
             positive_relationship: true,
@@ -249,7 +254,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
-          level: 3,
           parent_link: {
             parent_id: 'real_wage_of_typical_worker',
             positive_relationship: true,
@@ -267,7 +271,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
-          level: 3,
           parent_link: {
             parent_id: 'real_wage_of_typical_worker',
             positive_relationship: true,
@@ -285,7 +288,6 @@ function setupData() {
           trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
-          level: 4,
           parent_link: {
             parent_id: 'real_wages',
             positive_relationship: true,
@@ -303,7 +305,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
-          level: 4,
           parent_link: {
             parent_id: 'real_wages',
             positive_relationship: true,
@@ -321,7 +322,6 @@ function setupData() {
           trend_direction: "neutral",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
-          level: 4,
           parent_link: {
             parent_id: 'real_wages',
             positive_relationship: false,
@@ -339,7 +339,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
-          level: 5,
           parent_link: {
             parent_id: 'labor_share_of_output',
             positive_relationship: true,
@@ -376,7 +375,6 @@ function setupData() {
           trend_direction: "neutral",
           noMetricExpected: true,
           source_ids: ['noah_bloomberg', "civil_asset_forfeiture_tweet"],
-          level: 0,
           parent_link: null
         },
         {
@@ -389,7 +387,6 @@ function setupData() {
           trend_direction: "neutral",
           noMetricExpected: true,
           source_ids: ['noah_bloomberg'],
-          level: 1,
           parent_link: {
             parent_id: 'overall',
             positive_relationship: true,
@@ -407,7 +404,6 @@ function setupData() {
           trend_direction: "neutral",
           noMetricExpected: true,
           source_ids: ['noah_bloomberg'],
-          level: 1,
           parent_link: {
             parent_id: 'overall',
             positive_relationship: true,
@@ -425,7 +421,6 @@ function setupData() {
           trend_direction: "neutral",
           noMetricExpected: true,
           source_ids: ['noah_bloomberg', "civil_asset_forfeiture_tweet"],
-          level: 1,
           parent_link: {
             parent_id: 'overall',
             positive_relationship: true,
@@ -443,7 +438,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'economy',
             positive_relationship: false,
@@ -461,7 +455,6 @@ function setupData() {
           trend_direction: 'negative',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'economy',
             positive_relationship: true,
@@ -479,7 +472,6 @@ function setupData() {
           trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'economy',
             positive_relationship: true,
@@ -497,7 +489,6 @@ function setupData() {
           trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'economy',
             positive_relationship: false,
@@ -515,7 +506,6 @@ function setupData() {
           trend_direction: 'positive',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'economy',
             positive_relationship: true,
@@ -533,7 +523,6 @@ function setupData() {
           trend_direction: 'negative',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'economy',
             positive_relationship: true,
@@ -551,7 +540,6 @@ function setupData() {
           trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'economy',
             positive_relationship: true,
@@ -569,7 +557,6 @@ function setupData() {
           trend_direction: 'negative',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'inequality',
             positive_relationship: true,
@@ -587,7 +574,6 @@ function setupData() {
           trend_direction: 'negative',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'inequality',
             positive_relationship: true,
@@ -605,7 +591,6 @@ function setupData() {
           trend_direction: 'negative',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'inequality',
             positive_relationship: true,
@@ -623,7 +608,6 @@ function setupData() {
           trend_direction: 'negative',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'mobility',
             positive_relationship: true,
@@ -641,7 +625,6 @@ function setupData() {
           trend_direction: 'negative',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'mobility',
             positive_relationship: true,
@@ -659,7 +642,6 @@ function setupData() {
           trend_direction: 'positive',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'income',
             positive_relationship: true,
@@ -677,7 +659,6 @@ function setupData() {
           trend_direction: 'positive',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'income',
             positive_relationship: true,
@@ -695,7 +676,6 @@ function setupData() {
           trend_direction: 'positive',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'poverty',
             positive_relationship: true,
@@ -713,7 +693,6 @@ function setupData() {
           trend_direction: 'positive',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'poverty',
             positive_relationship: true,
@@ -731,7 +710,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'health',
             positive_relationship: false,
@@ -749,7 +727,6 @@ function setupData() {
           trend_direction: "neutral",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'health',
             positive_relationship: false,
@@ -767,7 +744,6 @@ function setupData() {
           trend_direction: 'positive',
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'health',
             positive_relationship: false,
@@ -785,7 +761,6 @@ function setupData() {
           trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'health',
             positive_relationship: false,
@@ -803,7 +778,6 @@ function setupData() {
           trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'mortality',
             positive_relationship: false,
@@ -821,7 +795,6 @@ function setupData() {
           trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'mortality',
             positive_relationship: true,
@@ -839,7 +812,6 @@ function setupData() {
           trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'mortality',
             positive_relationship: true,
@@ -857,7 +829,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'mortality',
             positive_relationship: true,
@@ -875,7 +846,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'mortality',
             positive_relationship: true,
@@ -893,7 +863,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'drugs',
             positive_relationship: true,
@@ -911,7 +880,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'drugs',
             positive_relationship: true,
@@ -929,7 +897,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'drugs',
             positive_relationship: true,
@@ -947,7 +914,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'drugs',
             positive_relationship: true,
@@ -965,7 +931,6 @@ function setupData() {
           trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg', "civil_asset_forfeiture_tweet"],
-          level: 2,
           parent_link: {
             parent_id: 'society',
             positive_relationship: false,
@@ -983,7 +948,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'society',
             positive_relationship: true,
@@ -1001,7 +965,6 @@ function setupData() {
           trend_direction: "neutral",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'society',
             positive_relationship: true,
@@ -1019,7 +982,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'society',
             positive_relationship: true,
@@ -1037,7 +999,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 2,
           parent_link: {
             parent_id: 'society',
             positive_relationship: false,
@@ -1055,7 +1016,6 @@ function setupData() {
           trend_direction: "neutral",
           noMetricExpected: false,
           source_ids: ['civil_asset_forfeiture_tweet'],
-          level: 3,
           parent_link: {
             parent_id: 'crime',
             positive_relationship: false,
@@ -1073,7 +1033,6 @@ function setupData() {
           trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'crime',
             positive_relationship: true,
@@ -1091,7 +1050,6 @@ function setupData() {
           trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'crime',
             positive_relationship: true,
@@ -1109,7 +1067,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'trust',
             positive_relationship: true,
@@ -1127,7 +1084,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'trust',
             positive_relationship: true,
@@ -1145,7 +1101,6 @@ function setupData() {
           trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'minority_rights',
             positive_relationship: true,
@@ -1163,7 +1118,6 @@ function setupData() {
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['noah_bloomberg'],
-          level: 3,
           parent_link: {
             parent_id: 'minority_rights',
             positive_relationship: false,
