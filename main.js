@@ -108,7 +108,7 @@ function createNode(opts) {
       opts.level = parent_node.level + 1
     }
     setLevel(opts.id, opts.level)
-    
+
     if (opts.parent_link != null) {
       createLink({
         parent_id: opts.parent_link.parent_id,
@@ -190,6 +190,7 @@ function setupData() {
   // order within each entity matters
   window.all_data = {
     brookings: {
+      display_name: "Brookings",
       sources: [
         {
           id: "brookings_wage_article",
@@ -352,6 +353,7 @@ function setupData() {
       ]
     },
     noah_smith: {
+      display_name: "Noah Smith",
       sources: [
         {
           id: "noah_bloomberg",
@@ -1197,6 +1199,10 @@ $(document).ready(function() {
     node_id = 'overall'
   }
   draw()
+
+  var entity_display_name = window.all_data[window.entity_id].display_name
+  $(document).prop('title', "Policy Views: " + entity_display_name);
+  $('#entity_name_heading').text(entity_display_name);
 
   for (var i = 0; i < window.all_data[window.entity_id].sources.length; i++) {
     console.log(window.all_data[window.entity_id].sources[i])
