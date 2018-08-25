@@ -260,10 +260,10 @@ function setupData() {
         {
           id: "real_wages",
           title: "Real wages",
-          metric: null,
-          current_level: null,
+          metric: "Average hourly earnings (inflation adjusted, 2016 dollars)",
+          current_level: "2017: $22",
           trend: "1973 → 2017: +10%",
-          source: null,
+          source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth",
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
@@ -278,11 +278,11 @@ function setupData() {
         {
           id: "labor_productivity",
           title: "How productive workers are",
-          metric: null,
+          metric: "Labor productivity index (inflation adjusted)",
           current_level: null,
-          trend: null,
-          source: null,
-          trend_direction: "negative",
+          trend: "1947 → 2017: +423%",
+          source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth",
+          trend_direction: "positive",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
           level: 4,
@@ -308,6 +308,24 @@ function setupData() {
             parent_id: 'real_wages',
             positive_relationship: true,
             lower_is_good: true,
+            label: null
+          }
+        },
+        {
+          id: "inflation",
+          title: "Inflation",
+          metric: null,
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "neutral",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          level: 4,
+          parent_link: {
+            parent_id: 'real_wages',
+            positive_relationship: false,
+            lower_is_good: false,
             label: null
           }
         },
