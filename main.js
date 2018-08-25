@@ -331,6 +331,40 @@ function setupData() {
           }
         },
         {
+          id: "labor_demand",
+          title: "Demand for labor",
+          metric: null,
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "neutral",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          parent_link: {
+            parent_id: 'real_wages',
+            positive_relationship: true,
+            lower_is_good: true,
+            label: null
+          }
+        },
+        {
+          id: "economic_growth",
+          title: "Strength of economy",
+          metric: "Economic growth",
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "neutral",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          parent_link: {
+            parent_id: 'labor_demand',
+            positive_relationship: true,
+            lower_is_good: true,
+            label: null
+          }
+        },
+        {
           id: "labor_bargaining_power",
           title: "Labor bargaining power",
           metric: null,
@@ -338,6 +372,23 @@ function setupData() {
           trend: null,
           source: null,
           trend_direction: "negative",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          parent_link: {
+            parent_id: 'labor_share_of_output',
+            positive_relationship: true,
+            lower_is_good: true,
+            label: null
+          }
+        },
+        {
+          id: "competition_within_and_across_industries",
+          title: "Competition within and across industries",
+          metric: null,
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "neutral",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
           parent_link: {
