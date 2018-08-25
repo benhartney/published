@@ -605,7 +605,7 @@ function setupData() {
           title: "Income",
           metric: null,
           current_level: null,
-          trend: null,
+          trend: "2000 → 2017: Improved",
           source: null,
           trend_direction: "positive",
           noMetricExpected: false,
@@ -672,8 +672,8 @@ function setupData() {
           id: "product_quality",
           title: "Product quality & range",
           metric: null,
-          current_level: "2000 → 2018: Increased",
-          trend: null,
+          current_level: null,
+          trend: "2000 → 2018: Increased",
           source: null,
           trend_direction: "positive",
           noMetricExpected: false,
@@ -1394,6 +1394,7 @@ $(document).ready(function() {
     if (connectionsLeadingToChildren[i]["label"] != null) {
       childNode["connection_label"] = connectionsLeadingToChildren[i]["label"]
     }
+    childNode["show_contributing_factor_s"] = childNode["childCount"] != 1
     addNodeToPage(childNode, $('#childNodes'))
   }
   if (connectionsLeadingToChildren.length == 0) {

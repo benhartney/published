@@ -24,59 +24,55 @@
 
     <script id="node-template" type="text/x-handlebars-template">
       <div class='col-sm-4'>
-        <div class='card nodeCard'>
-          <div class="card-body">
-            {{#if isMainNode}}
-              <h5>{{title}}</h5>
-            {{else}}
-              <h5><a class='childNodeLink nodeLink' href="?node_id={{id}}">{{title}}</a></h5>
-            {{/if}}
-            {{#if noMetricExpected}}
-            {{else}}
-              <hr>
-              <div class="font-weight-bold">
-                Metric
-              </div>
-              {{metric}}
+        <div class='card bg-light nodeCard'>
+          {{#if isMainNode}}
+            <h5 class="card-header">{{title}}</h5>
+          {{else}}
+            <h5 class="card-header"><a class='childNodeLink nodeLink' href="?node_id={{id}}">{{title}}</a></h5>
+          {{/if}}
+          {{#if noMetricExpected}}
+          {{else}}
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="font-weight-bold">
+                  Metric
+                </div>
+                {{metric}}
+              </li>
               {{#if connection_label}}
-                <hr>
-                <div>
+                <li class="list-group-item">
                   <div class="font-weight-bold">Details on how it contributes</div>
                   {{connection_label}}
-                </div>
+                </li>
               {{/if}}
               {{#if current_level}}
-                <hr>
-                <div>
+                <li class="list-group-item">
                   <div class="font-weight-bold">Current level</div>
                   {{current_level}}
-                </div>
+                </li>
               {{/if}}
               {{#if trend}}
-                <hr>
-                <div>
-                  <div class="font-weight-bold">Trend</div>
-                  {{trend}}
-                </div>
+                <li class="list-group-item">
+                  <div class='text-{{#if isNeutral}}body{{/if}}{{#if isPositive}}success{{/if}}{{#if isNegative}}danger{{/if}}'>
+                    <div class="font-weight-bold">Trend</div>
+                    {{trend}}
+                  </div>
+                </li>
               {{/if}}
               {{#if source}}
-                <hr>
-                <div>
+                <li class="list-group-item">
                   <div class="font-weight-bold">Source</div>
                   {{source}}
-                </div>
+                </li>
               {{/if}}
-            {{/if}}
-            <hr>
-            <div>
-              <div class="font-weight-bold">Contributing factors</div>
-              {{#if isMainNode}}
-                {{childCount}}
-              {{else}}
-                <a class='contributingFactorsLink nodeLink' href="?node_id={{id}}">{{childCount}}</a>
-              {{/if}}
+            </ul>
+          {{/if}}
+          {{#if isMainNode}}
+          {{else}}
+            <div class="card-footer">
+              <a class='contributingFactorsLink nodeLink' href="?node_id={{id}}">{{childCount}} contributing factor{{#if show_contributing_factor_s}}s{{/if}}</a>
             </div>
-          </div>
+          {{/if}}
         </div>
       </div>
     </script>
