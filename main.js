@@ -185,7 +185,7 @@ function setupData() {
       sources: [
         {
           id: "brookings_wage_article",
-          title: "Thirteen facts about wage growth",
+          title: "Article: Thirteen facts about wage growth",
           url: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/"
         }
       ],
@@ -220,7 +220,118 @@ function setupData() {
             lower_is_good: true,
             label: null
           }
+        },
+        {
+          id: "real_wage_of_typical_worker",
+          title: "Real wage of typical worker",
+          metric: "Wage of median worker, inflation adjusted",
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "negative",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          level: 2,
+          parent_link: {
+            parent_id: 'economy',
+            positive_relationship: true,
+            lower_is_good: true,
+            label: null
+          }
+        },
+        {
+          id: "allocation_of_real_wages",
+          title: "Allocation of real wages",
+          metric: null,
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "negative",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          level: 3,
+          parent_link: {
+            parent_id: 'real_wage_of_typical_worker',
+            positive_relationship: true,
+            lower_is_good: true,
+            label: null
+          }
+        },
+        {
+          id: "real_wages",
+          title: "Real wages",
+          metric: null,
+          current_level: null,
+          trend: "1973 → 2017: +10%",
+          source: null,
+          trend_direction: "negative",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          level: 3,
+          parent_link: {
+            parent_id: 'real_wage_of_typical_worker',
+            positive_relationship: true,
+            lower_is_good: true,
+            label: null
+          }
+        },
+        {
+          id: "labor_productivity",
+          title: "How productive workers are",
+          metric: null,
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "negative",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          level: 4,
+          parent_link: {
+            parent_id: 'real_wages',
+            positive_relationship: true,
+            lower_is_good: true,
+            label: null
+          }
+        },
+        {
+          id: "labor_share_of_output",
+          title: "Share of economic output that is received by workers",
+          metric: null,
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "negative",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          level: 4,
+          parent_link: {
+            parent_id: 'real_wages',
+            positive_relationship: true,
+            lower_is_good: true,
+            label: null
+          }
+        },
+        {
+          id: "labor_bargaining_power",
+          title: "Labor bargaining power",
+          metric: null,
+          current_level: null,
+          trend: null,
+          source: null,
+          trend_direction: "negative",
+          noMetricExpected: false,
+          source_ids: ['brookings_wage_article'],
+          level: 5,
+          parent_link: {
+            parent_id: 'labor_share_of_output',
+            positive_relationship: true,
+            lower_is_good: true,
+            label: null
+          }
         }
+
+
+
       ]
     },
     noah_smith: {
@@ -1117,7 +1228,6 @@ $(document).ready(function() {
 
   for (var i = 0; i < window.all_data[window.entity_id].sources.length; i++) {
     console.log(window.all_data[window.entity_id].sources[i])
-    //xxx here I need to append to that section
     var source = document.getElementById("source-template").innerHTML;
     var template = Handlebars.compile(source);
     var html = template(window.all_data[window.entity_id].sources[i]);
