@@ -24,56 +24,58 @@
 
     <script id="node-template" type="text/x-handlebars-template">
       <div class='col-sm-4'>
-        <div class='alert alert-{{#if isNeutral}}dark{{/if}}{{#if isPositive}}success{{/if}}{{#if isNegative}}danger{{/if}}' role='alert'>
-          {{#if isMainNode}}
-            <h5>{{title}}</h5>
-          {{else}}
-            <h5><a class='childNodeLink nodeLink' href="?node_id={{id}}">{{title}}</a></h5>
-          {{/if}}
-          {{#if noMetricExpected}}
-          {{else}}
-            <hr>
-            <div class="font-weight-bold">
-              Metric
-            </div>
-            {{metric}}
-            {{#if connection_label}}
-              <hr>
-              <div>
-                <div class="font-weight-bold">Details on how it contributes</div>
-                {{connection_label}}
-              </div>
-            {{/if}}
-            {{#if current_level}}
-              <hr>
-              <div>
-                <div class="font-weight-bold">Current level</div>
-                {{current_level}}
-              </div>
-            {{/if}}
-            {{#if trend}}
-              <hr>
-              <div>
-                <div class="font-weight-bold">Trend</div>
-                {{trend}}
-              </div>
-            {{/if}}
-            {{#if source}}
-              <hr>
-              <div>
-                <div class="font-weight-bold">Source</div>
-                {{source}}
-              </div>
-            {{/if}}
-          {{/if}}
-          <hr>
-          <div>
-            <div class="font-weight-bold">Contributing factors</div>
+        <div class='card nodeCard'>
+          <div class="card-body">
             {{#if isMainNode}}
-              {{childCount}}
+              <h5>{{title}}</h5>
             {{else}}
-              <a class='contributingFactorsLink nodeLink' href="?node_id={{id}}">{{childCount}}</a>
+              <h5><a class='childNodeLink nodeLink' href="?node_id={{id}}">{{title}}</a></h5>
             {{/if}}
+            {{#if noMetricExpected}}
+            {{else}}
+              <hr>
+              <div class="font-weight-bold">
+                Metric
+              </div>
+              {{metric}}
+              {{#if connection_label}}
+                <hr>
+                <div>
+                  <div class="font-weight-bold">Details on how it contributes</div>
+                  {{connection_label}}
+                </div>
+              {{/if}}
+              {{#if current_level}}
+                <hr>
+                <div>
+                  <div class="font-weight-bold">Current level</div>
+                  {{current_level}}
+                </div>
+              {{/if}}
+              {{#if trend}}
+                <hr>
+                <div>
+                  <div class="font-weight-bold">Trend</div>
+                  {{trend}}
+                </div>
+              {{/if}}
+              {{#if source}}
+                <hr>
+                <div>
+                  <div class="font-weight-bold">Source</div>
+                  {{source}}
+                </div>
+              {{/if}}
+            {{/if}}
+            <hr>
+            <div>
+              <div class="font-weight-bold">Contributing factors</div>
+              {{#if isMainNode}}
+                {{childCount}}
+              {{else}}
+                <a class='contributingFactorsLink nodeLink' href="?node_id={{id}}">{{childCount}}</a>
+              {{/if}}
+            </div>
           </div>
         </div>
       </div>

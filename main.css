@@ -29,3 +29,6 @@ span.redirect {
 .childNodeLink,.contributingFactorsLink {
   text-decoration: underline;
 }
+.nodeCard {
+  margin-bottom: 1rem;
+}
