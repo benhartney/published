@@ -71,12 +71,13 @@
               {{/if}}
             </ul>
           {{/if}}
-          {{#if isMainNode}}
-          {{else}}
-            <div class="card-footer">
+          <div class="card-footer">
+            {{#if isMainNode}}
+              {{childCount}} contributing factor{{#if show_contributing_factor_s}}s{{/if}}
+            {{else}}
               <a class='contributingFactorsLink nodeLink' href="?node_id={{id}}">{{childCount}} contributing factor{{#if show_contributing_factor_s}}s{{/if}}</a>
-            </div>
-          {{/if}}
+            {{/if}}
+          </div>
         </div>
       </div>
     </script>
@@ -152,14 +153,22 @@
               <div id='parentNodes' class='col-sm'></div>
             </div>
             <div class='row' id='node'></div>
-            <div class='row'>
+            <div class='row' id="childNodesImproveHeading">
               <div class='col-sm'>
                 <h5>
-                  <span id='childCount'></span> contributing factor<span id="contributing_factor_s">s</span>:
+                  Factors that improve, if they improve
                 </h5>
               </div>
             </div>
-            <div class='row' id='childNodes'></div>
+            <div class='row' id='childNodesImprove'></div>
+            <div class='row' id="childNodesWorsenHeading">
+              <div class='col-sm'>
+                <h5>
+                  Factors that worsen, if they get worse
+                </h5>
+              </div>
+            </div>
+            <div class='row' id='childNodesWorsen'></div>
             <div class='row' id='nothingHere'>
               <div class='col-sm'>
                 You've reached the bottom of this particular thread.

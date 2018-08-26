@@ -1366,6 +1366,7 @@ $(document).ready(function() {
   var node = nodes_for_mobile_view.find(function(element) {return element['id'] == node_id})
   node["source_is_link"] = node.hasOwnProperty("source") && node["source"] != null && node["source"].includes("http")
   node["isMainNode"] = true
+  node["show_contributing_factor_s"] = node["childCount"] != 1
 
   var parentChain = [];
   // assumes only one parent
@@ -1392,11 +1393,6 @@ $(document).ready(function() {
   node["childCount"] = connectionsLeadingToChildren.length
   addNodeToPage(node, $('#node'))
   $('#childCount').text(connectionsLeadingToChildren.length)
-  if (connectionsLeadingToChildren.length == 1) {
-    $('#contributing_factor_s').hide()
-  } else {
-    $('#contributing_factor_s').show()
-  }
 
   //
   for (var i = 0; i < connectionsLeadingToChildren.length; i++) {
@@ -1408,10 +1404,17 @@ $(document).ready(function() {
     }
     childNode["show_contributing_factor_s"] = childNode["childCount"] != 1
     childNode["source_is_link"] = childNode.hasOwnProperty("source") && childNode["source"] != null && childNode["source"].includes("http")
-    addNodeToPage(childNode, $('#childNodes'))
+    if (childNode.parent_link.lower_is_good) {
+      var div = $('#childNodesImprove')
+    } else {
+      var div = $('#childNodesWorsen')
+    }
+    addNodeToPage(childNode, div)
   }
   if (connectionsLeadingToChildren.length == 0) {
     $('#nothingHere').show()
+    $('#childNodesImproveHeading').hide()
+    $('#childNodesWorsenHeading').hide()
   }
   
 
