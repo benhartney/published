@@ -235,8 +235,8 @@ function setupData() {
           metric: "Wage of median worker, inflation adjusted",
           current_level: null,
           trend: null,
-          source: null,
-          trend_direction: "negative",
+          source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
+          trend_direction: "neutral",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
           parent_link: {
@@ -247,12 +247,12 @@ function setupData() {
           }
         },
         {
-          id: "allocation_of_real_wages",
-          title: "Allocation of real wages",
+          id: "equality_of_real_wages",
+          title: "Equality of real wages",
           metric: null,
           current_level: null,
-          trend: null,
-          source: null,
+          trend: "1979 → 2016: Decreased",
+          source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
           trend_direction: "negative",
           noMetricExpected: false,
           source_ids: ['brookings_wage_article'],
