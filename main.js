@@ -202,7 +202,7 @@ function setupData() {
       nodes: [
         {
           id: "overall",
-          title: "Brooking's view",
+          title: "Brooking's overall view",
           metric: null,
           current_level: null,
           trend: null,
@@ -214,7 +214,7 @@ function setupData() {
         },
         {
           id: "economy",
-          title: "Economy",
+          title: "Health of economy",
           metric: null,
           current_level: null,
           trend: null,
@@ -370,7 +370,7 @@ function setupData() {
           title: "Labor bargaining power",
           metric: null,
           current_level: null,
-          trend: null,
+          trend: "Decreased",
           source: null,
           trend_direction: "negative",
           noMetricExpected: false,
@@ -506,7 +506,7 @@ function setupData() {
       nodes: [
         {
           id: "overall",
-          title: "Noah Smith's view",
+          title: "Noah Smith's overall view",
           metric: null,
           current_level: null,
           trend: null,
@@ -518,7 +518,7 @@ function setupData() {
         },
         {
           id: "economy",
-          title: "Economy",
+          title: "Health of economy",
           metric: null,
           current_level: null,
           trend: null,
@@ -535,7 +535,7 @@ function setupData() {
         },
         {
           id: "health",
-          title: "Health",
+          title: "Health of people",
           metric: null,
           current_level: null,
           trend: null,
@@ -552,7 +552,7 @@ function setupData() {
         },
         {
           id: "society",
-          title: "Society",
+          title: "Health of society",
           metric: null,
           current_level: null,
           trend: null,
@@ -606,7 +606,7 @@ function setupData() {
           title: "Income",
           metric: null,
           current_level: null,
-          trend: "2000 → 2017: Improved",
+          trend: "2000 → 2017: Increased",
           source: null,
           trend_direction: "positive",
           noMetricExpected: false,
@@ -1392,6 +1392,7 @@ $(document).ready(function() {
   //
   node["childCount"] = connectionsLeadingToChildren.length
   addNodeToPage(node, $('#node'))
+  $('.temppp').text(node.title)
   $('#childCount').text(connectionsLeadingToChildren.length)
 
   //
@@ -1404,7 +1405,8 @@ $(document).ready(function() {
     }
     childNode["show_contributing_factor_s"] = childNode["childCount"] != 1
     childNode["source_is_link"] = childNode.hasOwnProperty("source") && childNode["source"] != null && childNode["source"].includes("http")
-    if (childNode.parent_link.lower_is_good) {
+    if (childNode.parent_link.positive_relationship) {
+      //xxx
       var div = $('#childNodesImprove')
     } else {
       var div = $('#childNodesWorsen')
