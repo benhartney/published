@@ -1062,7 +1062,7 @@ function setupData() {
         },
         {
           id: "crime",
-          title: "Crime & Legal System",
+          title: "Crime",
           metric: null,
           current_level: null,
           trend: "Positive",
