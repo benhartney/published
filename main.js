@@ -115,7 +115,6 @@ function createNode(opts) {
         parent_id: opts.parent_link.parent_id,
         child_id: opts.id,
         positive_relationship: opts.parent_link.positive_relationship,
-        lower_is_good: opts.parent_link.lower_is_good,
         label: opts.parent_link.label
       })
     }
@@ -151,18 +150,6 @@ function createLink(opts){
 
   // both nodes must already exist!
 
-  //if (opts.positive_relationship) {
-  //  var label = '→\n→'
-  //} else {
-  //  var label = '→\n←'
-  //}
-  //if (opts.lower_is_good) {
-  //  var label = 'improves'
-  //} else {
-  //  var label = 'worsens'
-  //}
-
-  //
   var parent_node = nodes_for_graph.find(function(element) {return element['id'] == opts.parent_id})
   var child_node = nodes_for_graph.find(function(element) {return element['id'] == opts.child_id})
   if (parent_node != null && child_node != null) {

@@ -35,7 +35,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'overall',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -52,7 +51,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'economy',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -69,7 +67,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'real_wage_of_typical_worker',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -86,7 +83,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'equality_of_real_wages',
           positive_relationship: false,
-          lower_is_good: true,
           label: null
         }
       },
@@ -103,7 +99,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'globalization',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -120,7 +115,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'equality_of_real_wages',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -137,7 +131,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'equality_of_real_wages',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -154,7 +147,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'real_wage_of_typical_worker',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -171,7 +163,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'real_wages',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -188,7 +179,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'real_wages',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -205,7 +195,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'real_wages',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -222,7 +211,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'real_wages',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -239,7 +227,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'labor_demand',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -256,7 +243,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -273,7 +259,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -290,7 +275,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -307,7 +291,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -324,7 +307,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -341,7 +323,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -358,7 +339,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       }
@@ -407,7 +387,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'overall',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -424,7 +403,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'overall',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -441,7 +419,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'overall',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -458,7 +435,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'economy',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -475,7 +451,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'economy',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -492,7 +467,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'economy',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -509,7 +483,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'economy',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -526,7 +499,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'economy',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -543,7 +515,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'economy',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -560,7 +531,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'economy',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -577,7 +547,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'inequality',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -594,7 +563,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'inequality',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -611,7 +579,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'inequality',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -628,7 +595,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'mobility',
           positive_relationship: true,
-          lower_is_good: true,
           label: "Explanatory power: 29%.\nSource:\nhttps://www.nber.org/papers/w22910"
         }
       },
@@ -645,7 +611,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'mobility',
           positive_relationship: true,
-          lower_is_good: true,
           label: "Explanatory power: 71%\nSource:\nhttps://www.nber.org/papers/w22910"
         }
       },
@@ -662,7 +627,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'income',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -679,7 +643,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'income',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -696,7 +659,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'poverty',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -713,7 +675,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'poverty',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -730,7 +691,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'health',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -747,7 +707,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'health',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -764,7 +723,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'health',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -781,7 +739,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'health',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -798,7 +755,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'mortality',
           positive_relationship: false,
-          lower_is_good: true,
           label: null
         }
       },
@@ -815,7 +771,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'mortality',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -832,7 +787,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'mortality',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -849,7 +803,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'mortality',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -866,7 +819,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'mortality',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -883,7 +835,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'drugs',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -900,7 +851,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'drugs',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -917,7 +867,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'drugs',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -934,7 +883,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'drugs',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -951,7 +899,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'society',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -968,7 +915,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'society',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -985,7 +931,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'society',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -1002,7 +947,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'society',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -1019,7 +963,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'society',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -1036,7 +979,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'crime',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       },
@@ -1053,7 +995,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'crime',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -1070,7 +1011,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'crime',
           positive_relationship: true,
-          lower_is_good: false,
           label: null
         }
       },
@@ -1087,7 +1027,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'trust',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -1104,7 +1043,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'trust',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -1121,7 +1059,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'minority_rights',
           positive_relationship: true,
-          lower_is_good: true,
           label: null
         }
       },
@@ -1138,7 +1075,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'minority_rights',
           positive_relationship: false,
-          lower_is_good: false,
           label: null
         }
       }
