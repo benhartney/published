@@ -59,13 +59,13 @@
                   </div>
                 </li>
               {{/if}}
-              {{#if source}}
+              {{#if metric_source}}
                 <li class="list-group-item">
-                  {{#if source_is_link}}
-                    <a href='{{source}}' target='_blank'>Source</a>
+                  {{#if metric_source_is_link}}
+                    <a href='{{metric_source}}' target='_blank'>Metric source</a>
                   {{else}}
-                    <div class="font-weight-bold">Source</div>
-                    {{source}}
+                    <div class="font-weight-bold">Metric source</div>
+                    {{metric_source}}
                   {{/if}}
                 </li>
               {{/if}}

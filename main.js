@@ -45,7 +45,7 @@ function setLevel(id, level) {
 }
 function createNode(opts) {
   if (window.source_id == 'all' || opts["id"] == "overall" || opts["source_ids"].includes(window.source_id)) {
-    if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend_copy") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("improved_or_worsened_or_neutral_in_context_only") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_ids") || !opts.hasOwnProperty("parent_link")) {
+    if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend_copy") || !opts.hasOwnProperty("metric_source") || !opts.hasOwnProperty("improved_or_worsened_or_neutral_in_context_only") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_ids") || !opts.hasOwnProperty("parent_link")) {
       throw "Missing property"
     }
     
@@ -56,7 +56,7 @@ function createNode(opts) {
       metric: "",
       current_level: "",
       trend_copy: "",
-      source: "",
+      metric_source: "",
       improved_or_worsened_or_neutral_in_context_only: ""
     }
     */ 
@@ -79,8 +79,8 @@ function createNode(opts) {
     if (opts.hasOwnProperty("trend_copy") && opts["trend_copy"] != null) {
       labelForGraph = labelForGraph + "\n---\n" + trendColorSymbol + opts["trend_copy"] + trendColorSymbol
     }
-    if (opts.hasOwnProperty("source") && opts["source"] != null) {
-      labelForGraph = labelForGraph + "\n---\nSource: " + opts["source"]
+    if (opts.hasOwnProperty("metric_source") && opts["metric_source"] != null) {
+      labelForGraph = labelForGraph + "\n---\nMetric source: " + opts["metric_source"]
     }
     nodes_for_graph.push({
       id: opts.id,
@@ -132,8 +132,8 @@ function createNode(opts) {
     if (opts["trend_copy"] == null) {
       opts["trend_copy"] = "-"
     }
-    if (opts["source"] == null) {
-      opts["source"] = "-"
+    if (opts["metric_source"] == null) {
+      opts["metric_source"] = "-"
     }
     if (opts.improved_or_worsened_or_neutral_in_context_only == 'neutral') {
       opts["isNeutral"] = true
@@ -267,7 +267,7 @@ $(document).ready(function() {
 
 
   var node = nodes_for_mobile_view.find(function(element) {return element['id'] == node_id})
-  node["source_is_link"] = node.hasOwnProperty("source") && node["source"] != null && node["source"].includes("http")
+  node["metric_source_is_link"] = node.hasOwnProperty("metric_source") && node["metric_source"] != null && node["metric_source"].includes("http")
   node["isMainNode"] = true
   node["show_contributing_factor_s"] = node["childCount"] != 1
 
@@ -309,7 +309,7 @@ $(document).ready(function() {
       childNode["connection_label"] = connectionsLeadingToChildren[i]["label"]
     }
     childNode["show_contributing_factor_s"] = childNode["childCount"] != 1
-    childNode["source_is_link"] = childNode.hasOwnProperty("source") && childNode["source"] != null && childNode["source"].includes("http")
+    childNode["metric_source_is_link"] = childNode.hasOwnProperty("metric_source") && childNode["metric_source"] != null && childNode["metric_source"].includes("http")
     if (childNode.parent_link.positive_relationship) {
       //xxx
       var div = $('#childNodesImprove')
