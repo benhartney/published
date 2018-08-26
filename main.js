@@ -1423,7 +1423,7 @@ $(document).ready(function() {
 
   $('.nodeLink').each(function() {
     var href = $(this).attr('href');
-    $(this).attr('href', href + "&source_id=" + window.source_id + "&id="+window.entity_id);
+    $(this).attr('href', href + "&source_id=" + window.source_id + "&id=" + window.entity_id);
   });
   
 
