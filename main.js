@@ -45,7 +45,7 @@ function setLevel(id, level) {
 }
 function createNode(opts) {
   if (window.source_id == 'all' || opts["id"] == "overall" || opts["source_ids"].includes(window.source_id)) {
-    if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("trend_direction") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_ids") || !opts.hasOwnProperty("parent_link")) {
+    if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend_copy") || !opts.hasOwnProperty("source") || !opts.hasOwnProperty("improved_or_worsened_or_neutral_in_context_only") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_ids") || !opts.hasOwnProperty("parent_link")) {
       throw "Missing property"
     }
     
@@ -55,16 +55,16 @@ function createNode(opts) {
       title: "",
       metric: "",
       current_level: "",
-      trend: "",
+      trend_copy: "",
       source: "",
-      trend_direction: ""
+      improved_or_worsened_or_neutral_in_context_only: ""
     }
     */ 
-    if (opts.trend_direction == 'neutral') {
+    if (opts.improved_or_worsened_or_neutral_in_context_only == 'neutral') {
       var trendColorSymbol = ''
-    } else if (opts.trend_direction == 'positive') {
+    } else if (opts.improved_or_worsened_or_neutral_in_context_only == 'improved') {
       var trendColorSymbol = '_'
-    } else if (opts.trend_direction == 'negative') {
+    } else if (opts.improved_or_worsened_or_neutral_in_context_only == 'worsened') {
       var trendColorSymbol = '*'
     }
     var backgroundColor = 'white'
@@ -76,8 +76,8 @@ function createNode(opts) {
     if (opts.hasOwnProperty("current_level") && opts["current_level"] != null) {
       labelForGraph = labelForGraph + "\n---\n" + opts["current_level"]
     }
-    if (opts.hasOwnProperty("trend") && opts["trend"] != null) {
-      labelForGraph = labelForGraph + "\n---\n" + trendColorSymbol + opts["trend"] + trendColorSymbol
+    if (opts.hasOwnProperty("trend_copy") && opts["trend_copy"] != null) {
+      labelForGraph = labelForGraph + "\n---\n" + trendColorSymbol + opts["trend_copy"] + trendColorSymbol
     }
     if (opts.hasOwnProperty("source") && opts["source"] != null) {
       labelForGraph = labelForGraph + "\n---\nSource: " + opts["source"]
@@ -129,18 +129,18 @@ function createNode(opts) {
     if (opts["current_level"] == null) {
       opts["current_level"] = "-"
     }
-    if (opts["trend"] == null) {
-      opts["trend"] = "-"
+    if (opts["trend_copy"] == null) {
+      opts["trend_copy"] = "-"
     }
     if (opts["source"] == null) {
       opts["source"] = "-"
     }
-    if (opts.trend_direction == 'neutral') {
+    if (opts.improved_or_worsened_or_neutral_in_context_only == 'neutral') {
       opts["isNeutral"] = true
-    } else if (opts.trend_direction == 'positive') {
-      opts["isPositive"] = true
-    } else if (opts.trend_direction == 'negative') {
-      opts["isNegative"] = true
+    } else if (opts.improved_or_worsened_or_neutral_in_context_only == 'improved') {
+      opts["hasImproved"] = true
+    } else if (opts.improved_or_worsened_or_neutral_in_context_only == 'worsened') {
+      opts["hasWorsened"] = true
     }
     nodes_for_mobile_view.push(opts)
   }

@@ -51,11 +51,11 @@
                   {{current_level}}
                 </li>
               {{/if}}
-              {{#if trend}}
+              {{#if trend_copy}}
                 <li class="list-group-item">
-                  <div class='text-{{#if isNeutral}}body{{/if}}{{#if isPositive}}success{{/if}}{{#if isNegative}}danger{{/if}}'>
+                  <div class='text-{{#if isNeutral}}body{{/if}}{{#if hasImproved}}success{{/if}}{{#if hasWorsened}}danger{{/if}}'>
                     <div class="font-weight-bold">Trend</div>
-                    {{trend}}
+                    {{trend_copy}}
                   </div>
                 </li>
               {{/if}}
