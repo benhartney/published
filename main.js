@@ -1065,7 +1065,7 @@ function setupData() {
           title: "Crime & Legal System",
           metric: null,
           current_level: null,
-          trend: null,
+          trend: "Positive",
           source: null,
           trend_direction: "positive",
           noMetricExpected: false,
