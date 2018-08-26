@@ -1392,8 +1392,10 @@ $(document).ready(function() {
   //
   node["childCount"] = connectionsLeadingToChildren.length
   addNodeToPage(node, $('#node'))
-  $('.temppp').text(node.title)
+  $('.nodeTitle').text(node.title)
   $('#childCount').text(connectionsLeadingToChildren.length)
+
+
 
   //
   for (var i = 0; i < connectionsLeadingToChildren.length; i++) {
@@ -1417,6 +1419,12 @@ $(document).ready(function() {
     $('#nothingHere').show()
     $('#childNodesImproveHeading').hide()
     $('#childNodesWorsenHeading').hide()
+  }
+  if ($('#childNodesImprove').is(':empty')){
+    $('#childNodesImprove').html("<div class='col-sm'>Nothing</div>")
+  }
+  if ($('#childNodesWorsen').is(':empty')){
+    $('#childNodesWorsen').html("<div class='col-sm'>Nothing</div>")
   }
   
 
