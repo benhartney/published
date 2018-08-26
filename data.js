@@ -74,6 +74,74 @@ window.all_data = {
         }
       },
       {
+        id: "globalization",
+        title: "Globalization",
+        metric: null,
+        current_level: null,
+        trend: "Increased",
+        source: "Haskel et al. 2012",
+        trend_direction: "negative",
+        noMetricExpected: false,
+        source_ids: ['brookings_wage_article'],
+        parent_link: {
+          parent_id: 'equality_of_real_wages',
+          positive_relationship: false,
+          lower_is_good: true,
+          label: null
+        }
+      },
+      {
+        id: "us_imports",
+        title: "U.S. Manufacturing Imports",
+        metric: null,
+        current_level: null,
+        trend: "Increased",
+        source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
+        trend_direction: "negative",
+        noMetricExpected: false,
+        source_ids: ['brookings_wage_article'],
+        parent_link: {
+          parent_id: 'globalization',
+          positive_relationship: true,
+          lower_is_good: true,
+          label: null
+        }
+      },
+      {
+        id: "technological_progress_2",
+        title: "Technological change that raises the relative productivity of high-skill workers",
+        metric: null,
+        current_level: null,
+        trend: "Increased",
+        source: "Autor, Katz, and Kearney 2008; Goldin and Katz 2010",
+        trend_direction: "negative",
+        noMetricExpected: false,
+        source_ids: ['brookings_wage_article'],
+        parent_link: {
+          parent_id: 'equality_of_real_wages',
+          positive_relationship: false,
+          lower_is_good: false,
+          label: null
+        }
+      },
+      {
+        id: "wage_benefit_to_a_college_degree",
+        title: "Wage benefit for a college degree",
+        metric: null,
+        current_level: null,
+        trend: "Increased",
+        source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
+        trend_direction: "negative",
+        noMetricExpected: false,
+        source_ids: ['brookings_wage_article'],
+        parent_link: {
+          parent_id: 'equality_of_real_wages',
+          positive_relationship: false,
+          lower_is_good: false,
+          label: null
+        }
+      },
+      {
         id: "real_wages",
         title: "Real wages",
         metric: "Average hourly earnings (inflation adjusted, 2016 dollars)",
@@ -211,11 +279,11 @@ window.all_data = {
       },
       {
         id: "technological_progress",
-        title: "technological progress",
+        title: "Technological progress",
         metric: null,
         current_level: null,
-        trend: null,
-        source: null,
+        trend: "Increased",
+        source: "International Monetary Fund 2017",
         trend_direction: "negative",
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
@@ -231,8 +299,8 @@ window.all_data = {
         title: "Capital intensity of production",
         metric: null,
         current_level: null,
-        trend: null,
-        source: null,
+        trend: "Increased",
+        source: "Karabarbounis and Neiman 2014",
         trend_direction: "negative",
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
@@ -244,11 +312,11 @@ window.all_data = {
         }
       },
       {
-        id: "offshoring_of_labor-intensive_production",
-        title: "offshoring of labor-intensive production",
+        id: "offshoring_of_labor_intensive_production",
+        title: "Offshoring of labor-intensive production",
         metric: null,
         current_level: null,
-        trend: null,
+        trend: "Increased",
         source: null,
         trend_direction: "negative",
         noMetricExpected: false,
@@ -262,11 +330,11 @@ window.all_data = {
       },
       {
         id: "superstar_firms",
-        title: "superstar firms",
+        title: "Superstar firms",
         metric: null,
         current_level: null,
-        trend: null,
-        source: null,
+        trend: "Increased",
+        source: "Autor et al. 2017",
         trend_direction: "negative",
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
@@ -282,8 +350,8 @@ window.all_data = {
         title: "Market concentration",
         metric: null,
         current_level: null,
-        trend: null,
-        source: null,
+        trend: "Increased",
+        source: "Furman 2016",
         trend_direction: "negative",
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],

@@ -197,10 +197,6 @@ function draw() {
   destroy();
   //var connectionCount = [];
 
-
-
-
-
   // create a network
   var container = document.getElementById('map');
   var data = {
@@ -335,16 +331,11 @@ $(document).ready(function() {
     }
     addNodeToPage(childNode, div)
   }
-  if (connectionsLeadingToChildren.length == 0) {
-    $('#nothingHere').show()
-    $('#childNodesImproveHeading').hide()
-    $('#childNodesWorsenHeading').hide()
-  }
   if ($('#childNodesImprove').is(':empty')){
-    $('#childNodesImprove').html("<div class='col-sm'>Nothing</div>")
+    $('#childNodesImprove').html("<div class='col-sm mb-2'>Nothing - you've reached the bottom of this particular thread.</div>")
   }
   if ($('#childNodesWorsen').is(':empty')){
-    $('#childNodesWorsen').html("<div class='col-sm'>Nothing</div>")
+    $('#childNodesWorsen').html("<div class='col-sm mb-2'>Nothing - you've reached the bottom of this particular thread.</div>")
   }
   
 
