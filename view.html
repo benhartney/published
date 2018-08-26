@@ -26,9 +26,9 @@
       <div class='col-sm-4'>
         <div class='card bg-light nodeCard'>
           {{#if isMainNode}}
-            <h5 class="card-header">{{title}}</h5>
+            <h4 class="card-header">{{title}}</h4>
           {{else}}
-            <h5 class="card-header"><a class='childNodeLink nodeLink' href="?node_id={{id}}">{{title}}</a></h5>
+            <h4 class="card-header"><a class='childNodeLink nodeLink' href="?node_id={{id}}">{{title}}</a></h4>
           {{/if}}
           {{#if noMetricExpected}}
           {{else}}
@@ -150,9 +150,9 @@
             <div class='row' id='node'></div>
             <div class='row'>
               <div class='col-sm'>
-                <h4>
+                <h5>
                   <span id='childCount'></span> contributing factor<span id="contributing_factor_s">s</span>:
-                </h4>
+                </h5>
               </div>
             </div>
             <div class='row' id='childNodes'></div>

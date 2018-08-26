@@ -61,14 +61,15 @@ function createNode(opts) {
     }
     */ 
     if (opts.trend_direction == 'neutral') {
-      var backgroundColor = 'white'
+      var trendColorSymbol = ''
     } else if (opts.trend_direction == 'positive') {
-      var backgroundColor = 'rgb(187, 247, 200)'
+      var trendColorSymbol = '_'
     } else if (opts.trend_direction == 'negative') {
-      var backgroundColor = 'rgb(255, 124, 124)'
+      var trendColorSymbol = '*'
     }
+    var backgroundColor = 'white'
     //build label
-    var labelForGraph = "<b>" + opts.title + "</b>"
+    var labelForGraph = opts.title
     if (opts.hasOwnProperty("metric") && opts["metric"] != null) {
       labelForGraph = labelForGraph + ": " + opts["metric"]
     }
@@ -76,7 +77,7 @@ function createNode(opts) {
       labelForGraph = labelForGraph + "\n---\n" + opts["current_level"]
     }
     if (opts.hasOwnProperty("trend") && opts["trend"] != null) {
-      labelForGraph = labelForGraph + "\n---\n" + opts["trend"]
+      labelForGraph = labelForGraph + "\n---\n" + trendColorSymbol + opts["trend"] + trendColorSymbol
     }
     if (opts.hasOwnProperty("source") && opts["source"] != null) {
       labelForGraph = labelForGraph + "\n---\nSource: " + opts["source"]
@@ -85,7 +86,7 @@ function createNode(opts) {
       id: opts.id,
       label: labelForGraph,
       font: {
-        multi: true
+        multi: 'md'
       },
       margin: 10,
       shape: 'box',
@@ -1288,6 +1289,16 @@ function draw() {
   };
 
   var options = {
+    nodes: {
+      font: {
+        bold: {
+          color: '#dc3545'
+        },
+        ital: {
+          color: '#28a745'
+        }
+      }
+    },
     interaction: {
       dragNodes: false
     },
@@ -1305,7 +1316,7 @@ function draw() {
         levelSeparation: 300
       }
     },
-    physics:false
+    physics: false
   };
   network = new vis.Network(container, data, options);
 }
