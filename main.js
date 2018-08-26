@@ -297,7 +297,7 @@ function setupData() {
             label: null
           }
         },
-        {//xxx
+        {
           id: "labor_share_of_national_income",
           title: "Share of national income that is received by workers",
           metric: null,
@@ -1364,6 +1364,7 @@ $(document).ready(function() {
 
 
   var node = nodes_for_mobile_view.find(function(element) {return element['id'] == node_id})
+  node["source_is_link"] = node.hasOwnProperty("source") && node["source"] != null && node["source"].includes("http")
   node["isMainNode"] = true
 
   var parentChain = [];
@@ -1406,6 +1407,7 @@ $(document).ready(function() {
       childNode["connection_label"] = connectionsLeadingToChildren[i]["label"]
     }
     childNode["show_contributing_factor_s"] = childNode["childCount"] != 1
+    childNode["source_is_link"] = childNode.hasOwnProperty("source") && childNode["source"] != null && childNode["source"].includes("http")
     addNodeToPage(childNode, $('#childNodes'))
   }
   if (connectionsLeadingToChildren.length == 0) {

@@ -61,8 +61,12 @@
               {{/if}}
               {{#if source}}
                 <li class="list-group-item">
-                  <div class="font-weight-bold">Source</div>
-                  {{source}}
+                  {{#if source_is_link}}
+                    <a href='{{source}}' target='_blank'>Source</a>
+                  {{else}}
+                    <div class="font-weight-bold">Source</div>
+                    {{source}}
+                  {{/if}}
                 </li>
               {{/if}}
             </ul>
