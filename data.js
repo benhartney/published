@@ -103,12 +103,12 @@ window.all_data = {
         }
       },
       {
-        id: "technological_progress_2",
-        title: "Technological change that raises the relative productivity of high-skill workers",
+        id: "wage_benefit_to_a_college_degree",
+        title: "Wage benefit for a college degree",
         metric: null,
         current_level: null,
         trend_copy: "Increased",
-        source: "Autor, Katz, and Kearney 2008; Goldin and Katz 2010",
+        source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
         improved_or_worsened_or_neutral_in_context_only: "worsened",
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
@@ -119,12 +119,29 @@ window.all_data = {
         }
       },
       {
-        id: "wage_benefit_to_a_college_degree",
-        title: "Wage benefit for a college degree",
+        id: "union_membership",
+        title: "Union membership",
+        metric: "% of workers that belong to a union",
+        current_level: "2006: 10%",
+        trend_copy: "1956 → 2016: -64% | -18pp",
+        source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
+        improved_or_worsened_or_neutral_in_context_only: "worsened",
+        noMetricExpected: false,
+        source_ids: ['brookings_wage_article'],
+        parent_link: {
+          parent_id: 'equality_of_real_wages',
+          positive_relationship: false,
+          label: null,
+          xxx: "Card 2001" // xxx
+        }
+      },
+      {
+        id: "technological_progress_2",
+        title: "Technological change that raises the relative productivity of high-skill workers",
         metric: null,
         current_level: null,
         trend_copy: "Increased",
-        source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
+        source: "Autor, Katz, and Kearney 2008; Goldin and Katz 2010",
         improved_or_worsened_or_neutral_in_context_only: "worsened",
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
