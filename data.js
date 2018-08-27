@@ -12,7 +12,7 @@ window.all_data = {
     nodes: [
       {
         id: "overall",
-        title: "Brooking's overall view",
+        title: "Brooking's overall view for the US",
         metric: null,
         current_level: null,
         trend_copy: null,
@@ -381,7 +381,7 @@ window.all_data = {
     nodes: [
       {
         id: "overall",
-        title: "Noah Smith's overall view",
+        title: "Noah Smith's overall view for the US",
         metric: null,
         current_level: null,
         trend_copy: null,
