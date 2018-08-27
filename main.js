@@ -43,87 +43,85 @@ function setLevel(id, level) {
     nodeToSetLevelFor["level"] = level;
   }
 }
+
+function addNodeToGraph(opts) {
+  //trend_color
+  if (opts.improved_or_worsened_or_neutral_in_context_only == 'neutral') {
+    var trendColorSymbol = ''
+  } else if (opts.improved_or_worsened_or_neutral_in_context_only == 'improved') {
+    var trendColorSymbol = '_'
+  } else if (opts.improved_or_worsened_or_neutral_in_context_only == 'worsened') {
+    var trendColorSymbol = '*'
+  }
+
+  //label
+  var labelForGraph = opts.title
+  if (opts.hasOwnProperty("metric") && opts["metric"] != null) {
+    labelForGraph = labelForGraph + ": " + opts["metric"]
+  }
+  if (opts.hasOwnProperty("current_level") && opts["current_level"] != null) {
+    labelForGraph = labelForGraph + "\n---\n" + opts["current_level"]
+  }
+  if (opts.hasOwnProperty("trend_copy") && opts["trend_copy"] != null) {
+    labelForGraph = labelForGraph + "\n---\n" + trendColorSymbol + opts["trend_copy"] + trendColorSymbol
+  }
+  if (opts.hasOwnProperty("metric_source") && opts["metric_source"] != null) {
+    labelForGraph = labelForGraph + "\n---\nMetric source: " + opts["metric_source"]
+  }
+
+  nodes_for_graph.push({
+    id: opts.id,
+    label: labelForGraph,
+    font: {
+      multi: 'md'
+    },
+    margin: 10,
+    shape: 'box',
+    color: {
+      background: 'white',
+      border: 'black'
+    },
+    widthConstraint: {
+      minimum: 200
+    },
+    heightConstraint: {
+      minimum: 120
+    }
+  });
+
+  //level
+  if (opts.parent_link == null) {
+    opts.level = 0
+  } else {
+    var parent_node = nodes_for_mobile_view.find(function(element) {return element['id'] == opts.parent_link.parent_id})
+    opts.level = parent_node.level + 1
+  }
+  setLevel(opts.id, opts.level)
+
+  if (opts.parent_link != null) {
+    // build label for edge
+    var label = opts.parent_link.label
+    if (opts.parent_link.connection_source != null) {
+      label = label + "\nSource:\n" + opts.parent_link.connection_source
+    }
+    createLink({
+      parent_id: opts.parent_link.parent_id,
+      child_id: opts.id,
+      positive_relationship: opts.parent_link.positive_relationship,
+      label: label
+    })
+  }
+}
+
 function createNode(opts) {
   if (window.source_id == 'all' || opts["id"] == "overall" || opts["source_ids"].includes(window.source_id)) {
     if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend_copy") || !opts.hasOwnProperty("metric_source") || !opts.hasOwnProperty("improved_or_worsened_or_neutral_in_context_only") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_ids") || !opts.hasOwnProperty("parent_link")) {
       throw "Missing property"
     }
     
-    /*
-    {
-      id: "",
-      title: "",
-      metric: "",
-      current_level: "",
-      trend_copy: "",
-      metric_source: "",
-      improved_or_worsened_or_neutral_in_context_only: ""
-    }
-    */ 
-    if (opts.improved_or_worsened_or_neutral_in_context_only == 'neutral') {
-      var trendColorSymbol = ''
-    } else if (opts.improved_or_worsened_or_neutral_in_context_only == 'improved') {
-      var trendColorSymbol = '_'
-    } else if (opts.improved_or_worsened_or_neutral_in_context_only == 'worsened') {
-      var trendColorSymbol = '*'
-    }
-    var backgroundColor = 'white'
-    //build label
-    var labelForGraph = opts.title
-    if (opts.hasOwnProperty("metric") && opts["metric"] != null) {
-      labelForGraph = labelForGraph + ": " + opts["metric"]
-    }
-    if (opts.hasOwnProperty("current_level") && opts["current_level"] != null) {
-      labelForGraph = labelForGraph + "\n---\n" + opts["current_level"]
-    }
-    if (opts.hasOwnProperty("trend_copy") && opts["trend_copy"] != null) {
-      labelForGraph = labelForGraph + "\n---\n" + trendColorSymbol + opts["trend_copy"] + trendColorSymbol
-    }
-    if (opts.hasOwnProperty("metric_source") && opts["metric_source"] != null) {
-      labelForGraph = labelForGraph + "\n---\nMetric source: " + opts["metric_source"]
-    }
-    nodes_for_graph.push({
-      id: opts.id,
-      label: labelForGraph,
-      font: {
-        multi: 'md'
-      },
-      margin: 10,
-      shape: 'box',
-      color: {
-        background: backgroundColor,
-        border: 'black'
-      },
-      widthConstraint: {
-        minimum: 200
-      },
-      heightConstraint: {
-        minimum: 120
-      }
-    });
-
-    if (opts.parent_link == null) {
-      opts.level = 0
-    } else {
-      var parent_node = nodes_for_mobile_view.find(function(element) {return element['id'] == opts.parent_link.parent_id})
-      opts.level = parent_node.level + 1
-    }
-    setLevel(opts.id, opts.level)
-
-
+    addNodeToGraph(opts)
 
     if (opts.parent_link != null) {
-      // build label for edge
-      var label = opts.parent_link.label
-      if (opts.parent_link.connection_source != null) {
-        label = label + "\nSource:\n" + opts.parent_link.connection_source
-      }
-      createLink({
-        parent_id: opts.parent_link.parent_id,
-        child_id: opts.id,
-        positive_relationship: opts.parent_link.positive_relationship,
-        label: label
-      })
       if (opts.parent_link.connection_source != null) {
         opts["parent_connection_source"] = opts.parent_link.connection_source
         opts["parent_connection_source_is_link"] = opts.parent_link.connection_source.includes("http")
