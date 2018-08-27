@@ -63,7 +63,7 @@ function createLink(opts){
   }
 }
 
-function draw() {
+function drawGraph() {
   destroy();
   //var connectionCount = [];
 
@@ -233,32 +233,7 @@ function addNodeToPage(node, $div) {
   $div.append(html)
 }
 
-// --------------------------------------------------------------------- start
-
-$(document).ready(function() {
-  window.entity_id = getParameterByName('id')
-  window.source_id = getParameterByName('source_id')
-  if (source_id === null) {
-    window.source_id = 'all'
-  }
-
-  // setup data
-  for (var i = 0; i < window.all_data[window.entity_id].nodes.length; i++) {
-    createNode(window.all_data[window.entity_id].nodes[i])
-  }
-
-
-
-  var node_id = getParameterByName('node_id')
-  if (node_id === null) {
-    node_id = 'overall'
-  }
-  draw()
-
-  var entity_display_name = window.all_data[window.entity_id].display_name
-  $(document).prop('title', "Policy Views: " + entity_display_name);
-  $('#entity_name_heading').text(entity_display_name);
-
+function setupSources() {
   for (var i = 0; i < window.all_data[window.entity_id].sources.length; i++) {
     var source = document.getElementById("source-template").innerHTML;
     var template = Handlebars.compile(source);
@@ -269,16 +244,23 @@ $(document).ready(function() {
     window.location = "view.html?source_id=" + this.value + "&id=" + window.entity_id;
   });
   $("input[name=source_selector][value=" + window.source_id + "]").prop('checked', true);
+}
 
+function setupEntityNameDisplay() {
+  var entity_display_name = window.all_data[window.entity_id].display_name
+  $(document).prop('title', "Policy Views: " + entity_display_name);
+  $('#entity_name_heading').text(entity_display_name);
+}
 
-  var node = nodes_for_mobile_view.find(function(element) {return element['id'] == node_id})
+function setupMainNode() {
+  var node = nodes_for_mobile_view.find(function(element) {return element['id'] == window.node_id})
   node["metric_source_is_link"] = node.hasOwnProperty("metric_source") && node["metric_source"] != null && node["metric_source"].includes("http")
   node["isMainNode"] = true
   node["show_contributing_factor_s"] = node["childCount"] != 1
 
   var parentChain = [];
   // assumes only one parent
-  var connectionForParent = connections_for_graph.find(function(edge) {return edge['to'] == node_id})
+  var connectionForParent = connections_for_graph.find(function(edge) {return edge['to'] == window.node_id})
   while (connectionForParent != undefined){
     var parentNode = nodes_for_mobile_view.find(function(element) {return element['id'] == connectionForParent["from"]})
     parentChain.unshift(parentNode)
@@ -294,7 +276,7 @@ $(document).ready(function() {
     $('#parentNodes').hide()
   }
 
-  var connectionsLeadingToChildren = connections_for_graph.filter(edge => edge['from'] == node_id).filter(val => {
+  var connectionsLeadingToChildren = connections_for_graph.filter(edge => edge['from'] == window.node_id).filter(val => {
     return nodes_for_mobile_view.find(function(element) {return element['id'] == val["to"]}) != null;
   });
   //
@@ -302,10 +284,12 @@ $(document).ready(function() {
   addNodeToPage(node, $('#node'))
   $('.nodeTitle').text(node.title)
   $('#childCount').text(connectionsLeadingToChildren.length)
+}
 
-
-
-  //
+function setupChildNodes() {
+  var connectionsLeadingToChildren = connections_for_graph.filter(edge => edge['from'] == window.node_id).filter(val => {
+    return nodes_for_mobile_view.find(function(element) {return element['id'] == val["to"]}) != null;
+  });
   for (var i = 0; i < connectionsLeadingToChildren.length; i++) {
     var childNode = nodes_for_mobile_view.find(function(element) {return element['id'] == connectionsLeadingToChildren[i]["to"]})
     var connectionsLeadingToChildsChildren = connections_for_graph.filter(edge => edge['from'] == childNode.id);
@@ -325,17 +309,44 @@ $(document).ready(function() {
   if ($('#childNodesWorsen').is(':empty')){
     $('#childNodesWorsen').html("<div class='col-sm mb-2'>Nothing.</div>")
   }
-  
+}
 
+function displayPopup() {
   var introModalViewedCookie = getCookie('introModalViewed');
   if (introModalViewedCookie == null && window.location.href.indexOf("policyviews") > -1) {
     $('#introModal').modal('toggle')
     setCookie('introModalViewed', 'true');
   }
+}
 
+function updateNodeLinks() {
   $('.nodeLink').each(function() {
     var href = $(this).attr('href');
     $(this).attr('href', href + "&source_id=" + window.source_id + "&id=" + window.entity_id);
   });
+}
+
+function setupData() {
+  for (var i = 0; i < window.all_data[window.entity_id].nodes.length; i++) {
+    createNode(window.all_data[window.entity_id].nodes[i])
+  }
+}
+
+// --------------------------------------------------------------------- start
+
+$(document).ready(function() {
+  
+  window.entity_id = getParameterByName('id')
+  window.source_id = getParameterByName('source_id') || 'all'
+  window.node_id = getParameterByName('node_id') || 'overall'
+
+  setupData()
+  drawGraph()
+  setupEntityNameDisplay()
+  setupSources()
+  setupMainNode()
+  setupChildNodes()
+  displayPopup()
+  updateNodeLinks()
   
 });
