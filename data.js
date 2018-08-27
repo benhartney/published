@@ -462,7 +462,7 @@ window.all_data = {
         current_level: "2014: 50%",
         trend_copy: "1970 → 2014: -46% | -42pp",
         metric_source: "http://www.nber.org/papers/w22910",
-        improved_or_worsened_or_neutral_in_context_only: 'negative',
+        improved_or_worsened_or_neutral_in_context_only: 'worsened',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
@@ -510,7 +510,7 @@ window.all_data = {
         current_level: "2018: 79%",
         trend_copy: "1994 → 2018: +0.52% | +0.41pp",
         metric_source: "Federal Reserve Bank of St. Louis",
-        improved_or_worsened_or_neutral_in_context_only: 'positive',
+        improved_or_worsened_or_neutral_in_context_only: 'improved',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
@@ -526,7 +526,7 @@ window.all_data = {
         current_level: "2013: +0.88%",
         trend_copy: "1996-2004 avg → 2005-2013 avg: -50% | -0.87pp",
         metric_source: "U.S. Total Factor Productivity Slowdown - Evidence from the U.S. States",
-        improved_or_worsened_or_neutral_in_context_only: 'negative',
+        improved_or_worsened_or_neutral_in_context_only: 'worsened',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
@@ -558,7 +558,7 @@ window.all_data = {
         current_level: "2016: 41.5",
         trend_copy: "2000 → 2016: +2.72% | +1.1pp",
         metric_source: "Federal Reserve Bank of St. Louis",
-        improved_or_worsened_or_neutral_in_context_only: 'negative',
+        improved_or_worsened_or_neutral_in_context_only: 'worsened',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
@@ -574,7 +574,7 @@ window.all_data = {
         current_level: "2012: 41.8%",
         trend_copy: "2000 → 2012: +23% | +7.7pp",
         metric_source: "Gabriel Zucman",
-        improved_or_worsened_or_neutral_in_context_only: 'negative',
+        improved_or_worsened_or_neutral_in_context_only: 'worsened',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
@@ -590,7 +590,7 @@ window.all_data = {
         current_level: "2012: 64.6%",
         trend_copy: "2000 → 2012: +14% | +8.1pp",
         metric_source: "Gabriel Zucman",
-        improved_or_worsened_or_neutral_in_context_only: 'negative',
+        improved_or_worsened_or_neutral_in_context_only: 'worsened',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
@@ -606,7 +606,7 @@ window.all_data = {
         current_level: "2017: 2.27%",
         trend_copy: "1961-1980 avg → 1981-2017 avg: -30% | -1.17pp",
         metric_source: "World Bank",
-        improved_or_worsened_or_neutral_in_context_only: 'negative',
+        improved_or_worsened_or_neutral_in_context_only: 'worsened',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
@@ -622,7 +622,7 @@ window.all_data = {
         current_level: null,
         trend_copy: "1961 → 2017: Decreased",
         metric_source: "World Bank",
-        improved_or_worsened_or_neutral_in_context_only: 'negative',
+        improved_or_worsened_or_neutral_in_context_only: 'worsened',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
@@ -638,7 +638,7 @@ window.all_data = {
         current_level: "2017: TBD",
         trend_copy: "2000 → 2017: +11.5%",
         metric_source: "Federal Reserve Bank of St. Louis",
-        improved_or_worsened_or_neutral_in_context_only: 'positive',
+        improved_or_worsened_or_neutral_in_context_only: 'improved',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
@@ -654,7 +654,7 @@ window.all_data = {
         current_level: "2016: TBD",
         trend_copy: "2000 → 2016: +3.7%",
         metric_source: "Federal Reserve Bank of St. Louis",
-        improved_or_worsened_or_neutral_in_context_only: 'positive',
+        improved_or_worsened_or_neutral_in_context_only: 'improved',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
@@ -670,7 +670,7 @@ window.all_data = {
         current_level: "2016: 15.6%",
         trend_copy: "2000 → 2016: -13% | -2.4pp",
         metric_source: "Center on Budget and Policy Priorities",
-        improved_or_worsened_or_neutral_in_context_only: 'positive',
+        improved_or_worsened_or_neutral_in_context_only: 'improved',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
@@ -686,7 +686,7 @@ window.all_data = {
         current_level: "2017: 0.21%",
         trend_copy: "2007 → 2017: -21% | -0.04pp",
         metric_source: "U.S. Department of Housing and Urban Development",
-        improved_or_worsened_or_neutral_in_context_only: 'positive',
+        improved_or_worsened_or_neutral_in_context_only: 'improved',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
@@ -734,7 +734,7 @@ window.all_data = {
         current_level: "2017: 5087.7",
         trend_copy: "2005 → 2017: -13.23% | -776",
         metric_source: "https://bit.ly/2mnvG49",
-        improved_or_worsened_or_neutral_in_context_only: 'positive',
+        improved_or_worsened_or_neutral_in_context_only: 'improved',
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
