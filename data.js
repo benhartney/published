@@ -910,7 +910,7 @@ window.all_data = {
         title: "Crime",
         metric: null,
         current_level: null,
-        trend_copy: "Positive",
+        trend_copy: "Improved",
         metric_source: null,
         improved_or_worsened_or_neutral_in_context_only: "improved",
         noMetricExpected: false,
