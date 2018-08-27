@@ -1,8 +1,12 @@
 var nodes_for_graph = [];
 var connections_for_graph = [];
 var network = null;
-
 var nodes_for_mobile_view = []
+
+
+
+
+// --------------------------------------------------------------------- helpers
 
 function setCookie(name,value,days) {
   var expires = "";
@@ -26,7 +30,6 @@ function getCookie(name) {
 function eraseCookie(name) {   
   document.cookie = name+'=; Max-Age=-99999999;';  
 }
-
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, '\\$&');
@@ -37,10 +40,77 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-function setLevel(id, level) {
-  var nodeToSetLevelFor = nodes_for_graph.find(function(element) {return element['id'] == id})
-  if (nodeToSetLevelFor != null) {
-    nodeToSetLevelFor["level"] = level;
+
+
+
+// --------------------------------------------------------------------- graph
+
+function createLink(opts){
+  // both nodes must already exist
+  var parent_node = nodes_for_graph.find(function(element) {return element['id'] == opts.parent_id})
+  var child_node = nodes_for_graph.find(function(element) {return element['id'] == opts.child_id})
+  if (parent_node != null && child_node != null) {
+    connections_for_graph.push({
+      from: opts.parent_id,
+      to: opts.child_id,
+      arrows: 'from',
+      label: opts.label,
+      font: {
+        background: 'white',
+        size: 15
+      }
+    });
+  }
+}
+
+function draw() {
+  destroy();
+  //var connectionCount = [];
+
+  // create a network
+  var container = document.getElementById('map');
+  var data = {
+    nodes: nodes_for_graph,
+    edges: connections_for_graph
+  };
+
+  var options = {
+    nodes: {
+      font: {
+        bold: {
+          color: '#dc3545'
+        },
+        ital: {
+          color: '#28a745'
+        }
+      }
+    },
+    interaction: {
+      dragNodes: false
+    },
+    edges: {
+      smooth: {
+        type: 'cubicBezier',
+        forceDirection: 'vertical',
+        roundness: 0.4
+      }
+    },
+    layout: {
+      hierarchical: {
+        direction: "UD",
+        nodeSpacing: 600,
+        levelSeparation: 300
+      }
+    },
+    physics: false
+  };
+  network = new vis.Network(container, data, options);
+}
+
+function destroy() {
+  if (network !== null) {
+    network.destroy();
+    network = null;
   }
 }
 
@@ -96,7 +166,10 @@ function addNodeToGraph(opts) {
     var parent_node = nodes_for_mobile_view.find(function(element) {return element['id'] == opts.parent_link.parent_id})
     opts.level = parent_node.level + 1
   }
-  setLevel(opts.id, opts.level)
+  var nodeToSetLevelFor = nodes_for_graph.find(function(element) {return element['id'] == opts.id})
+  if (nodeToSetLevelFor != null) {
+    nodeToSetLevelFor["level"] = opts.level;
+  }
 
   if (opts.parent_link != null) {
     // build label for edge
@@ -112,6 +185,11 @@ function addNodeToGraph(opts) {
     })
   }
 }
+
+
+
+// --------------------------------------------------------------------- main
+
 
 function createNode(opts) {
   if (window.source_id == 'all' || opts["id"] == "overall" || opts["source_ids"].includes(window.source_id)) {
@@ -131,22 +209,11 @@ function createNode(opts) {
       }
     }
 
+    opts["metric"] = opts["metric"] || "-"
+    opts["current_level"] = opts["current_level"] || "-"
+    opts["trend_copy"] = opts["trend_copy"] || "-"
+    opts["metric_source"] = opts["metric_source"] || "-"
 
-
-
-    // only for mobile view
-    if (opts["metric"] == null) {
-      opts["metric"] = "-"
-    }
-    if (opts["current_level"] == null) {
-      opts["current_level"] = "-"
-    }
-    if (opts["trend_copy"] == null) {
-      opts["trend_copy"] = "-"
-    }
-    if (opts["metric_source"] == null) {
-      opts["metric_source"] = "-"
-    }
     if (opts.improved_or_worsened_or_neutral_in_context_only == 'neutral') {
       opts["isNeutral"] = true
     } else if (opts.improved_or_worsened_or_neutral_in_context_only == 'improved') {
@@ -154,83 +221,9 @@ function createNode(opts) {
     } else if (opts.improved_or_worsened_or_neutral_in_context_only == 'worsened') {
       opts["hasWorsened"] = true
     }
+
     nodes_for_mobile_view.push(opts)
   }
-}
-
-function createLink(opts){
-  // both nodes must already exist
-  var parent_node = nodes_for_graph.find(function(element) {return element['id'] == opts.parent_id})
-  var child_node = nodes_for_graph.find(function(element) {return element['id'] == opts.child_id})
-  if (parent_node != null && child_node != null) {
-    connections_for_graph.push({
-      from: opts.parent_id,
-      to: opts.child_id,
-      arrows: 'from',
-      label: opts.label,
-      font: {
-        background: 'white',
-        size: 15
-      }
-    });
-  }
-}
-
-function destroy() {
-  if (network !== null) {
-    network.destroy();
-    network = null;
-  }
-}
-
-function setupData() {
-  for (var i = 0; i < window.all_data[window.entity_id].nodes.length; i++) {
-    createNode(window.all_data[window.entity_id].nodes[i])
-  }
-}
-
-function draw() {
-  destroy();
-  //var connectionCount = [];
-
-  // create a network
-  var container = document.getElementById('map');
-  var data = {
-    nodes: nodes_for_graph,
-    edges: connections_for_graph
-  };
-
-  var options = {
-    nodes: {
-      font: {
-        bold: {
-          color: '#dc3545'
-        },
-        ital: {
-          color: '#28a745'
-        }
-      }
-    },
-    interaction: {
-      dragNodes: false
-    },
-    edges: {
-      smooth: {
-        type: 'cubicBezier',
-        forceDirection: 'vertical',
-        roundness: 0.4
-      }
-    },
-    layout: {
-      hierarchical: {
-        direction: "UD",
-        nodeSpacing: 600,
-        levelSeparation: 300
-      }
-    },
-    physics: false
-  };
-  network = new vis.Network(container, data, options);
 }
 
 function addNodeToPage(node, $div) {
@@ -240,6 +233,8 @@ function addNodeToPage(node, $div) {
   $div.append(html)
 }
 
+// --------------------------------------------------------------------- start
+
 $(document).ready(function() {
   window.entity_id = getParameterByName('id')
   window.source_id = getParameterByName('source_id')
@@ -247,12 +242,13 @@ $(document).ready(function() {
     window.source_id = 'all'
   }
 
-  
+  // setup data
+  for (var i = 0; i < window.all_data[window.entity_id].nodes.length; i++) {
+    createNode(window.all_data[window.entity_id].nodes[i])
+  }
 
 
 
-  
-  setupData()
   var node_id = getParameterByName('node_id')
   if (node_id === null) {
     node_id = 'overall'
@@ -317,7 +313,6 @@ $(document).ready(function() {
     childNode["show_contributing_factor_s"] = childNode["childCount"] != 1
     childNode["metric_source_is_link"] = childNode.hasOwnProperty("metric_source") && childNode["metric_source"] != null && childNode["metric_source"].includes("http")
     if (childNode.parent_link.positive_relationship) {
-      //xxx
       var div = $('#childNodesImprove')
     } else {
       var div = $('#childNodesWorsen')
@@ -343,5 +338,4 @@ $(document).ready(function() {
     $(this).attr('href', href + "&source_id=" + window.source_id + "&id=" + window.entity_id);
   });
   
-
 });
