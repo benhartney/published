@@ -39,10 +39,20 @@
                 </div>
                 {{metric}}
               </li>
-              {{#if connection_label}}
+              {{#if parent_connection_label}}
                 <li class="list-group-item">
                   <div class="font-weight-bold">Details on how it contributes</div>
-                  {{connection_label}}
+                  {{parent_connection_label}}
+                </li>
+              {{/if}}
+              {{#if parent_connection_source}}
+                <li class="list-group-item">
+                  {{#if parent_connection_source_is_link}}
+                    <a href='{{parent_connection_source}}' target='_blank'>Connection source</a>
+                  {{else}}
+                    <div class="font-weight-bold">Connection source</div>
+                    {{parent_connection_source}}
+                  {{/if}}
                 </li>
               {{/if}}
               {{#if current_level}}

@@ -131,8 +131,8 @@ window.all_data = {
         parent_link: {
           parent_id: 'equality_of_real_wages',
           positive_relationship: false,
-          label: null,
-          xxx: "Card 2001" // xxx
+          connection_source: "Card 2001",
+          label: "Unionization rates of men fell from 1973 to 1993...these trends account for 15-20% of the rise in male wage inequality."
         }
       },
       {
@@ -612,7 +612,8 @@ window.all_data = {
         parent_link: {
           parent_id: 'mobility',
           positive_relationship: true,
-          label: "Explanatory power: 29%.\nmetric_source:\nhttps://www.nber.org/papers/w22910"
+          connection_source: "https://www.nber.org/papers/w22910",
+          label: "Explanatory power: 29%"
         }
       },
       {
@@ -628,7 +629,8 @@ window.all_data = {
         parent_link: {
           parent_id: 'mobility',
           positive_relationship: true,
-          label: "Explanatory power: 71%\nmetric_source:\nhttps://www.nber.org/papers/w22910"
+          connection_source: "https://www.nber.org/papers/w22910",
+          label: "Explanatory power: 71%"
         }
       },
       {

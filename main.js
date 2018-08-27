@@ -110,13 +110,27 @@ function createNode(opts) {
     }
     setLevel(opts.id, opts.level)
 
+
+
     if (opts.parent_link != null) {
+      // build label for edge
+      var label = opts.parent_link.label
+      if (opts.parent_link.connection_source != null) {
+        label = label + "\nSource:\n" + opts.parent_link.connection_source
+      }
       createLink({
         parent_id: opts.parent_link.parent_id,
         child_id: opts.id,
         positive_relationship: opts.parent_link.positive_relationship,
-        label: opts.parent_link.label
+        label: label
       })
+      if (opts.parent_link.connection_source != null) {
+        opts["parent_connection_source"] = opts.parent_link.connection_source
+        opts["parent_connection_source_is_link"] = opts.parent_link.connection_source.includes("http")
+      }
+      if (opts.parent_link.label != null) {
+        opts["parent_connection_label"] = opts.parent_link.label
+      }
     }
 
 
@@ -147,13 +161,10 @@ function createNode(opts) {
 }
 
 function createLink(opts){
-
-  // both nodes must already exist!
-
+  // both nodes must already exist
   var parent_node = nodes_for_graph.find(function(element) {return element['id'] == opts.parent_id})
   var child_node = nodes_for_graph.find(function(element) {return element['id'] == opts.child_id})
   if (parent_node != null && child_node != null) {
-
     connections_for_graph.push({
       from: opts.parent_id,
       to: opts.child_id,
@@ -305,9 +316,6 @@ $(document).ready(function() {
     var childNode = nodes_for_mobile_view.find(function(element) {return element['id'] == connectionsLeadingToChildren[i]["to"]})
     var connectionsLeadingToChildsChildren = connections_for_graph.filter(edge => edge['from'] == childNode.id);
     childNode["childCount"] = connectionsLeadingToChildsChildren.length
-    if (connectionsLeadingToChildren[i]["label"] != null) {
-      childNode["connection_label"] = connectionsLeadingToChildren[i]["label"]
-    }
     childNode["show_contributing_factor_s"] = childNode["childCount"] != 1
     childNode["metric_source_is_link"] = childNode.hasOwnProperty("metric_source") && childNode["metric_source"] != null && childNode["metric_source"].includes("http")
     if (childNode.parent_link.positive_relationship) {
