@@ -335,7 +335,7 @@ function setupData() {
 // --------------------------------------------------------------------- start
 
 $(document).ready(function() {
-  
+
   window.entity_id = getParameterByName('id')
   window.source_id = getParameterByName('source_id') || 'all'
   window.node_id = getParameterByName('node_id') || 'overall'
@@ -346,7 +346,7 @@ $(document).ready(function() {
   setupSources()
   setupMainNode()
   setupChildNodes()
-  displayPopup()
   updateNodeLinks()
+  displayPopup()
   
 });
