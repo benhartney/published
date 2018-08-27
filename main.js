@@ -327,10 +327,10 @@ $(document).ready(function() {
     addNodeToPage(childNode, div)
   }
   if ($('#childNodesImprove').is(':empty')){
-    $('#childNodesImprove').html("<div class='col-sm mb-2'>Nothing - you've reached the bottom of this particular thread.</div>")
+    $('#childNodesImprove').html("<div class='col-sm mb-2'>Nothing.</div>")
   }
   if ($('#childNodesWorsen').is(':empty')){
-    $('#childNodesWorsen').html("<div class='col-sm mb-2'>Nothing - you've reached the bottom of this particular thread.</div>")
+    $('#childNodesWorsen').html("<div class='col-sm mb-2'>Nothing.</div>")
   }
   
 
