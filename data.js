@@ -363,9 +363,6 @@ window.all_data = {
           connection_source: "Furman 2016",
         }
       }
-
-
-
     ]
   },
   noah_smith: {
