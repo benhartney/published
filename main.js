@@ -63,7 +63,7 @@ function createLink(opts){
   }
 }
 
-function drawGraph() {
+function paintGraph() {
   destroy();
   //var connectionCount = [];
 
@@ -233,7 +233,7 @@ function addNodeToPage(node, $div) {
   $div.append(html)
 }
 
-function setupSources() {
+function paintSources() {
   for (var i = 0; i < window.all_data[window.entity_id].sources.length; i++) {
     var source = document.getElementById("source-template").innerHTML;
     var template = Handlebars.compile(source);
@@ -252,7 +252,7 @@ function setupEntityNameDisplay() {
   $('#entity_name_heading').text(entity_display_name);
 }
 
-function setupMainNode() {
+function paintMainNode() {
   var node = nodes_for_mobile_view.find(function(element) {return element['id'] == window.node_id})
   node["metric_source_is_link"] = node.hasOwnProperty("metric_source") && node["metric_source"] != null && node["metric_source"].includes("http")
   node["isMainNode"] = true
@@ -286,7 +286,7 @@ function setupMainNode() {
   $('#childCount').text(connectionsLeadingToChildren.length)
 }
 
-function setupChildNodes() {
+function paintChildNodes() {
   var connectionsLeadingToChildren = connections_for_graph.filter(edge => edge['from'] == window.node_id).filter(val => {
     return nodes_for_mobile_view.find(function(element) {return element['id'] == val["to"]}) != null;
   });
@@ -341,11 +341,11 @@ $(document).ready(function() {
   window.node_id = getParameterByName('node_id') || 'overall'
 
   setupData()
-  drawGraph()
+  paintGraph()
   setupEntityNameDisplay()
-  setupSources()
-  setupMainNode()
-  setupChildNodes()
+  paintSources()
+  paintMainNode()
+  paintChildNodes()
   updateNodeLinks()
   displayPopup()
   
