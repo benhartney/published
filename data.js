@@ -907,18 +907,18 @@ window.all_data = {
         }
       },
       {
-        id: "crime",
-        title: "Crime",
+        id: "health_of_the_justice_system",
+        title: "Health of the justice system",
         metric: null,
         current_level: null,
-        trend_copy: "Improved",
+        trend_copy: null,
         metric_source: null,
-        improved_or_worsened_or_neutral_in_context_only: "improved",
+        improved_or_worsened_or_neutral_in_context_only: "neutral",
         noMetricExpected: false,
         source_ids: ['noah_bloomberg', "civil_asset_forfeiture_tweet"],
         parent_link: {
           parent_id: 'society',
-          positive_relationship: false,
+          positive_relationship: true,
           label: null
         }
       },
@@ -982,7 +982,7 @@ window.all_data = {
         source_ids: ['noah_bloomberg'],
         parent_link: {
           parent_id: 'society',
-          positive_relationship: false,
+          positive_relationship: true,
           label: null
         }
       },
@@ -997,7 +997,7 @@ window.all_data = {
         noMetricExpected: false,
         source_ids: ['civil_asset_forfeiture_tweet'],
         parent_link: {
-          parent_id: 'crime',
+          parent_id: "health_of_the_justice_system",
           positive_relationship: false,
           label: null
         }
@@ -1013,8 +1013,8 @@ window.all_data = {
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
-          parent_id: 'crime',
-          positive_relationship: true,
+          parent_id: 'society',
+          positive_relationship: false,
           label: null
         }
       },
@@ -1029,8 +1029,8 @@ window.all_data = {
         noMetricExpected: false,
         source_ids: ['noah_bloomberg'],
         parent_link: {
-          parent_id: 'crime',
-          positive_relationship: true,
+          parent_id: 'health_of_the_justice_system',
+          positive_relationship: false,
           label: null
         }
       },
