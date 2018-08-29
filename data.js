@@ -285,14 +285,15 @@ window.all_data = {
         metric: null,
         current_level: null,
         trend_copy: "Increased",
-        metric_source: "International Monetary Fund 2017",
+        metric_source: null,
         improved_or_worsened_or_neutral_in_context_only: "worsened",
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
         parent_link: {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: false,
-          label: null
+          label: null,
+          connection_source: "International Monetary Fund 2017"
         }
       },
       {
@@ -301,14 +302,15 @@ window.all_data = {
         metric: null,
         current_level: null,
         trend_copy: "Increased",
-        metric_source: "Karabarbounis and Neiman 2014",
+        metric_source: null,
         improved_or_worsened_or_neutral_in_context_only: "worsened",
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
         parent_link: {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: false,
-          label: null
+          label: null,
+          connection_source: "Karabarbounis and Neiman 2014",
         }
       },
       {
@@ -333,14 +335,15 @@ window.all_data = {
         metric: null,
         current_level: null,
         trend_copy: "Increased",
-        metric_source: "Autor et al. 2017",
+        metric_source: null,
         improved_or_worsened_or_neutral_in_context_only: "worsened",
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
         parent_link: {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: false,
-          label: null
+          label: null,
+          connection_source: "Autor et al. 2017"
         }
       },
       {
@@ -349,14 +352,15 @@ window.all_data = {
         metric: null,
         current_level: null,
         trend_copy: "Increased",
-        metric_source: "Furman 2016",
+        metric_source: null,
         improved_or_worsened_or_neutral_in_context_only: "worsened",
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
         parent_link: {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: false,
-          label: null
+          label: null,
+          connection_source: "Furman 2016",
         }
       }
 
