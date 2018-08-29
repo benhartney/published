@@ -972,7 +972,7 @@ window.all_data = {
       },
       {
         id: "international_perception",
-        title: "International perception",
+        title: "International perception of the US",
         metric: "% of non-US people who perceive the US as a major threat to their country",
         current_level: "2017: 38%",
         trend_copy: "2013 → 2017: +52% | +13pp",
