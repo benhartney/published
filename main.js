@@ -256,7 +256,6 @@ function paintMainNode() {
   var node = nodes_for_mobile_view.find(function(element) {return element['id'] == window.node_id})
   node["metric_source_is_link"] = node.hasOwnProperty("metric_source") && node["metric_source"] != null && node["metric_source"].includes("http")
   node["isMainNode"] = true
-  node["show_contributing_factor_s"] = node["childCount"] != 1
 
   var parentChain = [];
   // assumes only one parent
@@ -281,6 +280,7 @@ function paintMainNode() {
   });
   //
   node["childCount"] = connectionsLeadingToChildren.length
+  node["show_contributing_factor_s"] = node["childCount"] != 1
   addNodeToPage(node, $('#node'))
   $('.nodeTitle').text(node.title)
   $('#childCount').text(connectionsLeadingToChildren.length)

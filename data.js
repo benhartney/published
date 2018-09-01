@@ -40,7 +40,7 @@ window.all_data = {
       },
       {
         id: "real_wage_of_typical_worker",
-        title: "Real wage of typical worker",
+        title: "Wage of typical worker, inflation adjusted",
         metric: "Wage of median worker, inflation adjusted",
         current_level: null,
         trend_copy: null,
@@ -56,7 +56,7 @@ window.all_data = {
       },
       {
         id: "equality_of_real_wages",
-        title: "Equality of real wages",
+        title: "Equality of wages",
         metric: null,
         current_level: null,
         trend_copy: "1979 → 2016: Decreased",
