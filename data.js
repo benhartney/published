@@ -40,7 +40,7 @@ window.all_data = {
       },
       {
         id: "real_wage_of_typical_worker",
-        title: "Wage of typical worker, inflation adjusted",
+        title: "Real wage of typical worker",
         metric: "Wage of median worker, inflation adjusted",
         current_level: null,
         trend_copy: null,
