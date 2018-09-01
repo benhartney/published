@@ -57,7 +57,7 @@ window.all_data = {
       {
         id: "inequality_of_real_wages",
         title: "Inequality of wages",
-        metric: "Average hourly wage of top 20% of wage earners / Average hourly wage of bottom 20% of wage earners",
+        metric: "Difference between average hourly wage of a top 20% wage earner and a bottom 20% wage earner",
         current_level: "2016: 5.3 times larger",
         trend_copy: "1979 → 2016: +26%", // https://www.google.com/search?hl=en&ei=qvqKW4T0OMWf0wLy6LeoBw&q=%28%28%2848%2F9%29-%2838%2F9%29%29%2F%2838%2F9%29%29*100&oq=%28%28%2848%2F9%29-%2838%2F9%29%29%2F%2838%2F9%29%29*100&gs_l=psy-ab.3...4447.6542..6718...0.0..0.114.506.4j2......0....1..gws-wiz.9NA-OoUPAXo
         metric_source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
@@ -67,54 +67,6 @@ window.all_data = {
         parent_link: {
           parent_id: 'real_wage_of_typical_worker',
           positive_relationship: false,
-          label: null
-        }
-      },
-      {
-        id: "globalization",
-        title: "Globalization",
-        metric: null,
-        current_level: null,
-        trend_copy: "Increased",
-        metric_source: "Haskel et al. 2012",
-        improved_or_worsened_or_neutral_in_context_only: "worsened",
-        noMetricExpected: false,
-        source_ids: ['brookings_wage_article'],
-        parent_link: {
-          parent_id: 'inequality_of_real_wages',
-          positive_relationship: true,
-          label: null
-        }
-      },
-      {
-        id: "us_imports",
-        title: "U.S. Manufacturing Imports",
-        metric: null,
-        current_level: null,
-        trend_copy: "Increased",
-        metric_source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
-        improved_or_worsened_or_neutral_in_context_only: "worsened",
-        noMetricExpected: false,
-        source_ids: ['brookings_wage_article'],
-        parent_link: {
-          parent_id: 'globalization',
-          positive_relationship: true,
-          label: null
-        }
-      },
-      {
-        id: "wage_benefit_to_a_college_degree",
-        title: "Wage benefit for a college degree",
-        metric: null,
-        current_level: null,
-        trend_copy: "Increased",
-        metric_source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
-        improved_or_worsened_or_neutral_in_context_only: "worsened",
-        noMetricExpected: false,
-        source_ids: ['brookings_wage_article'],
-        parent_link: {
-          parent_id: 'inequality_of_real_wages',
-          positive_relationship: true,
           label: null
         }
       },
@@ -147,6 +99,54 @@ window.all_data = {
         source_ids: ['brookings_wage_article'],
         parent_link: {
           parent_id: 'inequality_of_real_wages',
+          positive_relationship: true,
+          label: null
+        }
+      },
+      {
+        id: "wage_benefit_to_a_college_degree",
+        title: "Wage benefit for a college degree",
+        metric: null,
+        current_level: null,
+        trend_copy: "Increased",
+        metric_source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
+        improved_or_worsened_or_neutral_in_context_only: "worsened",
+        noMetricExpected: false,
+        source_ids: ['brookings_wage_article'],
+        parent_link: {
+          parent_id: 'inequality_of_real_wages',
+          positive_relationship: true,
+          label: null
+        }
+      },
+      {
+        id: "globalization",
+        title: "Globalization",
+        metric: null,
+        current_level: null,
+        trend_copy: "1979 → 2017: Increased",
+        metric_source: "Haskel et al. 2012",
+        improved_or_worsened_or_neutral_in_context_only: "worsened",
+        noMetricExpected: false,
+        source_ids: ['brookings_wage_article'],
+        parent_link: {
+          parent_id: 'inequality_of_real_wages',
+          positive_relationship: true,
+          label: null
+        }
+      },
+      {
+        id: "us_imports",
+        title: "U.S. Manufacturing Imports",
+        metric: null,
+        current_level: null,
+        trend_copy: "Increased",
+        metric_source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
+        improved_or_worsened_or_neutral_in_context_only: "worsened",
+        noMetricExpected: false,
+        source_ids: ['brookings_wage_article'],
+        parent_link: {
+          parent_id: 'globalization',
           positive_relationship: true,
           label: null
         }
