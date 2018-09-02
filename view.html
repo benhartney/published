@@ -39,12 +39,6 @@
                 </div>
                 {{metric}}
               </li>
-              {{#if parent_connection_label}}
-                <li class="list-group-item">
-                  <div class="font-weight-bold">Impact details</div>
-                  {{parent_connection_label}}
-                </li>
-              {{/if}}
               {{#if current_level}}
                 <li class="list-group-item">
                   <div class="font-weight-bold">Current level</div>
@@ -59,6 +53,12 @@
                   <div class='text-{{#if trendIsNeutral}}body{{/if}}{{#if trendHasImproved}}success{{/if}}{{#if trendHasWorsened}}danger{{/if}}'>
                     {{trend_copy}}
                   </div>
+                </li>
+              {{/if}}
+              {{#if parent_connection_label}}
+                <li class="list-group-item">
+                  <div class="font-weight-bold">Connection details</div>
+                  {{parent_connection_label}}
                 </li>
               {{/if}}
               {{#if parent_connection_source}}
