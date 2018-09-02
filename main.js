@@ -352,7 +352,6 @@ $(document).ready(function() {
   window.node_id = getParameterByName('node_id') || 'overall'
 
   setupData()
-  //paintGraph()
   setupEntityNameDisplay()
   paintSources()
   paintMainNode()
