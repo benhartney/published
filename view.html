@@ -63,7 +63,7 @@
               {{/if}}
               {{#if parent_connection_source}}
                 <li class="list-group-item">
-                  <div class="font-weight-bold">Connection source</div>
+                  <div class="font-weight-bold">Connection reference</div>
                   {{#if parent_connection_source_url}}
                     <a href='{{parent_connection_source_url}}' target='_blank'>{{parent_connection_source}}</a>
                   {{else}}
@@ -73,7 +73,7 @@
               {{/if}}
               {{#if metric_source}}
                 <li class="list-group-item">
-                  <div class="font-weight-bold">Metric source</div>
+                  <div class="font-weight-bold">Metric reference</div>
                   {{#if metric_source_is_link}}
                     <a href='{{metric_source}}' target='_blank'>Open</a>
                   {{else}}

@@ -914,7 +914,7 @@ window.all_data = {
       },
       {
         id: "health_of_the_justice_system",
-        title: "Health of the justice system",
+        title: "The condition of the justice system",
         metric: null,
         current_level: null,
         trend_copy: null,
@@ -995,8 +995,9 @@ window.all_data = {
       {
         id: "civil_asset_forfeiture",
         title: "Civil asset forfeiture",
-        metric: "Cash seized by DEA without civil/criminal charges filed or judicial review",
-        current_level: "2007 → 2016: $3.2 billion",
+        metric: "Yearly average of cash seized by DEA without civil/criminal charges filed or judicial review, 2007 → 2016",
+        current_level: "$320 million",
+        metric_is_good_or_bad_or_neutral: "bad",
         trend_copy: "-",
         metric_source: "https://oig.justice.gov/reports/2017/e1702.pdf",
         improved_or_worsened_or_neutral_in_context_only: "neutral",
