@@ -29,3 +29,9 @@ span.redirect {
 .nodeCard {
   margin-bottom: 1rem;
 }
+#graphIntroContainer, #graphContainer {
+  display: none;
+}
+#graphOpenSectionContainer {
+  margin-bottom: 7rem;
+}

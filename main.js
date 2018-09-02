@@ -352,12 +352,20 @@ $(document).ready(function() {
   window.node_id = getParameterByName('node_id') || 'overall'
 
   setupData()
-  paintGraph()
+  //paintGraph()
   setupEntityNameDisplay()
   paintSources()
   paintMainNode()
   paintChildNodes()
   updateNodeLinks()
   displayPopup()
+
+  $("#graphOpen").click(function() {
+    $('#graphIntroContainer').show()
+    $('#graphContainer').show()
+    $('#graphOpenSectionContainer').hide()
+    paintGraph()
+    return false
+  });
   
 });
