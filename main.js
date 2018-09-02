@@ -259,7 +259,7 @@ function paintSources() {
 
 function setupEntityNameDisplay() {
   var entity_display_name = window.all_data[window.entity_id].display_name
-  $(document).prop('title', "Policy Views: " + entity_display_name);
+  $(document).prop('title', "Policy View: " + entity_display_name);
   $('#entity_name_heading').text(entity_display_name);
 }
 
