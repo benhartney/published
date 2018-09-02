@@ -57,7 +57,7 @@ window.all_data = {
       {
         id: "inequality_of_real_wage_growth_allocation",
         title: "Inequality in allocation of real wage growth",
-        metric: "How much larger was the increase in average wage of top quintile wage-earner than that of a middle quintile wage-earner",
+        metric: "Size of difference between the increase in average wage of top quintile wage-earner than that of a middle quintile wage-earner",
         metric_is_good_or_bad_or_neutral: "bad",
         current_level: "2016: 16 times larger", // $10/$0.6138 = 16.2919517758
         trend_copy: null,

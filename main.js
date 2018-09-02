@@ -224,11 +224,11 @@ function createNode(opts) {
     opts["metric_source"] = opts["metric_source"] || "-"
 
     if (opts.improved_or_worsened_or_neutral_in_context_only == 'neutral') {
-      opts["isNeutral"] = true
+      opts["trendIsNeutral"] = true
     } else if (opts.improved_or_worsened_or_neutral_in_context_only == 'improved') {
-      opts["hasImproved"] = true
+      opts["trendHasImproved"] = true
     } else if (opts.improved_or_worsened_or_neutral_in_context_only == 'worsened') {
-      opts["hasWorsened"] = true
+      opts["trendHasWorsened"] = true
     }
 
     nodes_for_mobile_view.push(opts)
