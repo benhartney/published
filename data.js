@@ -55,13 +55,14 @@ window.all_data = {
         }
       },
       {
-        id: "inequality_of_real_wages",
-        title: "Inequality of wages",
-        metric: "Difference between average hourly wage of a top 20% wage earner and a bottom 20% wage earner",
-        current_level: "2016: 5.3 times larger",
-        trend_copy: "1979 → 2016: +26%", // https://www.google.com/search?hl=en&ei=qvqKW4T0OMWf0wLy6LeoBw&q=%28%28%2848%2F9%29-%2838%2F9%29%29%2F%2838%2F9%29%29*100&oq=%28%28%2848%2F9%29-%2838%2F9%29%29%2F%2838%2F9%29%29*100&gs_l=psy-ab.3...4447.6542..6718...0.0..0.114.506.4j2......0....1..gws-wiz.9NA-OoUPAXo
+        id: "inequality_of_real_wage_growth_allocation",
+        title: "Inequality in allocation of real wage growth",
+        metric: "How much larger was the increase in average wage of top quintile wage-earner than that of a middle quintile wage-earner",
+        metric_is_good_or_bad_or_neutral: "bad",
+        current_level: "2016: 16 times larger", // $10/$0.6138 = 16.2919517758
+        trend_copy: null,
         metric_source: "https://www.brookings.edu/research/thirteen-facts-about-wage-growth/",
-        improved_or_worsened_or_neutral_in_context_only: "worsened",
+        improved_or_worsened_or_neutral_in_context_only: "neutral",
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
         parent_link: {
@@ -81,7 +82,7 @@ window.all_data = {
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
         parent_link: {
-          parent_id: 'inequality_of_real_wages',
+          parent_id: 'inequality_of_real_wage_growth_allocation',
           positive_relationship: true,
           connection_source: "Card 2001",
           label: "Unionization rates of men fell from 1973 to 1993...these trends account for 15-20% of the rise in male wage inequality."
@@ -98,7 +99,7 @@ window.all_data = {
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
         parent_link: {
-          parent_id: 'inequality_of_real_wages',
+          parent_id: 'inequality_of_real_wage_growth_allocation',
           positive_relationship: true,
           label: null
         }
@@ -114,7 +115,7 @@ window.all_data = {
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
         parent_link: {
-          parent_id: 'inequality_of_real_wages',
+          parent_id: 'inequality_of_real_wage_growth_allocation',
           positive_relationship: true,
           label: null
         }
@@ -130,7 +131,7 @@ window.all_data = {
         noMetricExpected: false,
         source_ids: ['brookings_wage_article'],
         parent_link: {
-          parent_id: 'inequality_of_real_wages',
+          parent_id: 'inequality_of_real_wage_growth_allocation',
           positive_relationship: true,
           label: null
         }

@@ -196,6 +196,15 @@ function createNode(opts) {
     if (!opts.hasOwnProperty("id") || !opts.hasOwnProperty("title") || !opts.hasOwnProperty("metric") || !opts.hasOwnProperty("current_level") || !opts.hasOwnProperty("trend_copy") || !opts.hasOwnProperty("metric_source") || !opts.hasOwnProperty("improved_or_worsened_or_neutral_in_context_only") || !opts.hasOwnProperty("noMetricExpected") || !opts.hasOwnProperty("source_ids") || !opts.hasOwnProperty("parent_link")) {
       throw "Missing property"
     }
+
+    // in the above I have all of the params required, but here I don't. fix this
+    if (!opts.hasOwnProperty("metric_is_good_or_bad_or_neutral") || opts.metric_is_good_or_bad_or_neutral == 'neutral') {
+      opts["metricIsNeutral"] = true
+    } else if (opts.metric_is_good_or_bad_or_neutral == 'good') {
+      opts["metricIsGood"] = true
+    } else if (opts.metric_is_good_or_bad_or_neutral == 'bad') {
+      opts["metricIsBad"] = true
+    }
     
     addNodeToGraph(opts)
 

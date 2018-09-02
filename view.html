@@ -58,7 +58,9 @@
               {{#if current_level}}
                 <li class="list-group-item">
                   <div class="font-weight-bold">Current level</div>
-                  {{current_level}}
+                  <div class='text-{{#if metricIsNeutral}}body{{/if}}{{#if metricIsGood}}success{{/if}}{{#if metricIsBad}}danger{{/if}}'>
+                    {{current_level}}
+                  </div>
                 </li>
               {{/if}}
               {{#if trend_copy}}
