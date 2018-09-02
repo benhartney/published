@@ -211,7 +211,9 @@ function createNode(opts) {
     if (opts.parent_link != null) {
       if (opts.parent_link.connection_source != null) {
         opts["parent_connection_source"] = opts.parent_link.connection_source
-        opts["parent_connection_source_is_link"] = opts.parent_link.connection_source.includes("http")
+      }
+      if (opts.parent_link.connection_source_url != null) {
+        opts["parent_connection_source_url"] = opts.parent_link.connection_source_url
       }
       if (opts.parent_link.label != null) {
         opts["parent_connection_label"] = opts.parent_link.label

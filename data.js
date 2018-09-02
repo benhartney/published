@@ -85,6 +85,7 @@ window.all_data = {
           parent_id: 'inequality_of_real_wage_growth_allocation',
           positive_relationship: true,
           connection_source: "Card 2001",
+          connection_source_url: "http://davidcard.berkeley.edu/papers/union-wage-ineq.pdf",
           label: "Unionization rates of men fell from 1973 to 1993...these trends account for 15-20% of the rise in male wage inequality."
         }
       },
@@ -294,7 +295,8 @@ window.all_data = {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: false,
           label: null,
-          connection_source: "International Monetary Fund 2017"
+          connection_source: "International Monetary Fund 2017",
+          connection_source_url: "https://www.imf.org/en/Publications/WEO/Issues/2017/04/04/world-economic-outlook-april-2017"
         }
       },
       {
@@ -312,6 +314,7 @@ window.all_data = {
           positive_relationship: false,
           label: null,
           connection_source: "Karabarbounis and Neiman 2014",
+          connection_source_url: "https://www.nber.org/papers/w19136"
         }
       },
       {
@@ -344,7 +347,8 @@ window.all_data = {
           parent_id: 'labor_share_of_national_income',
           positive_relationship: false,
           label: null,
-          connection_source: "Autor et al. 2017"
+          connection_source: "Autor et al. 2017",
+          connection_source_url: "https://www.nber.org/papers/w23108"
         }
       },
       {
@@ -362,6 +366,7 @@ window.all_data = {
           positive_relationship: false,
           label: null,
           connection_source: "Furman 2016",
+          connection_source_url: "https://obamawhitehouse.archives.gov/sites/default/files/page/files/20161017_furman_ccny_inequality_cea.pdf"
         }
       }
     ]
