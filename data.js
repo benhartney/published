@@ -499,7 +499,7 @@ window.all_data = {
         title: "Poverty",
         metric: null,
         current_level: null,
-        trend_copy: "2000 → 2017: Improved",
+        trend_copy: "2000 → 2017: Decreased",
         metric_source: null,
         improved_or_worsened_or_neutral_in_context_only: "improved",
         noMetricExpected: false,
