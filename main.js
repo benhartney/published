@@ -315,10 +315,10 @@ function paintChildNodes() {
     addNodeToPage(childNode, div)
   }
   if ($('#childNodesImprove').is(':empty')){
-    $('#childNodesImprove').html("<div class='col-sm mb-2'>This section is empty.</div>")
+    $('#childNodesImprove').html("<div class='col-sm mb-2'>" + window.all_data[window.entity_id].display_name + " has not specified anything for this section.</div>")
   }
   if ($('#childNodesWorsen').is(':empty')){
-    $('#childNodesWorsen').html("<div class='col-sm mb-2'>This section is empty.</div>")
+    $('#childNodesWorsen').html("<div class='col-sm mb-2'>" + window.all_data[window.entity_id].display_name + " has not specified anything for this section.</div>")
   }
 }
 
