@@ -29,7 +29,7 @@ span.redirect {
 .nodeCard {
   margin-bottom: 1rem;
 }
-#graphIntroContainer, #graphContainer {
+#graphIntroContainer, #graphContainer, #graphOpenSectionContainer, #graphHR {
   display: none;
 }
 #graphOpenSectionContainer {
