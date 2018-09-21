@@ -914,7 +914,7 @@ window.all_data = {
       },
       {
         id: "health_of_the_justice_system",
-        title: "The condition of the justice system",
+        title: "The health of the justice system",
         metric: null,
         current_level: null,
         trend_copy: null,
